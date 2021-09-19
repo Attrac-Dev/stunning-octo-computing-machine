@@ -1,0 +1,290 @@
+/* MOBILE GRID AREA CONTENT WRAPPER */
+.hero-image {
+    grid-area: h;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: var(--brand-off-white);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+.hero-image>img {
+    width: 100%;
+    height: auto;
+    min-width: 350px;
+}
+.intro-content {
+    text-align: center;
+    grid-area: i;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+.intro-content h1 {
+    padding: 1.5rem;
+    font-weight: 800;
+    font-size: 1.75rem;
+}
+.intro-content h4 {
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--shadow-color);
+}
+.intro-content h3 {
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--brand-blue);
+}
+.call-to-action-block {
+    grid-area: c;
+    display: flex;
+    justify-content: center;
+}
+.other-content {
+    grid-area: o;
+    display: block
+}
+.other-content > h4, .other-content > h2, .other-content > h5 {
+    text-align: center;
+    padding: 0.25rem;
+}
+.other-content h4 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--shadow-color);
+    padding: .7rem;
+}
+.other-content h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--brand-blue);
+}
+
+.other-content h5 {
+    font-weight: 300;
+    font-size: 1.125rem;
+    color: var(--shadow-color);
+    padding: 0.7rem;
+}
+/* MOBILE CARDS  */
+section.card {
+    /* margin: 2rem 4rem 2rem 4rem; */
+    padding: 1.5rem;
+}
+section.card h3, h5 {
+    text-align: center;
+}
+section.card img {
+    display: block;
+    margin: 1rem auto 1rem auto;
+    width: 150px;
+}
+hr.mobile-card-divider {
+    width: 80%;
+    margin: auto;
+    border-top: 2px solid var(--brand-blue);
+}
+/* MOBILE CONTENT WRAPPER  */
+.content-grid-wrapper {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(10, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-areas: 
+    "i i i i i i i i i i"
+    "i i i i i i i i i i"
+    "c c c c c c c c c c"
+    "h h h h h h h h h h"
+    "h h h h h h h h h h"
+    "h h h h h h h h h h"
+    "h h h h h h h h h h"
+    "h h h h h h h h h h"
+    "o o o o o o o o o o"
+    "o o o o o o o o o o"
+    "o o o o o o o o o o"
+    "o o o o o o o o o o"
+    "o o o o o o o o o o";
+}
+
+/* MOBILE CTA BUTTONS  */
+.round-button {
+    width: 10rem;
+    height: 3.5rem;
+    border-radius: 35px;
+    border-color: transparent;
+    font-size: 1rem;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    padding: 0.25rem;;
+}
+button.cta {
+    background-color: var(--brand-blue);
+    color: var(--brand-white);
+}
+button.round-button.cta:hover {
+    background-color: var(--brand-indigo);
+}
+
+button.cta2 {
+    color: var(--brand-indigo);
+    background-color: var(--brand-white);
+    border-color: var(--brand-indigo);
+    border-style: solid;
+    border-width: thin;
+}
+
+button.cta2:hover {
+    background-color: var(--brand-off-white);
+}
+
+.round-button + .round-button {
+    margin-left: 1.5rem;
+}
+
+.page-container {
+    /* background-color: rgba(var(--brand-indigo-rgb), 0.65); */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--brand-off-white);
+}
+
+br.hide-mobile {
+    display: none;
+}
+
+@media all and (min-width: 576px) {
+/* LANDSCAPE-MOBILE GRID AREA CONTENT WRAPPER */
+/* LANDSCAPE-MOBILE CARDS  */
+section.card {  
+    margin: 1rem 2rem 1rem 2rem;
+    padding: 1.5rem;   
+}
+section.card h3, h5 {
+    text-align: center;
+}
+section.card img {
+    display: block;
+    margin: 1rem auto 1rem auto;
+    width: 150px;
+}
+/* LANDSCAPE-MOBILE CONTENT WRAPPER  */
+br.hide-mobile {
+    display: inline;
+}
+}
+
+@media all and (min-width: 768px) {
+
+    section.card {
+        border-style: solid;
+        margin: 2rem 4rem 2rem 4rem;
+        border-radius: 4rem;
+        padding: 1.5rem;
+        /* border-color: var(--brand-off-white); */
+        border-width: thin;
+        box-shadow: 0px 2px 5px var(--brand-off-white);
+    }
+    section.card h3, h5 {
+        text-align: center;
+    }
+    section.card img {
+        display: block;
+        margin: 1rem auto 1rem auto;
+        width: 150px;
+    }
+    hr.mobile-card-divider {
+        display: none;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media all and (min-width: 992px) {
+    .content-grid-wrapper {
+
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-areas: 
+        ". . . . . h h h h h"
+        "i i i i i h h h h h"
+        "i i i i i h h h h h"
+        "c c c c c h h h h h"
+        ". . . . . h h h h h"
+        "o o o o o o o o o o"
+        "o o o o o o o o o o"
+        "o o o o o o o o o o"
+        "o o o o o o o o o o"
+        "o o o o o o o o o o";
+    }
+
+    .intro-content {
+        text-align: left;
+        padding-left: 2rem;
+        padding-top: 3rem;
+    }
+    .intro-content h1 {
+        padding: 1rem 0 ;
+        font-size: 2.2rem;
+    }
+    .intro-content h4 {
+        font-weight: thin;
+        font-size: 2rem;
+    }
+    .intro-content h3 {
+        font-size: 1.7em;
+        line-height: 2.125rem;
+    }
+
+    .hero-image {
+        background-color: var(--brand-white);
+        padding-top: 1rem;
+        padding-bottom:1rem;
+    }
+    .other-content {
+        padding: 3rem 0;
+        background-color: var(--brand-off-white);
+    }
+    .other-content h4 {
+        font-size: 2.25rem;
+    }
+    .other-content h2 {
+        font-size: 2.5rem;
+    }
+    .other-content h5 {
+        font-size: 1.75rem;
+    }
+
+    section.card {
+        border-style: none;
+        margin: 2rem 4rem 2rem 4rem;
+        border-radius: 4rem;
+        padding: 1.5rem;
+        background-color: var(--brand-white);
+        border-width: thin;
+        box-shadow: 0px 2px 5px rgba(var(--brand-grey-rgb), 0.30);
+    }
+    /* cards */
+    .card-wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-row: auto auto;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        padding: 2rem;
+    }
+    .card-wrapper>section.card{
+        align-items: center;
+        justify-content: center;
+        margin: 2rem 1.5rem;
+        padding: 45px;
+        border-radius: 7rem;
+    }
+} 
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media all and (min-width: 1200px) { 
+    hr.mobile-card-divider {
+        display: none;
+    }
+}

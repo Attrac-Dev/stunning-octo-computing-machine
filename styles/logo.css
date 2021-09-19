@@ -1,0 +1,17 @@
+/* ALTERNATE LOGOS (on breakpoints) */
+#static-logo {
+    display: none;
+}
+
+
+/* MOBILE LOGO  */
+.logo {
+    font-size: 20px;
+    padding: 7.5px 10px 7.5px 0;
+}
+
+@media all and (min-width: 768px) {
+    .logo {
+        flex: 1;
+    }
+}

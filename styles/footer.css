@@ -1,0 +1,185 @@
+/* MOBILE FOOTER */
+footer {
+    background-color: var(--brand-blue);
+    /* margin-top: 2rem; */
+    position: sticky;
+    top: 100%;
+}
+/* Sticks footer to bottom */
+.body-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  /* Footer main */
+  .ft-main {
+    padding: 1.25rem 1.875rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* More Sticky Footer Styles */
+h2.ft-title {
+    color: var(--shadow-color);
+}
+
+.ft-main-item {
+    padding: 1.25rem;
+    min-width: 12.5rem;
+  }
+  .ft-main-item p {
+    color: var(--brand-off-white);
+    padding: 2px;
+}
+  .ft-main-item li {
+    list-style-type: none;
+    padding: 2px;
+  }
+  .ft-main-item>ul>li>a {
+    color: var(--brand-off-white);
+}
+.ft-main-item>ul>li>a:hover {
+    color: var(--brand-indigo);
+}
+
+  /* Footer main | Newsletter form */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  input[type="email"] {
+    border: 0;
+    padding: 0.625rem;
+    margin-top: 0.3125rem;
+    width: 13rem;
+    background-color: var(--brand-white);
+  }
+  input[type="submit"] {
+    background-color: var(--brand-indigo);
+    color: var(--brand-white);
+    cursor: pointer;
+    border: 0;
+    padding: 0.625rem 0.9375rem;
+    margin-top: 0.3125rem;
+  }
+
+  input[type="submit"]:hover {
+      background-color: var(--highlight-color);
+  }
+  /* Footer social */
+  .ft-social {
+    padding: 0 1.875rem 1.25rem;
+  }
+  .ft-social-list {
+    display: flex;
+    justify-content: center;
+    border-top: 1px var(--brand-off-white) solid;
+    padding-top: 1.25rem;
+  }
+  .ft-social-list li {
+    margin: 0.5rem;
+    font-size: 1.6rem;
+    list-style-type: none;
+  }
+  .ft-social li a i {
+      width: 2rem;
+      height: 2rem;
+  }
+  .ft-social-list li a:hover {
+      color: var(--highlight-color);
+  }
+  /* Footer legal */
+  .ft-legal {
+    padding: 0.9375rem 1.875rem;
+    background-color: var(--brand-indigo);
+  }
+  .ft-legal-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .ft-legal-list li {
+    margin: 0.125rem 0.625rem;
+    white-space: nowrap;
+    list-style-type: none;
+  }
+
+  .ft-legal-list li a {
+    color: var(--brand-off-white);
+  }
+  .copyright {
+      color: var(--brand-off-white)
+  }
+  /* one before the last child */
+  .ft-legal-list li:nth-last-child(2) {
+      flex: 1;
+  }
+
+
+  /* Small devices (landscape phones, 576px and up) */
+@media all and (min-width: 576px) { 
+    /* LANDSCAPE-MOBILE FOOTER */
+footer {
+    background-color: var(--brand-blue);
+    margin-top: 2rem;
+}
+/* Sticks footer to bottom */
+.body-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .container {
+    flex: 1;
+  }
+
+
+  /* More Sticky Footer Styles */
+h2.ft-title {
+    color: var(--shadow-color);
+}
+
+  /* Footer main | Newsletter form */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  input[type="email"] {
+    border: 0;
+    padding: 0.625rem;
+    margin-top: 0.3125rem;
+    width: 13rem;
+    background-color: var(--brand-white);
+  }
+  input[type="submit"] {
+    background-color: var(--brand-indigo);
+    color: var(--brand-white);
+    cursor: pointer;
+    border: 0;
+    padding: 0.625rem 0.9375rem;
+    margin-top: 0.3125rem;
+  }
+
+  input[type="submit"]:hover {
+      background-color: var(--highlight-color);
+  }
+  
+  /* one before the last child */
+  .ft-legal-list li:nth-last-child(2) {
+      flex: 1;
+  }
+}
+
+@media all and (min-width: 768px) {
+    /* Sticky Footer */
+    .ft-main {
+        justify-content: space-evenly;
+      }
+}
+
+@media all and (min-width: 992px) {
+  section.ft-main {
+        margin-top: 10rem;
+    }
+}
