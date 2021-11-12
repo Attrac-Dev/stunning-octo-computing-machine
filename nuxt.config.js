@@ -1,3 +1,6 @@
+import dotenv from "dotenv" 
+dotenv.config()
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -18,7 +21,7 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.1/css/all.css'},
-      { rel: 'icon', type: 'image/x-icon', href: '~/static/favicon.ico' },
+      { rel: 'icon', type: 'image/png', href: './static/favicon-32x32.png' },
       // { rel: 'apple-touch-icon', sizes: '180x180', href: '~/static/apple-touch-icon.png'},
       // { rel: 'icon', type: 'image/png', sizes: '32x32', href: '~/static/favicon-32x32.ico' },
       // { rel: 'icon', type: 'image/x-png', sizes: '16x16', href: '~/static/favicon-16x16.ico' },
@@ -38,6 +41,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/contentful"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,7 +50,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/fontawesome',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
   ],
 
   fontawesome: {
@@ -57,8 +61,16 @@ export default {
     }
   },
 
+  // environment variables
+  env: {
+    CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE,
+    CONTENTFUL_ACCESSTOKEN: process.env.CONTENTFUL_ACCESSTOKEN,
+    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

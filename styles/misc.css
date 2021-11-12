@@ -2,3 +2,45 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Assistant', sans-serif;
     color: var(--brand-indigo);
 }
+
+h1 {
+    --minSize: 1.75rem;
+    --maxSize: 2.5rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}
+
+h2 {
+    --minSize: 1.5rem;
+    --maxSize: 2.25rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}
+
+h3 {
+    --minSize: 1.25rem;
+    --maxSize: 2rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}
+
+h4 {
+    --minSize: 1rem;
+    --maxSize: 1.75rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}
+
+h5 {
+    --minSize: 0.75rem;
+    --maxSize: 1.5rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}
+
+h6 {
+    --minSize: 0.5rem;
+    --maxSize: 1.25rem;
+    --scaler: 10vw;
+    font-size: clamp( var(--minSize), var(--scaler), var(--maxSize));
+}

@@ -1,16 +1,24 @@
 <template>
   <div class="content-container">
-    {{ page }} Page
+     <ContentfulPage :id=id />
   </div>
 </template>
 
 <script>
 // import here
+import ContentfulPage from '~/components/ContentfulPage.vue'
+import { createClient } from '~/plugins/contentful'
+const contentfulClient = createClient();
 export default {
-    data: () => ({
-        page: 'Advertising',
-        pageType: 'landing'
-    }),
+  components: { ContentfulPage },
+  data: () => ({
+      page: 'Advertising',
+      pageType: 'service',
+      id: '5CNMw4HU31Ts3DxLe3c6WS'
+  }), 
+  async asyncData () {
+    // do something here
+  },
 // Directive has a set of lifecycle hooks:
   // called before bound element's attributes or event listeners are applied
   created() {},

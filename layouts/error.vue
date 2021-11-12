@@ -38,15 +38,11 @@
 
 <style scoped>
     /* classes for both pages */
-    h1 {
-        font-size: 1.75rem;
-    }
+
     h3 {
-        font-size: 1.25rem;
         font-weight: 400;
     }
     h5 {
-        font-size: 1rem;
         font-weight: 100;
     }
 
@@ -109,30 +105,26 @@
     /* small break points */
     @media all and (min-width: 576px) {
         /* classes for both pages */
-        h1 {
-            font-size: 2.5rem;
-        }
+
         h3 {
-            font-size: 1.75rem;
+ 
             font-weight: 400;
         }
         h5 {
-            font-size: 1.5rem;
+    
             font-weight: 100;
         }
     }
     /* meduim break points */
     @media all and (min-width: 768px) {
         /* classes for both pages */
-        h1 {
-            font-size: 3.5rem;
-        }
+
         h3 {
-            font-size: 2rem;
+
             font-weight: 400;
         }
         h5 {
-            font-size: 1.5rem;
+
             font-weight: 100;
         }
         /* not found classes */
@@ -152,15 +144,13 @@
     /* large break points */
     @media all and (min-width: 992px) {
         /* classes for both pages */
-        h1 {
-            font-size: 5rem;
-        }
+
         h3 {
-            font-size: 2.5rem;
+
             font-weight: 400;
         }
         h5 {
-            font-size: 2.5rem;
+ 
             font-weight: 100;
         }
         /* not found classes */
@@ -170,6 +160,7 @@
             height: auto;
             min-width: 260px;
             margin: auto;
+            max-width: 900px;
 
         }
         .bottom-text {
@@ -186,6 +177,7 @@
             height: auto;
             min-width: 260px;
             margin: auto;
+            max-width: 900px;
 
         }
         .bottom-text {
