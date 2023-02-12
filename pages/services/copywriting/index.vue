@@ -52,6 +52,6 @@ export default {
 
 <style scoped>
   .content-container {
-    margin: 2rem;
+    margin: 1.25rem;
 }
 </style>

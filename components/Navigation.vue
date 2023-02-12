@@ -16,7 +16,7 @@
                     <li class="subitem"><NuxtLink to="/services/copywriting" >Copywriting</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/social media" >Social Media</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/emails" >Emails</NuxtLink></li>
-                    <li class="subitem"><NuxtLink to="/services/etc" >Etc.</NuxtLink></li>
+                    <li class="subitem"><NuxtLink to="/services/branding" >Branding</NuxtLink></li>
                 </ul>
             </li>
             <li class="item has-submenu">
@@ -27,7 +27,7 @@
                     <li class="subitem"><NuxtLink to="/plans/enterprise" >Enterprise</NuxtLink></li>
                 </ul>
             </li>
-            <li class="item no-submenu"><a href="#">Blog</a></li> <!-- external link to blog subdomain -->
+            <li class="item no-submenu"><a href="https://attrac.dev" target="_blank">Blog</a></li> <!-- external link to blog subdomain -->
             <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
             </li>
             <li class="item button"><a href="#">Log In</a></li>

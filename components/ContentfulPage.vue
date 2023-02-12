@@ -1,7 +1,7 @@
 <template>
 
 <div class="content-container" v-if="object">
-<!-- <h1 v-if="pageName">{{ pageName }}</h1> -->
+<h1 v-if="pageName" class="page-name">{{ pageName }}</h1>
 <img class="main-page-image" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
 <div class="content-text" v-html="contentText"></div>
 <img class="secondary-page-image" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
@@ -102,26 +102,68 @@ export default {
 </script>
 
 <style scoped>
-    .main-page-image {
-        width: 80vw;
+
+    .page-name {
+        font-weight: 600;
+        font-size: 2rem;
     }
-    .secondary-page-image {
-        width: 50vw;
+    .main-page-image, .secondary-page-image {
+        margin-bottom: 20px;
     }
-    .content-text ::v-deep(h2, h3, h4, h5) {
+    .content-text {
+        margin-bottom: 15px;
+    }
+    .content-text ::v-deep(h2), .additional-content-text ::v-deep(h2) {
+        /* margin-bottom: 2rem; */
+        padding-bottom: 2rem;
+        font-weight: 300;
+    }
+    .content-text ::v-deep(h3), .additional-content-text ::v-deep(h3) {
+        /* margin-bottom: 2rem; */
+        padding-bottom: 2rem;
+        font-weight: 200;
+        margin-top: 5px;
+    }
+
+    .content-text ::v-deep(h4, h5), .additional-content-text ::v-deep(h4, h5) {
+        font-weight: 300;
+    }
+    .content-text ::v-deep(h4), .additional-content-text ::v-deep(h4) {
+        margin-bottom: 1rem;
+    }
+    .content-text ::v-deep(li), .additional-content-text ::v-deep(li) {
+        margin-left: 1.5rem;
+        margin-bottom: -1rem;
+    }
+    .content-text ::v-deep(ul) , .additional-content-text ::v-deep(ul) {
         margin-bottom: 2rem;
     }
-    .additional-content-text ::v-deep(h2, h3, h4, h5) {
+    .content-text ::v-deep(ol) , .additional-content-text ::v-deep(ol) {
         margin-bottom: 2rem;
     }
-    .content-text ::v-deep(p) {
+    .content-text ::v-deep(ol li), .additional-content-text ::v-deep(ol li) {
+        margin-bottom: -20px;
+    }
+
+    /* .additional-content-text,  ::v-deep(h2) {
         padding-bottom: 2rem;
-        line-height: 1.5rem;
+        font-weight: 300;
+        margin-top: 5px;
+    }
+
+    .additional-content-text ::v-deep(h3, h4, h5) {
+        padding-bottom: 2rem;
+        font-weight: 200;
+    } */
+
+    .content-text ::v-deep(p), .additional-content-text ::v-deep(p) {
+        margin-bottom: 40px;
+        line-height: 2rem;
         font-size: 1.25rem;
     }
-    .additional-content-text ::v-deep(p) {
-        padding-bottom: 2rem;
-        line-height: 1.5rem;
+    /* .additional-content-text ::v-deep(p) {
+        margin-bottom: 20px;
+        line-height: 2rem;
         font-size: 1.25rem;
-    }
+    } */
 </style>
