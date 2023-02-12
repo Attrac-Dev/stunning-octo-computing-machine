@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider nuxt build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider nuxt start",
+    "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.4.0",
@@ -16,7 +16,7 @@
     "contentful": "^9.0.0",
     "core-js": "^3.15.1",
     "dotenv": "^10.0.0",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.12.2"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.4",

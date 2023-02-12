@@ -4,8 +4,8 @@
             <li class="logo"><NuxtLink to="/" >
                 <img id="logo" src="~/static/AttracDev_Vector_Logo.svg" alt="AttracDev logo">
             </NuxtLink></li>
-            <li class="item"><NuxtLink to="/" >Home</NuxtLink></li>
-            <li class="item"><NuxtLink to="/about" >About</NuxtLink></li>
+            <li class="item no-submenu"><NuxtLink to="/" >Home</NuxtLink></li>
+            <li class="item no-submenu"><NuxtLink to="/about" >About</NuxtLink></li>
             <li class="item has-submenu">
                 <a tabindex="0">Services</a>
                 <ul class="submenu">
@@ -27,8 +27,8 @@
                     <li class="subitem"><NuxtLink to="/plans/enterprise" >Enterprise</NuxtLink></li>
                 </ul>
             </li>
-            <li class="item"><a href="#">Blog</a></li> <!-- external link to blog subdomain -->
-            <li class="item"><NuxtLink to="/contact" >Contact</NuxtLink>
+            <li class="item no-submenu"><a href="#">Blog</a></li> <!-- external link to blog subdomain -->
+            <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
             </li>
             <li class="item button"><a href="#">Log In</a></li>
             <li class="item button secondary"><a href="#">Sign Up</a></li>

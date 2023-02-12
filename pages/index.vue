@@ -43,5 +43,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .content-container {
+    margin: 2rem;
+  }
 </style>

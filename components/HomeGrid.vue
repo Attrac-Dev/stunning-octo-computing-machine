@@ -83,7 +83,7 @@
             <hr class="mobile-card-divider">
 
             <HomeCard 
-            :header="'Social Media Managment'" 
+            :header="'Social Media Management'" 
             :subheader="'Engaging with customers on the many different social media platforms can be exhausting. We can help to streamline the process and get you the results you are looking for.'" 
             :imgPath="'/social-media.svg'"
             :alt="'Social Media icon'"
@@ -114,9 +114,19 @@
 <script>
 import HomeCard from './HomeCard.vue'
 export default {
-  components: { HomeCard },
-    setup() {
-        
+    head: {
+        title: 'AttracDev Development & Design',
+        meta: [
+            {
+                hid: 'home',
+                description: 'home page',
+                content: 'home page content'
+            }
+        ]
+    },
+    components: { HomeCard },
+        setup() {
+
     },
     mounted() {
         console.log('HomeGrid component has been mounted')

@@ -1,7 +1,7 @@
 <template>
 
 <div class="content-container" v-if="object">
-<h1 v-if="pageName">{{ pageName }}</h1>
+<!-- <h1 v-if="pageName">{{ pageName }}</h1> -->
 <img class="main-page-image" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
 <div class="content-text" v-html="contentText"></div>
 <img class="secondary-page-image" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
@@ -9,7 +9,7 @@
 </div>
         
 <div v-else>
-<p>This content counld not be found</p>
+<p>This content couldn't not be found</p>
 </div>
 
 </template>
@@ -22,6 +22,18 @@ import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 
 const contentfulClient = createClient();
 export default {
+    head() {
+        return {
+            title: `${this.pageName} =>  { AttracDev Development & Design }`,
+            meta: [
+                {
+                    hid: this.entryID,
+                    name: `${this.pageName} page`,
+                    content: `${this.pageName} page content`,
+                }
+            ]
+        }
+    },
     components: {
 
     },
@@ -37,10 +49,12 @@ export default {
         secondaryPageImage: '',
         additionalContentText: ''
     }),
+    
     // Directive has a set of lifecycle hooks:
     // called before bound element's attributes or event listeners are applied
     async created() {
       this.fetchContent()
+
     },
     // called before bound element's parent component is mounted
     beforeMount() {
@@ -48,7 +62,6 @@ export default {
     },
     // called when bound element's parent component is mounted
     mounted() {
-       
 
     },
     // called before the containing component's VNode is updated
@@ -90,23 +103,23 @@ export default {
 
 <style scoped>
     .main-page-image {
-        width: 50vw;
+        width: 80vw;
     }
     .secondary-page-image {
         width: 50vw;
     }
-    .content-text >>> h2, h3, h4, h5 {
+    .content-text ::v-deep(h2, h3, h4, h5) {
         margin-bottom: 2rem;
     }
-    .additional-content-text >>> h2, h3, h4, h5 {
+    .additional-content-text ::v-deep(h2, h3, h4, h5) {
         margin-bottom: 2rem;
     }
-    .content-text >>> p {
+    .content-text ::v-deep(p) {
         padding-bottom: 2rem;
         line-height: 1.5rem;
         font-size: 1.25rem;
     }
-    .additional-content-text >>> p {
+    .additional-content-text ::v-deep(p) {
         padding-bottom: 2rem;
         line-height: 1.5rem;
         font-size: 1.25rem;
