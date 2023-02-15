@@ -1,11 +1,15 @@
 <template>
 
 <div class="content-container" v-if="object">
-<h1 v-if="pageName" class="page-name">{{ pageName }}</h1>
-<img class="main-page-image" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
-<div class="content-text" v-html="contentText"></div>
-<img class="secondary-page-image" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
-<div class="additional-content-text" v-if="additionalContentText" v-html="additionalContentText"></div>
+    <h1 v-if="pageName" class="page-name">{{ pageName }}</h1>
+    <div class="container-grid-1">
+        <img class="main-page-image grid-item" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
+        <div class="content-text grid-item" v-html="contentText"></div>
+    </div>
+    <div class="container-grid-2">
+        <div class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
+        <img class="secondary-page-image grid-item" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
+    </div>
 </div>
         
 <div v-else>
@@ -24,13 +28,12 @@ const contentfulClient = createClient();
 export default {
     head() {
         return {
-            title: `${this.pageName} =>  { AttracDev Development & Design }`,
+            title: this.title,
             meta: [
-                {
-                    hid: this.entryID,
-                    name: `${this.pageName} page`,
-                    content: `${this.pageName} page content`,
-                }
+                { hid: 'description', name: 'description', content: this.description },
+                { hid: 'robots', name: 'robots', content: this.robots },
+                { hid: 'keywords', name: 'keywords', content: this.keywords },
+                { hid: 'author', name: 'author', content: this.author }
             ]
         }
     },
@@ -47,7 +50,12 @@ export default {
         mainPageImage: '',
         contentText: '',
         secondaryPageImage: '',
-        additionalContentText: ''
+        additionalContentText: '',
+        robots: '',
+        author: '',
+        description: '',
+        keywords: '',
+        title: ''
     }),
     
     // Directive has a set of lifecycle hooks:
@@ -80,6 +88,13 @@ export default {
                 if (entry) {
                     console.log("we got the entry")
                     this.object = entry.fields
+                    // meta tags
+                    this.robots = this.object ? entry.fields.robots : 'index, follow',
+                    this.title = this.object ? entry.fields.title: `${this.pageName} | AttracDev`,
+                    this.author = this.object ? entry.fields.author: 'AttracDev',
+                    this.keywords = this.object ? entry.fields.keywords: '',
+                    this.description = this.object ? entry.fields.description: ''
+                    // body content
                     this.pageName = this.object ? entry.fields.pageName : ''
                     this.mainPageImage = this.object ? entry.fields.mainPageImage.fields : ''
                     this.contentText = this.object ? documentToHtmlString(entry.fields.contentText) : ''
@@ -102,7 +117,23 @@ export default {
 </script>
 
 <style scoped>
-
+    @media screen and (min-width: 1366px) {
+        .container-grid-1 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 25px;
+            align-items: center;
+        }
+        .container-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 25px;
+            align-items: center;
+        }
+        .grid-item {
+            align-self: center;
+        }
+    }
     .page-name {
         font-weight: 600;
         font-size: 2rem;
