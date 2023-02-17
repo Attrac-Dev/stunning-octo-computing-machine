@@ -3,12 +3,12 @@
 <div class="content-container" v-if="object">
     <h1 v-if="pageName" class="page-name">{{ pageName }}</h1>
     <div class="container-grid-1">
-        <img class="main-page-image grid-item" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
+        <img class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
         <div class="content-text grid-item" v-html="contentText"></div>
     </div>
     <div class="container-grid-2">
         <div class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
-        <img class="secondary-page-image grid-item" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
+        <img class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
     </div>
 </div>
         
@@ -55,7 +55,8 @@ export default {
         author: '',
         description: '',
         keywords: '',
-        title: ''
+        title: '',
+
     }),
     
     // Directive has a set of lifecycle hooks:
