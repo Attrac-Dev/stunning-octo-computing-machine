@@ -3,25 +3,42 @@
 <div class="content-grid-wrapper">
 
     <section class="intro-content">
-        <h4>SaaS Web Design & Development</h4>
-        <h1>Outstanding SaaS <br class="nudge">Web Development Agency</h1>
-        <h3>We help SaaS and Tech Companies reach their full potential, but helping them attract new customers. To do this, we craft beautiful, responsive and fast custom websites.</h3>
+        <h1>{{ mainHeader }}</h1>
+        <h2>{{ mainSubHeader }}</h2>
+        <h3>{{  mainH3 }}</h3>
     </section>
     <div class="call-to-action-block">
-       <button class="round-button cta">Contact Us ></button>
-       <button class="round-button cta2">Learn More</button>
+       <button class="round-button cta">{{ mainCTA }}</button>
+       <button class="round-button cta2">{{ mainCTA2 }}</button>
     </div>
     <div class="hero-image">
       <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
         <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
-        <img src="~/static/Asset selection-bro.svg" alt="Website layout illustration">
+        <img v-if="mainImage" :src="mainImage.file.url" v-bind:alt="mainImage.description">
+        
     </div>
     <div class="other-content">
-        <h4>Why AttracDev?</h4>
-        <h2>SaaS Web Development Agency</h2>
-        <h5>Find out why so many SaaS companies <br class="hide-mobile" />want to work with us.</h5>
+        <!-- main header -->
+        <h4>{{ servicesHeader }}</h4>
+        <!-- main subheader -->
+        <h2>{{ servicesSubheader }}</h2>
+        <!-- main description -->
+        <h5>{{ servicesDescription }}</h5>
         <div class="card-wrapper">
-           <HomeCard 
+
+            <HomeCard v-for="(service, index) in services" :key="index"
+                :header="service.serviceCardType"
+                :subheader="service.serviceCardDescription"
+                :imgPath="service.serviceCardIcon.url"
+                :alt="service.serviceCardIcon.description"
+                :nuxtlinkPath="service.serviceCardLinkPath"
+            />
+            
+            <!-- <HomeCard 
+                :id=services[0]
+            />
+            <hr class="mobile-card-divider"> -->
+           <!-- <HomeCard
             :header="'Design'" 
             :subheader="'We provide bespoke website designs that are not only responsive, but also engaging. Your website is the heart of your presence online. Putting your best foot forward by creating an attractive website is only the first step to building relationships online.'" 
             :imgPath="'/screen.svg'"
@@ -99,7 +116,7 @@
             :imgPath="'/message-bubble.svg'"
             :alt="'word bubble icon'"
             :linkPath="'etc'"
-            />
+            /> -->
 
         </div>
         
@@ -112,24 +129,127 @@
 </style>
 
 <script>
+// import here
+import { createClient } from '../plugins/contentful'
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import { BLOCKS, MARKS } from '@contentful/rich-text-types'
+
+const contentfulClient = createClient();
 import HomeCard from './HomeCard.vue'
+
 export default {
-    head: {
-        title: 'AttracDev Development & Design',
-        meta: [
-            {
-                hid: 'home',
-                description: 'home page',
-                content: 'home page content'
-            }
-        ]
+    data: (instance) => ({
+        test: 0,
+        // entryID: '4faDEHz7CtVqZtgFbJO4GK',
+        entryID: instance.id,
+        object: {},
+        // contentful Page specific fields
+        pageName: '',
+        mainHeader: '',
+        mainSubHeader: '',
+        mainH3: '',
+        mainImage: '',
+        mainCTA: '',
+        mainCTA2: '',
+        servicesHeader: '',
+        servicesSubheader: '',
+        servicesDescription: '',
+        services: [],
+        robots: '',
+        author: '',
+        metaDescription: '',
+        keywords: '',
+        title: '',
+
+    }),
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                { hid: 'description', name: 'description', content: this.description },
+                { hid: 'robots', name: 'robots', content: this.robots },
+                { hid: 'keywords', name: 'keywords', content: this.keywords },
+                { hid: 'author', name: 'author', content: this.author }
+            ]
+        }
     },
     components: { HomeCard },
         setup() {
 
     },
+    async created() {
+      this.fetchContent()
+
+    },
     mounted() {
         console.log('HomeGrid component has been mounted')
+    },
+    methods: {
+        // component specific methods here
+        getNested(obj){
+            // map obj.fields => service: {serviceCardType, serviceCardDescription, serviceCardIcon}
+            var services = obj.map(function(service){
+
+                return ({   
+                    "serviceCardIcon": {
+                        "title": service.fields.serviceCardIcon.fields.title,
+                        "description": service.fields.serviceCardIcon.fields.description,
+                        "url": service.fields.serviceCardIcon.fields.file.url,
+                        "fileName": service.fields.serviceCardIcon.fields.file.fileName
+                    },
+                    "serviceCardType": service.fields.serviceCardType,
+                    "serviceCardDescription": service.fields.serviceCardDescription,
+                    "serviceCardLinkPath": service.fields.linkPath,
+                })
+            }) 
+            // console.log(JSON.stringify(services))
+            return services
+        },
+        async fetchContent() {
+            try {
+                // had to use the getEntries instead of getEntry, because getEntry does not return the linked entry values
+                const entries = await contentfulClient.getEntries({
+                    'sys.id':this.entryID
+                })
+                if (entries) {
+                    console.log("we got the entries")
+                    entries.items.forEach((entry) => {
+                        this.object = entry.fields
+                        // meta tags
+                        this.robots = this.object ? entry.fields.robots : 'noindex, nofollow',
+                        this.title = this.object ? entry.fields.title: `${this.pageName} | AttracDev`,
+                        this.author = this.object ? entry.fields.author: 'AttracDev',
+                        this.keywords = this.object ? entry.fields.keywords: '',
+                        this.description = this.object ? entry.fields.metaDescription: ''
+                        // body content
+                        // main header, main sub-header, main h3, main image, main cta, main cta2, services header, services sub-header, services description, services[]
+                        this.pageName = this.object ? entry.fields.pageName : ''
+
+                        this.mainHeader = this.object ? entry.fields.h1 : ''
+                        this.mainSubHeader = this.object ? entry.fields.mainSubHeader : ''
+                        this.mainH3 = this.object ? entry.fields.h3 : ''
+                        this.mainImage = this.object ? entry.fields.mainImage.fields : ''
+                        this.mainCTA = this.object ? entry.fields.mainCTA : ''
+                        this.mainCTA2 = this.object ? entry.fields.mainCTA2 : ''
+                        this.servicesHeader = this.object ? entry.fields.servicesH2 : ''
+                        this.servicesSubheader = this.object ? entry.fields.servicesH3 : ''
+                        this.servicesDescription = this.object ? entry.fields.servicesDescription : ''
+                        // this.services = this.object ? entry.fields.services : ''
+                        // this.services = this.object ? entry.fields.services : ''  // returns array of card ids             
+                    })
+                    // try to get the nested service info
+                    this.services = this.object ? this.getNested(this.object.services) : []
+                } else {
+                    console.log('no entry was found')
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    },
+    props: {
+        // contentful entry object
+       id: String
     }
 }
 </script>

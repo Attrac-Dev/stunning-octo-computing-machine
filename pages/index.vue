@@ -1,15 +1,20 @@
 <template>
   <div class="content-container">
-    <HomeGrid />
+    <HomeGrid :id=id />
   </div>
 </template>
 
 <script>
 // import here
+// import here
+import ContentfulPage from '~/components/ContentfulPage.vue'
+import { createClient } from '~/plugins/contentful'
+const contentfulClient = createClient();
 export default {
     data: () => ({
         page: 'Home',
-        pageType: 'landing'
+        pageType: 'landing',
+        id: '6fVWWN65k4vv6WSI3SD88s'
     }),
 // Directive has a set of lifecycle hooks:
   // called before bound element's attributes or event listeners are applied

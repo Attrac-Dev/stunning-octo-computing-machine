@@ -46,16 +46,7 @@ export default {
         entryID: instance.id,
         object: {},
         // contentful Page specific fields
-        pageName: '',
-        mainPageImage: '',
-        contentText: '',
-        secondaryPageImage: '',
-        additionalContentText: '',
-        robots: '',
-        author: '',
-        description: '',
-        keywords: '',
-        title: '',
+       
 
     }),
     
