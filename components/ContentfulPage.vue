@@ -1,7 +1,7 @@
 <template>
 
 <div class="content-container" v-if="object">
-    <h1 v-if="pageName" class="page-name">{{ pageName }}</h1>
+    <h1 v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
     <div class="container-grid-1">
         <img class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
         <div class="content-text grid-item" v-html="contentText"></div>
@@ -46,7 +46,17 @@ export default {
         entryID: instance.id,
         object: {},
         // contentful Page specific fields
-       
+        robots: '',
+        title: '',
+        author: '',
+        keywords: '',
+        description: '',
+        pageName: '',
+        mainPageHeader: '',
+        mainPageImage: '',
+        contentText: '',
+        secondaryPageImage: '',
+        additionalContentText: ''
 
     }),
     
@@ -81,17 +91,18 @@ export default {
                     console.log("we got the entry")
                     this.object = entry.fields
                     // meta tags
-                    this.robots = this.object ? entry.fields.robots : 'index, follow',
-                    this.title = this.object ? entry.fields.title: `${this.pageName} | AttracDev`,
-                    this.author = this.object ? entry.fields.author: 'AttracDev',
-                    this.keywords = this.object ? entry.fields.keywords: '',
-                    this.description = this.object ? entry.fields.description: ''
+                    this.robots = this.object.robots ? entry.fields.robots : 'index, follow',
+                    this.title = this.object.title ? entry.fields.title : `${this.pageName} | AttracDev`,
+                    this.author = this.object.author ? entry.fields.author : 'AttracDev',
+                    this.keywords = this.object.keywords ? entry.fields.keywords : '',
+                    this.description = this.object.description ? entry.fields.description : ''
                     // body content
-                    this.pageName = this.object ? entry.fields.pageName : ''
-                    this.mainPageImage = this.object ? entry.fields.mainPageImage.fields : ''
-                    this.contentText = this.object ? documentToHtmlString(entry.fields.contentText) : ''
-                    this.secondaryPageImage = this.object ? entry.fields.secondaryPageImage.fields : ''
-                    this.additionalContentText = this.object ? documentToHtmlString(entry.fields.additionalContentText) : ''
+                    this.pageName = this.object.pageName ? entry.fields.pageName : ''
+                    this.mainPageHeader = this.object.mainPageHeader ? entry.fields.mainPageHeader : this.object.pageName
+                    this.mainPageImage = this.object.mainPageImage ? entry.fields.mainPageImage.fields : ''
+                    this.contentText = this.object.contentText ? documentToHtmlString(entry.fields.contentText) : ''
+                    this.secondaryPageImage = this.object.secondaryPageImage ? entry.fields.secondaryPageImage.fields : ''
+                    this.additionalContentText = this.object.additionalContentText ? documentToHtmlString(entry.fields.additionalContentText) : ''
                 } else {
                     console.log('no entry was found')
                 }
