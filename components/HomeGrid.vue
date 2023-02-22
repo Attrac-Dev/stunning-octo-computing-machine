@@ -33,7 +33,7 @@
                 :alt="service.serviceCardIcon.description"
                 :nuxtlinkPath="service.serviceCardLinkPath"
             />
-            
+
             <!-- <HomeCard 
                 :id=services[0]
             />
@@ -126,6 +126,34 @@
 
 <style>
     @import '~/styles/grid.css';
+
+    h1 {
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-weight: 300;
+        padding-bottom: 2rem;
+    }
+
+    h3 {
+        font-weight: 200;
+        margin-top: 5px;
+        padding-bottom: 2rem;
+    }
+
+    h4, h5 {
+        font-weight: 300;
+    }
+
+    .other-content {
+        position: relative; /* set the position to relative */
+        left: 50%; /* move the element 50% to the right */
+        transform: translateX(-50%); /* move the element back 50% to the left */
+        width: 100vw; /* set the width to 100% of the viewport width */
+        padding: 3rem;
+    }
 </style>
 
 <script>
