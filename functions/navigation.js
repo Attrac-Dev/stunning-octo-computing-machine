@@ -7,7 +7,7 @@ export function navigationScript() {
     function toggleMenu() {
         if (menu.classList.contains("active")) {
             menu.classList.remove("active")
-            console.log('removed active from menu navigation')
+            // console.log('removed active from menu navigation')
             // adds the menu (hamburger) icon
             hamburger.classList.remove("is-active")
         } else {
@@ -15,7 +15,7 @@ export function navigationScript() {
              
             // adds the close (x) icon
             hamburger.classList.add("is-active")
-        }hamburger
+        }
     }
      
     /* Event Listener: addEventListener(type, listener, options)*/
@@ -28,7 +28,7 @@ export function navigationScript() {
       // submenu toggle OFF
       if (this.classList.contains("submenu-active")) {
         this.classList.remove("submenu-active")
-        console.log('first line of toggleItem()')
+        // console.log('Closed Sub-Menu')
         
         
         // still trying to change the font awesome chevron to f077
@@ -45,11 +45,11 @@ export function navigationScript() {
       } else if (menu.querySelector(".submenu-active")) {
         menu.querySelector(".submenu-active").classList.remove("submenu-active")
         this.classList.add("submenu-active")
-        console.log('second line of toggleItem()')
+        // console.log('second line of toggleItem()')
         // toggle the chevron DOWN
       } else {
         this.classList.add("submenu-active")
-        console.log('last line of toggleItem()')
+        // console.log('Opened Sub-Menu')
         // toggle the chevron UP
       }
     }
@@ -64,11 +64,19 @@ export function navigationScript() {
     
     /* Close Submenu From Anywhere */
     function closeSubmenu(e) {
+        const targetElement = e.target
+        // console.log(targetElement, targetElement.nodeName)
         let isClickInside = menu.contains(e.target)
-       
+        if (isClickInside && targetElement.nodeName === 'A' && !targetElement.nextSibling){
+          setTimeout(() => toggleMenu(), 800)
+          // console.log('should this be closed?')
+        }
         if (!isClickInside && menu.querySelector(".submenu-active")) {
           menu.querySelector(".submenu-active").classList.remove("submenu-active")
           // toggle the chevron DOWN
+          // console.log(`item clicked ${e.target}`)
+          setTimeout(() => toggleMenu(), 800)
+
         }
       }
        

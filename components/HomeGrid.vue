@@ -154,6 +154,48 @@
         width: 100vw; /* set the width to 100% of the viewport width */
         padding: 3rem;
     }
+    @media only screen and (max-width: 800px) {
+        /* style only mobile devices */
+        .hero-image {
+            background-color: transparent;
+            padding: 0 0;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        /* style only smaller screen widths */
+        .hero-image {
+            margin-top: -150px;
+            margin-bottom: -150px;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        /* style only smallest screens */
+        .intro-content {
+            padding: 0 0;
+        }
+        .hero-image {
+            margin: 20px 0 10px 0;
+            height: 300px;
+        }
+        section.other-content {
+            margin: auto;
+            width: 80%;
+        }
+        .card-sub-header {
+            /* font-size: larger; */
+            padding: 0;
+            margin: auto;
+            width: 100%;
+        }
+        .other-content {
+            margin: -300px 0;
+        }
+        .card {
+            padding: 0;
+        }
+    }
 </style>
 
 <script>

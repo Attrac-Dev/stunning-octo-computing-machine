@@ -19,12 +19,12 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.1/css/all.css'},
-      { rel: 'icon', type: 'image/png', href: './static/favicon-32x32.png' },
-      { rel: 'apple-touch-icon', sizes: '180x180', href: '~/static/apple-touch-icon.png'},
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '~/static/favicon-32x32.ico' },
-      { rel: 'icon', type: 'image/x-png', sizes: '16x16', href: '~/static/favicon-16x16.ico' },
+      { rel: 'icon', type: 'image/png', href: '~/static/favicon-32x32.png?v2' },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '~/static/apple-touch-icon.png?v2'},
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '~/static/favicon-32x32.ico?v2' },
+      { rel: 'icon', type: 'image/x-png', sizes: '16x16', href: '~/static/favicon-16x16.ico?v2' },
       // { rel: 'manifest', href: '/site.manifest'},
-      { rel: 'mask-icon', href: '~/static/safari-pinned-tab.svg', color: '#5bbad5' }
+      { rel: 'mask-icon', href: '~/static/safari-pinned-tab.svg?v2', color: '#5bbad5' }
     ]
   },
 

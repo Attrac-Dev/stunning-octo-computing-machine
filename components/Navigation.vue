@@ -45,6 +45,16 @@
 
 <style>
     @import '~/styles/navigation.css';
+    @import '~/styles/vars.css';
+    /* shows the active page in the menu */
+    a.nuxt-link-exact-active {
+        color: var(--brand-blue)
+    }
+    .menu {
+        /* when menu closes */
+        transition: opacity 0.3s ease-out;
+    }
+
 </style>
 
 <script>
