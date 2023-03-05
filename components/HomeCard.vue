@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style scoped>
+  @import '~/styles/vars.css';
   .card {
     display: flex;
     flex-direction: column;
@@ -82,13 +83,16 @@ export default {
     margin-bottom: 1rem;
   }
   h3 {
-    margin: 0.5rem 0 1rem 0;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   p {
-    margin: 1rem 0 2rem 0;
+    margin: 0 auto;
     padding: 0 2rem 0 2rem;
     font-size: 1.2rem;
     line-height: 1.5rem;
+    text-align: center;
   }
   .cta-text {
     background: none;
@@ -102,5 +106,30 @@ export default {
     background-color: transparent;
     padding: 1rem;
     /* no shadow */
+  }
+
+  button.cta-text {
+    margin: 15px 0;
+    background: var(--brand-blue);
+    color: var(--brand-white);
+  }
+
+  button.cta-text:hover, button.cta-text:active {
+    background: var(--brand-indigo);
+  }
+
+  p {
+    margin-bottom: 5px;
+    line-height: 2rem;
+    font-size: 1.25rem;
+  }
+  @media only screen and (max-width: 800px) {
+    section.card {
+      padding: 3rem 0;
+    }
+    p {
+      width: 100%;
+      padding: 0;
+    }
   }
 </style>

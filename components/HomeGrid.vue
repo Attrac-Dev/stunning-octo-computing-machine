@@ -1,31 +1,40 @@
 <template>
     <!-- Grid Area wrapper-->
 <div class="content-grid-wrapper">
-
-    <section class="intro-content">
-        <h1>{{ mainHeader }}</h1>
-        <h2>{{ mainSubHeader }}</h2>
-        <h3>{{  mainH3 }}</h3>
-    </section>
-    <div class="call-to-action-block">
-       <button class="round-button cta">{{ mainCTA }}</button>
-       <button class="round-button cta2">{{ mainCTA2 }}</button>
-    </div>
-    <div class="hero-image">
-      <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
-        <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
-        <img v-if="mainImage" :src="mainImage.file.url" v-bind:alt="mainImage.description">
+        <div class="above-fold">
+            <div class="left">
+                <section class="intro-content">
+                    <h1>{{ mainHeader }}</h1>
+                    <h2>{{ mainSubHeader }}</h2>
+                    <h3>{{  mainH3 }}</h3>
+                </section>
+                <div class="call-to-action-block">
+                    <button class="round-button cta">{{ mainCTA }}</button>
+                    <button class="round-button cta2">{{ mainCTA2 }}</button>
+                </div>
+            </div>
+            <div class="right">
+                <div class="hero-image">
+                <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
+                <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
+                <img v-if="mainImage" :src="mainImage.file.url" v-bind:alt="mainImage.description">
+            </div>
+            </div>
+        </div>
         
-    </div>
-    <div class="other-content">
-        <!-- main header -->
-        <h4>{{ servicesHeader }}</h4>
-        <!-- main subheader -->
-        <h2>{{ servicesSubheader }}</h2>
-        <!-- main description -->
-        <h5>{{ servicesDescription }}</h5>
-        <div class="card-wrapper">
 
+    
+    <div class="other-content">
+        <div class="services-headers breakout">
+            <!-- main header -->
+            <h2 class="service-header">{{ servicesHeader }}</h2>
+            <!-- main subheader -->
+            <h3 class="service-header">{{ servicesSubheader }}</h3>
+            <!-- main description -->
+            <h5 class="service-header">{{ servicesDescription }}</h5>
+        </div>
+
+        <div class="card-wrapper">
             <HomeCard v-for="(service, index) in services" :key="index"
                 :header="service.serviceCardType"
                 :subheader="service.serviceCardDescription"
@@ -33,169 +42,55 @@
                 :alt="service.serviceCardIcon.description"
                 :nuxtlinkPath="service.serviceCardLinkPath"
             />
-
-            <!-- <HomeCard 
-                :id=services[0]
-            />
-            <hr class="mobile-card-divider"> -->
-           <!-- <HomeCard
-            :header="'Design'" 
-            :subheader="'We provide bespoke website designs that are not only responsive, but also engaging. Your website is the heart of your presence online. Putting your best foot forward by creating an attractive website is only the first step to building relationships online.'" 
-            :imgPath="'/screen.svg'"
-            :alt="'computer icon'"
-            :linkPath="'design'"
-            />
-
-            <hr class="mobile-card-divider">
-            <HomeCard 
-            :header="'Development'" 
-            :subheader="'We can either sprinkle just a little bit of Javascript throughout your site, or we can create a powerful web app from the ground up.'" 
-            :imgPath="'/web-development.svg'"
-            :alt="'computer icon'"
-            :linkPath="'development'"
-            />
-            
-            <hr class="mobile-card-divider">
-            
-            <HomeCard 
-            :header="'Email Newsletters'" 
-            :subheader="'Reach out to your client base by offering them a monthly newsletter. These have been shown to have a very high engagement rate and can generate repeat customers.'" 
-            :imgPath="'/email-marketing.svg'"
-            :alt="'letter icon'"
-            :linkPath="'emails'"
-            />
-            
-            <hr class="mobile-card-divider">
-
-            <HomeCard 
-            :header="'Podcasting'" 
-            :subheader="'Producing your own weekly podcast can create garner a large fan base. Advertising in other podcasts can also help engage with potential customers.'" 
-            :imgPath="'/microphone.svg'"
-            :alt="'microphone icon'"
-            :linkPath="'podcasts'"
-            />
-
-            <hr class="mobile-card-divider">
-
-            <HomeCard 
-            :header="'Video Marketing'" 
-            :subheader="'Videos are a great way to establish your brand with new customers. Ads, reviews, interviews, product placement and more have become a proven way to introduce new customers to your product or service.'" 
-            :imgPath="'/video-marketing.svg'"
-            :alt="'video icon'"
-            :linkPath="'videos'"
-            />
-
-            <hr class="mobile-card-divider">
-
-
-            <HomeCard 
-            :header="'A/B Testing'" 
-            :subheader="'Sometimes one design resonates more with customers than another would. The concept of A/B testing is to try two different designs and let the data show which is the more effective option.'" 
-            :imgPath="'/a-b testing.svg'"
-            :alt="'A/B Test icon'"
-            :linkPath="'etc'"
-            />
-
-            
-            <hr class="mobile-card-divider">
-
-            <HomeCard 
-            :header="'Social Media Management'" 
-            :subheader="'Engaging with customers on the many different social media platforms can be exhausting. We can help to streamline the process and get you the results you are looking for.'" 
-            :imgPath="'/social-media.svg'"
-            :alt="'Social Media icon'"
-            :linkPath="'social%20media'"
-            />
-
-           
-            <hr class="mobile-card-divider">
-
-            <HomeCard 
-            :header="'Reviews & Testimonials'" 
-            :subheader="'Word of mouth has always been the best way to generate new customers. There are a lot of new ways to do this in the digital age. Having genuine reviews from actual customers can build your brand in ways that nothing else can match.'" 
-            :imgPath="'/message-bubble.svg'"
-            :alt="'word bubble icon'"
-            :linkPath="'etc'"
-            /> -->
-
         </div>
         
     </div>
 </div>
 </template>
 
-<style>
-    @import '~/styles/grid.css';
 
-    h1 {
-        font-weight: 600;
-        font-size: 2rem;
-    }
+<style scoped>
+@import '~/styles/vars.css';
+@import '~/styles/misc.css';
 
-    h2 {
-        font-weight: 300;
-        padding-bottom: 2rem;
-    }
+.breakout {
+    /* go beyond the wrapping container */
+    margin-left:   calc(50% - 50vw);
+    margin-right:  calc(50% - 50vw);
+    padding-left:  calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
+}
+.services-headers {
+    background-color: var(--brand-blue);
+    padding: 2rem 4rem 4rem 4rem;
+    
+}
+.service-header {
+    color: var(--brand-white);
+}
 
-    h3 {
-        font-weight: 200;
-        margin-top: 5px;
-        padding-bottom: 2rem;
+@media screen and (min-width: 1200px) {
+    .content-grid-wrapper {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
-
-    h4, h5 {
-        font-weight: 300;
+    .content-grid-wrapper, .other-content {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 25px;
+        align-items: center;
     }
-
-    .other-content {
-        position: relative; /* set the position to relative */
-        left: 50%; /* move the element 50% to the right */
-        transform: translateX(-50%); /* move the element back 50% to the left */
-        width: 100vw; /* set the width to 100% of the viewport width */
-        padding: 3rem;
-    }
-    @media only screen and (max-width: 800px) {
-        /* style only mobile devices */
-        .hero-image {
-            background-color: transparent;
-            padding: 0 0;
-        }
-    }
-
-    @media only screen and (max-width: 500px) {
-        /* style only smaller screen widths */
-        .hero-image {
-            margin-top: -150px;
-            margin-bottom: -150px;
-        }
+    .above-fold, .card-wrapper {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
     }
 
-    @media only screen and (max-width: 375px) {
-        /* style only smallest screens */
-        .intro-content {
-            padding: 0 0;
-        }
-        .hero-image {
-            margin: 20px 0 10px 0;
-            height: 300px;
-        }
-        section.other-content {
-            margin: auto;
-            width: 80%;
-        }
-        .card-sub-header {
-            /* font-size: larger; */
-            padding: 0;
-            margin: auto;
-            width: 100%;
-        }
-        .other-content {
-            margin: -300px 0;
-        }
-        .card {
-            padding: 0;
-        }
-    }
+}
+
+
 </style>
 
 <script>
