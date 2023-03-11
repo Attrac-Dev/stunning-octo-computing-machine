@@ -1,14 +1,14 @@
 <template>
 
 <div class="content-container" v-if="object">
-    <h1 v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
+    <h1 v-if="pageName" data-aos="fade-left" ata-aos-easing="linear" class="page-name">{{ mainPageHeader }}</h1>
     <div class="container-grid-1">
-        <img class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
-        <div class="content-text grid-item" v-html="contentText"></div>
+        <img data-aos="fade-right" ata-aos-easing="linear" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
+        <div data-aos="fade-left" ata-aos-easing="linear"  class="content-text grid-item" v-html="contentText"></div>
     </div>
     <div class="container-grid-2">
-        <div class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
-        <img class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
+        <div data-aos="fade-right" ata-aos-easing="linear" class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
+        <img data-aos="fade-left" ata-aos-easing="linear" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
     </div>
 </div>
         
@@ -33,7 +33,7 @@ export default {
                 { hid: 'description', name: 'description', content: this.description },
                 { hid: 'robots', name: 'robots', content: this.robots },
                 { hid: 'keywords', name: 'keywords', content: this.keywords },
-                { hid: 'author', name: 'author', content: this.author }
+                { hid: 'author', name: 'author', content: this.author },
             ]
         }
     },
@@ -120,6 +120,7 @@ export default {
 </script>
 
 <style scoped>
+@import '~/styles/typography.css';
     @media screen and (min-width: 1366px) {
         .container-grid-1 {
             display: grid;
@@ -138,8 +139,7 @@ export default {
         }
     }
     .page-name {
-        font-weight: 600;
-        font-size: 2rem;
+        /* using global typography */
     }
     .main-page-image, .secondary-page-image {
         margin-bottom: 20px;
@@ -149,55 +149,50 @@ export default {
     }
     .content-text ::v-deep(h2), .additional-content-text ::v-deep(h2) {
         /* margin-bottom: 2rem; */
-        padding-bottom: 2rem;
-        font-weight: 300;
+        /* using global typography */
     }
     .content-text ::v-deep(h3), .additional-content-text ::v-deep(h3) {
-        /* margin-bottom: 2rem; */
-        padding-bottom: 2rem;
-        font-weight: 200;
-        margin-top: 5px;
+        /* using global typography */
     }
 
     .content-text ::v-deep(h4, h5), .additional-content-text ::v-deep(h4, h5) {
-        font-weight: 300;
+        /* using global typography */
     }
     .content-text ::v-deep(h4), .additional-content-text ::v-deep(h4) {
-        margin-bottom: 1rem;
+        /* margin-bottom: 0.5rem; */
     }
     .content-text ::v-deep(li), .additional-content-text ::v-deep(li) {
         margin-left: 1.5rem;
         margin-bottom: -1rem;
+        /* using global typography */
     }
     .content-text ::v-deep(ul) , .additional-content-text ::v-deep(ul) {
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
     }
     .content-text ::v-deep(ol) , .additional-content-text ::v-deep(ol) {
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
     }
     .content-text ::v-deep(ol li), .additional-content-text ::v-deep(ol li) {
         margin-bottom: -20px;
     }
 
-    /* .additional-content-text,  ::v-deep(h2) {
+    .additional-content-text,  ::v-deep(h2) {
         padding-bottom: 2rem;
-        font-weight: 300;
+        /* using global typography */
         margin-top: 5px;
     }
 
     .additional-content-text ::v-deep(h3, h4, h5) {
         padding-bottom: 2rem;
-        font-weight: 200;
-    } */
+        /* using global typography */
+    }
 
     .content-text ::v-deep(p), .additional-content-text ::v-deep(p) {
         margin-bottom: 40px;
-        line-height: 2rem;
-        font-size: 1.25rem;
+        /* using global typography */
     }
-    /* .additional-content-text ::v-deep(p) {
+    .additional-content-text ::v-deep(p) {
         margin-bottom: 20px;
-        line-height: 2rem;
-        font-size: 1.25rem;
-    } */
+        /* using global typography */
+    }
 </style>

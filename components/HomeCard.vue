@@ -1,6 +1,6 @@
 <template>
     <section class="card">
-        <img class="main-page-image grid-item fade-in" v-if="imgPath" :src="imgPath" v-bind:alt="alt">
+        <img class="main-page-image grid-item fade-in" v-if="imgPath" :src="imgPath" v-bind:alt="alt" data-aos="zoom-in" ata-aos-easing="linear" data-aos-duration="800">
         <h3 class="card-header">{{ header }}</h3>
         <p class="card-sub-header">{{ subheader }}</p>
         <NuxtLink :to="`/services/${nuxtlinkPath}`"><button class="cta-text">{{ ctaText }}</button></NuxtLink>
@@ -70,6 +70,7 @@ export default {
 
 <style scoped>
   @import '~/styles/vars.css';
+  @import '~/styles/typography.css';
   .card {
     display: flex;
     flex-direction: column;
@@ -88,24 +89,20 @@ export default {
     padding-bottom: 15px;
   }
   p {
+    /* using global typography */
     margin: 0 auto;
     padding: 0 2rem 0 2rem;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
     text-align: center;
   }
   .cta-text {
+    /* using global typography */
     background: none;
     border: none;
     margin: 0;
-    font: inherit;
-    color: inherit;
     cursor: pointer;
     outline: inherit;
-    font-size: 1.5rem;
     background-color: transparent;
     padding: 1rem;
-    /* no shadow */
   }
 
   button.cta-text {
@@ -120,8 +117,7 @@ export default {
 
   p {
     margin-bottom: 5px;
-    line-height: 2rem;
-    font-size: 1.25rem;
+    /* using global typography */
   }
   @media only screen and (max-width: 800px) {
     section.card {

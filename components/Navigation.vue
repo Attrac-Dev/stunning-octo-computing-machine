@@ -55,6 +55,10 @@
         transition: opacity 0.3s ease-out;
     }
 
+    nav {
+        z-index: 1000;
+    }
+
 </style>
 
 <script>
