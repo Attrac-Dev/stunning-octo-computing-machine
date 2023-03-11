@@ -2,3 +2,7 @@
     This is the main global CSS file for anything not scoped to the components
     Use this to set the design system for the project
 */
+/* 
+    The 'Animate on Scroll' library doesn't work on mobile. Here is the overwrite to fix this.
+*/
+

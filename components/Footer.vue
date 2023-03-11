@@ -17,7 +17,7 @@
         <h2 class="ft-title">Resources</h2>
         <ul>
           <li><NuxtLink to="/docs">Docs</NuxtLink></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="https://attrac.dev">Blog</a></li>
           <li><NuxtLink to="/ebooks">eBooks</NuxtLink></li>
           <li><NuxtLink to="/webinars">Webinars</NuxtLink></li>
           <li><NuxtLink to="/faq">FAQ</NuxtLink></li>

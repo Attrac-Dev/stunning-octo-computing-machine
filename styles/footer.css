@@ -103,6 +103,7 @@ h2.ft-title {
     margin: 0.125rem 0.625rem;
     white-space: nowrap;
     list-style-type: none;
+    font-size: 1rem;
   }
 
   .ft-legal-list li a {

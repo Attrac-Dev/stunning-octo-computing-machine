@@ -14,20 +14,22 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      // { name: 'msapplication-TileColor', content: '#2d89ef'},
-      // { name: 'theme-color', content: '#ffffff'}
+      { name: 'apple-mobile-webb-app-capable', content: 'yes'}
+
     ],
     link: [
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.1/css/all.css'},
-      { rel: 'icon', type: 'image/png', href: './static/favicon-32x32.png' },
-      // { rel: 'apple-touch-icon', sizes: '180x180', href: '~/static/apple-touch-icon.png'},
-      // { rel: 'icon', type: 'image/png', sizes: '32x32', href: '~/static/favicon-32x32.ico' },
-      // { rel: 'icon', type: 'image/x-png', sizes: '16x16', href: '~/static/favicon-16x16.ico' },
-      // { rel: 'manifest', href: '/site.manifest'},
-      // { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ]
+  },
+
+  pageTransition: {
+    name: 'page',
+    mode: 'out-in',
+    beforeEnter (el) {
+      console.log('Before Enter . . . . ')
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -35,13 +37,16 @@ export default {
     '~/styles/vars.css',
     '~/styles/normalize.css',
     '~/styles/hamburgers.css',
-    '~/styles/misc.css',
-    '~/styles/transitions.css'
+    // '~/styles/misc.css',
+    '~/styles/transitions.css',
+    '~/styles/typography.css',
+    '~styles/main.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/contentful"
+    "~/plugins/contentful",
+    { src: "~/plugins/aos", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,6 +63,13 @@ export default {
       solid: true,
       regular: true,
       brands: true,
+    }
+  },
+
+  googleFonts: {
+    families: {
+      'Assistant': true, 
+      'Karla': true,
     }
   },
 

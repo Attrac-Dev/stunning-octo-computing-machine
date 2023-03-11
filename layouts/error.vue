@@ -65,7 +65,7 @@
     }
     .not-found-img {
         padding: 0;
-        width: 60vw;
+        width: 100vw;
         height: auto;
         min-width: 260px;
         margin: auto;

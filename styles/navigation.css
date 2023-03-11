@@ -11,8 +11,9 @@
     margin: 0;
 }
 .body-container {
-    font-family: sans-serif;
-    font-size: 16px;
+    font-family: 'Assistant';
+    font-size: inherit;
+    font-weight: 300;
 }
 nav {
     background: var(--brand-white);
