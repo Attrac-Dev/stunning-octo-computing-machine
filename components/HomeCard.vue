@@ -1,6 +1,6 @@
 <template>
     <section class="card">
-        <img class="main-page-image grid-item fade-in" v-if="imgPath" :src="imgPath" v-bind:alt="alt" data-aos="zoom-in" ata-aos-easing="linear" data-aos-duration="800">
+        <img preload class="main-page-image grid-item fade-in" v-if="imgPath" :src="imgPath" v-bind:alt="alt" data-aos="zoom-in" ata-aos-easing="linear" data-aos-duration="800" data-aos-offset="200" />
         <h3 class="card-header">{{ header }}</h3>
         <p class="card-sub-header">{{ subheader }}</p>
         <NuxtLink :to="`/services/${nuxtlinkPath}`"><button class="cta-text">{{ ctaText }}</button></NuxtLink>
@@ -87,6 +87,11 @@ export default {
     margin: 0 auto;
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+  h3.card-header {
+    color: var(--brand-dark-grey);
+    font-size: 2rem;
+    font-weight: 500;
   }
   p {
     /* using global typography */

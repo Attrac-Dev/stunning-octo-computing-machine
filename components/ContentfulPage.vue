@@ -1,14 +1,14 @@
 <template>
 
 <div class="content-container" v-if="object">
-    <h1 v-if="pageName" data-aos="fade-left" ata-aos-easing="linear" class="page-name">{{ mainPageHeader }}</h1>
+    <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
     <div class="container-grid-1">
-        <img data-aos="fade-right" ata-aos-easing="linear" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
-        <div data-aos="fade-left" ata-aos-easing="linear"  class="content-text grid-item" v-html="contentText"></div>
+        <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
+        <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="contentText"></div>
     </div>
     <div class="container-grid-2">
-        <div data-aos="fade-right" ata-aos-easing="linear" class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
-        <img data-aos="fade-left" ata-aos-easing="linear" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
+        <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
+        <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
     </div>
 </div>
         
@@ -138,29 +138,14 @@ export default {
             align-self: center;
         }
     }
-    .page-name {
-        /* using global typography */
-    }
+
     .main-page-image, .secondary-page-image {
         margin-bottom: 20px;
     }
     .content-text {
         margin-bottom: 15px;
     }
-    .content-text ::v-deep(h2), .additional-content-text ::v-deep(h2) {
-        /* margin-bottom: 2rem; */
-        /* using global typography */
-    }
-    .content-text ::v-deep(h3), .additional-content-text ::v-deep(h3) {
-        /* using global typography */
-    }
 
-    .content-text ::v-deep(h4, h5), .additional-content-text ::v-deep(h4, h5) {
-        /* using global typography */
-    }
-    .content-text ::v-deep(h4), .additional-content-text ::v-deep(h4) {
-        /* margin-bottom: 0.5rem; */
-    }
     .content-text ::v-deep(li), .additional-content-text ::v-deep(li) {
         margin-left: 1.5rem;
         margin-bottom: -1rem;

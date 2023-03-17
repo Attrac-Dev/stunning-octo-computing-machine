@@ -4,13 +4,13 @@
         <div class="above-fold">
             <div class="left">
                 <section class="intro-content">
-                    <h1 class="intro-header blue-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="800">{{ mainHeader }}</h1>
-                    <h2 class="intro-header grey-text" data-aos="fade-right" data-aos-delay="800" data-aos-duration="1600">{{ mainSubHeader }}</h2>
-                    <h3 class="intro-header indigo-text" data-aos="fade-left" data-aos-delay="1200" data-aos-duration="2400">{{  mainH3 }}</h3>
+                    <h1 class="intro-header blue-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">{{ mainHeader }}</h1>
+                    <h2 class="intro-header grey-text" data-aos="fade-right" data-aos-delay="800" data-aos-duration="600">{{ mainSubHeader }}</h2>
+                    <h3 class="intro-header indigo-text" data-aos="fade-left" data-aos-delay="1200" data-aos-duration="600">{{  mainH3 }}</h3>
                 </section>
-                <div class="call-to-action-block breakout" data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="2000">
-                    <VariableButton class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
-                    <VariableButton class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA2 :textColor="'white'" />
+                <div class="call-to-action-block breakout">
+                    <VariableButton data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
+                    <VariableButton data-aos="fade-left" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA2 :textColor="'white'" />
                 </div>
             </div>
             <div class="right">
@@ -25,7 +25,7 @@
 
     
     <div class="other-content">
-        <div class="services-headers breakout">
+        <div data-aos-offset="80" data-aos-anchor="center-bottom" data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="3000" class="services-headers breakout">
             <!-- main header -->
             <h2 class="service-header">{{ servicesHeader }}</h2>
             <!-- main subheader -->
@@ -65,12 +65,12 @@
     display: flex;
     justify-content: space-evenly;
 }
-.intro-header {
-    /* using global typography */
-}
+
 .services-headers {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-indigo);
     padding: 2rem 4rem 4rem 4rem;
+    box-shadow: 0 3px 1px var(--brand-dark-grey);
+
 }
 .service-header {
     color: var(--brand-white);
@@ -140,15 +140,7 @@
         padding-left:30px;
         padding-right: 15px;
     }
-    h2.service-header {
-        /* using global typography */
-    }
-    h3.service-header {
-       /* using global typography */
-    }
-    h5.service-header {
-        /* using global typography */
-    }
+
 }
 
 /* smallest screens */
@@ -180,15 +172,6 @@
     .services-headers {
         padding-left:15px;
         padding-right: 15px;
-    }
-    h2.service-header {
-        /* using global typography */
-    }
-    h3.service-header {
-        /* using global typography */
-    }
-    h5.service-header {
-        /* using global typography */
     }
 }
 

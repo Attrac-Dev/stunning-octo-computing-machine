@@ -58,12 +58,14 @@ body {
     color: var(--brand-dark-grey);
     text-align: left;
     letter-spacing: 0.03em;
+   
 }
 
 /* Apply the font family to all headings */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Assistant', sans-serif;
     letter-spacing: 0.02em;
+   
 }
 
 /* Apply a consistent margin and padding to all headings */
@@ -137,6 +139,7 @@ p {
     color: var(--brand-dark-grey);
     text-align: left;
     letter-spacing: 0.03em;
+    
   }
 
   /* Additional typography styles */
