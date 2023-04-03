@@ -13,9 +13,9 @@
   export default {
     async asyncData() {
         const pageData = { 
-            page: 'About',
-            pageType: 'informational',
-            id: '4faDEHz7CtVqZtgFbJO4GK'
+            page: 'Videos',
+            pageType: 'service',
+            id: '1oGar5zmarPC4i6ymZEUW0'
         }
         const entry = await contentfulClient.getEntry(pageData.id)
         return { entry }

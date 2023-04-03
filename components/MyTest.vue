@@ -5,10 +5,10 @@
             <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
             <div class="container-grid-1">
                 <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.fields.file.url" v-bind:alt="mainPageImage.description">
-                <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="printEntries(entry.contentText)"></div>
+                <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="printEntries(contentText)"></div>
             </div>
             <div class="container-grid-2">
-                <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
+                <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="printEntries(additionalContentText)"></div>
                 <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.fields.file.url" v-bind:alt="secondaryPageImage.description">
             </div>
         </div>
@@ -49,17 +49,17 @@
         }
     },
     created() {
-        this.title =    this.entry.title
-        this.robots =   this.entry.robots
-        this.keywords = this.entry.keywords
-        this.description =  this.entry.description
-        this.author =   this.entry.author
-        this.pageName =     this.entry.pageName
-        this.mainPageHeader =   this.entry.mainPageHeader
-        this.mainPageImage =    this.entry.mainPageImage
-        this.contentText =  this.entry.contentText
-        this.secondaryPageImage =   this.entry.secondaryPageImage
-        this.additionalContentText =    this.entry.additionalContentText
+        // this.title =    this.entry.title
+        // this.robots =   this.entry.robots
+        // this.keywords = this.entry.keywords
+        // this.description =  this.entry.description
+        // this.author =   this.entry.author
+        this.pageName =     this.entry.pageName ? this.entry.pageName : 'ERROR RETRIEVING PAGE NAME'
+        this.mainPageHeader =   this.entry.mainPageHeader ? this.entry.mainPageHeader : this.entry.pageName
+        this.mainPageImage =    this.entry.mainPageImage ? this.entry.mainPageImage : ''
+        this.contentText =  this.entry.contentText ? this.entry.contentText : 'ERROR RETRIEVING TEXT'
+        this.secondaryPageImage =   this.entry.secondaryPageImage ? this.entry.secondaryPageImage : ''
+        this.additionalContentText =    this.entry.additionalContentText ? this.entry.additionalContentText : ''
     }
   }
   </script>
