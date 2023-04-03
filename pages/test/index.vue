@@ -1,9 +1,9 @@
 <!-- Parent Component -->
 <template>
-    <div>
+    <div class="content-container">
       <MyTest :entry="entry.fields" />
     </div>
-  </template>
+</template>
   
   <script>
   import MyTest from '@/components/MyTest.vue'
@@ -11,16 +11,25 @@
   const contentfulClient = createClient();
 
   export default {
+    async asyncData() {
+        const pageData = { 
+            page: 'About',
+            pageType: 'informational',
+            id: '4faDEHz7CtVqZtgFbJO4GK'
+        }
+        const entry = await contentfulClient.getEntry(pageData.id)
+        return { entry }
+    },
     components: {
       MyTest
     },
     data() {
         return {
-            title: 'AttracDev | Branding and Software',
-            robots: 'index, follow',
-            keywords: 'AttracDev Software Web Development Design Branding',
-            description: 'AttracDev Page',
-            author: 'AttracDev Branding and Software'
+            title: '',
+            robots: '',
+            keywords: '',
+            description: '',
+            author: ''
         }
     },
     head() {
@@ -34,19 +43,26 @@
             ]
         }
     },
-    async asyncData() {
-        const pageData = { 
-            page: 'About',
-            pageType: 'informational',
-            id: '4faDEHz7CtVqZtgFbJO4GK'
-        }
-        const entry = await contentfulClient.getEntry(pageData.id)
-        return { entry }
-    },
     created() {
-        const { robots, keywords, description, author } = this.entry.fields;
+            const { robots, keywords, description, author } = this.entry.fields
+            // ternary operators to check if values have been passed in  or give a default value
+            this.robots = robots ? robots : 'index, follow'
+            this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
+            this.description = description ? description : 'some description string'
+            this.author = author ? author : 'AttracDev'
+
+            console.log({
+                robots: this.robots,
+                keywords: this.keywords,
+                description: this.description,
+                author: this.author
+            })
     }
   }
   </script>
   
-  
+  <style scoped>
+  .content-container {
+    margin: 1.25rem;
+    }
+</style>

@@ -1,6 +1,6 @@
 <!-- Child Component -->
 <template>
-    <div>
+
         <div class="content-container" v-if="entry">
             <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
             <div class="container-grid-1">
@@ -16,7 +16,7 @@
         <div v-else>
         <p>This content couldn't not be found</p>
         </div>
-    </div>
+
   </template>
   
   <script>
