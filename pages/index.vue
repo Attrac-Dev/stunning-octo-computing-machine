@@ -1,48 +1,67 @@
+<!-- Homepage Page Template -->
 <template>
   <div class="content-container">
-    <HomeGrid :id=id />
+    <HomeGrid :entry="entry.fields" />
   </div>
 </template>
 
 <script>
-// import here
-// import here
-import ContentfulPage from '~/components/ContentfulPage.vue'
+import HomeGrid from '../components/HomeGrid.vue'
 import { createClient } from '~/plugins/contentful'
 const contentfulClient = createClient();
 export default {
-    data: () => ({
+  async asyncData() {
+      const pageData = { 
         page: 'Home',
         pageType: 'landing',
         id: '6fVWWN65k4vv6WSI3SD88s'
-    }),
-// Directive has a set of lifecycle hooks:
-  // called before bound element's attributes or event listeners are applied
-  created() {},
-  // called before bound element's parent component is mounted
-  beforeMount() {},
-  // called when bound element's parent component is mounted
-  mounted() {},
-  // called before the containing component's VNode is updated
-  beforeUpdate() {},
-  // called after the containing component's VNode and the VNodes of its children // have updated
-  updated() {},
-  // called before the bound element's parent component is unmounted
-  beforeUnmount() {},
-  // called when the bound element's parent component is unmounted
-  unmounted() {},
-  methods: {
-      // component specific methods here
+      }
+      const entry = await contentfulClient.getEntry(pageData.id)
+      return { entry }
   },
-  props: {
-    // examples of props object:
-    // title: String,
-    // likes: Number,
-    // isPublished: Boolean,
-    // commentIds: Array,
-    // author: Object,
-    // callback: Function,
-    // contactsPromise: Promise // or any other constructor
+  components: {
+    HomeGrid
+  },
+  data() {
+        return {
+            title: '',
+            robots: '',
+            keywords: '',
+            description: '',
+            author: ''
+        }
+    },
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                { name: 'description', content: this.description },
+                { name: 'robots', content: this.robots },
+                { name: 'keywords', content: this.keywords },
+                { name: 'author', content: this.author },
+            ]
+        }
+    },
+    created() {
+          const { robots, keywords, description, author, pageName } = this.entry.fields
+          // ternary operators to check if values have been passed in  or give a default value
+          this.robots = robots ? robots : 'index, follow'
+          this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
+          this.description = description ? description : 'some description string'
+          this.author = author ? author : 'AttracDev'
+
+          if (pageName) {
+            console.log({
+              "message":"success",
+              pageName
+            })
+          } else {
+            console.error({
+              "message":"failure",
+              "pageName": "none detected"
+            })
+          }
+
   }
 }
 </script>

@@ -37,7 +37,7 @@ export function navigationScript() {
 
         const chevron = afterSelector.getPropertyValue('content')
 
-        console.log(`p tag content for chevron = ${chevron}`)
+        // console.log(`p tag content for chevron = ${chevron}`)
         
         
         // toggle the chevron

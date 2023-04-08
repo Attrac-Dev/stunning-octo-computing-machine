@@ -44,20 +44,26 @@
         }
     },
     created() {
-            const { robots, keywords, description, author } = this.entry.fields
-            // ternary operators to check if values have been passed in  or give a default value
-            this.robots = robots ? robots : 'index, follow'
-            this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
-            this.description = description ? description : 'some description string'
-            this.author = author ? author : 'AttracDev'
+          const { robots, keywords, description, author, pageName } = this.entry.fields
+          // ternary operators to check if values have been passed in  or give a default value
+          this.robots = robots ? robots : 'index, follow'
+          this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
+          this.description = description ? description : 'some description string'
+          this.author = author ? author : 'AttracDev'
 
+          if (pageName) {
             console.log({
-                robots: this.robots,
-                keywords: this.keywords,
-                description: this.description,
-                author: this.author
+              "message":"success",
+              pageName
             })
-    }
+          } else {
+            console.error({
+              "message":"failure",
+              "pageName": "none detected"
+            })
+          }
+
+  }
   }
   </script>
   
