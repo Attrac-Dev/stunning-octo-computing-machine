@@ -1,12 +1,12 @@
 <!-- Parent Component -->
 <template>
   <div class="content-container">
-    <MyTest :entry="entry.fields" />
+    <ContentfulPage :entry="entry.fields" />
   </div>
 </template>
 
 <script>
-import MyTest from '@/components/MyTest.vue'
+import ContentfulPage from '@/components/ContentfulPage.vue'
 import { createClient } from '../../../plugins/contentful'
 const contentfulClient = createClient();
 
@@ -21,7 +21,7 @@ export default {
       return { entry }
   },
   components: {
-    MyTest
+    ContentfulPage
   },
   data() {
       return {
