@@ -46,8 +46,9 @@ export default {
       }
   },
   created() {
-          const { robots, keywords, description, author, pageName } = this.entry.fields
+          const { title, robots, keywords, description, author, pageName } = this.entry.fields
           // ternary operators to check if values have been passed in  or give a default value
+          this.title = title ? title : 'AttracDev | Software and Branding'
           this.robots = robots ? robots : 'index, follow'
           this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
           this.description = description ? description : 'some description string'
@@ -56,7 +57,8 @@ export default {
           if (pageName) {
             console.log({
               "message":"success",
-              pageName
+              pageName,
+              title
             })
           } else {
             console.error({

@@ -41,6 +41,7 @@
                 :imgPath="service.serviceCardIcon.url"
                 :alt="service.serviceCardIcon.description"
                 :nuxtlinkPath="service.serviceCardLinkPath"
+                :cta-text="service.linkText"
             />
         </div>
         
@@ -100,6 +101,7 @@ export default {
                     "serviceCardType": service.fields.serviceCardType,
                     "serviceCardDescription": service.fields.serviceCardDescription,
                     "serviceCardLinkPath": service.fields.linkPath,
+                    "linkText": service.fields.linkText
                 })
             }) 
             // console.log(JSON.stringify(services))
