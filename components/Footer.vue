@@ -34,10 +34,11 @@
       <div class="ft-main-item">
         <h2 class="ft-title">Stay Updated</h2>
         <p>Subscribe to our newsletter to get our latest news.</p>
-        <form>
+        <!-- <form>
           <input type="email" name="email" placeholder="Enter email address">
           <input type="submit" value="Subscribe">
-        </form>
+        </form> -->
+        <NewsLetterSignup/>
       </div>
     </section>
   
@@ -71,6 +72,9 @@
 </style>
 
 <script>
+import NewsLetterSignup from './NewsLetterSignup.vue'
+import FooterSocial from './FooterSocial.vue'
+
 export default {
  data() {
       return {
@@ -80,6 +84,10 @@ export default {
     },
   computed: {
 
+  },
+  components: {
+    NewsLetterSignup,
+    FooterSocial
   }
 }
 </script>

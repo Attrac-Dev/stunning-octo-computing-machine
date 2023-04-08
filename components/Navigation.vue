@@ -57,6 +57,10 @@
 
     nav {
         z-index: 1000;
+    }                                      
+    .item.has-submenu {
+        cursor: pointer;
+        /* the other menu items have a pointer, so added this to look similar */
     }
 
 </style>

@@ -1,125 +1,70 @@
+<!-- Child Component -->
 <template>
 
-<div class="content-container" v-if="object">
-    <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
-    <div class="container-grid-1">
-        <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.file.url" v-bind:alt="mainPageImage.description">
-        <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="contentText"></div>
-    </div>
-    <div class="container-grid-2">
-        <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="additionalContentText"></div>
-        <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.file.url" v-bind:alt="secondaryPageImage.description">
-    </div>
-</div>
-        
-<div v-else>
-<p>This content couldn't not be found</p>
-</div>
+        <div class="content-container" v-if="entry">
+            <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
+            <div class="container-grid-1">
+                <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.fields.file.url" v-bind:alt="mainPageImage.description">
+                <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="printEntries(contentText)"></div>
+            </div>
+            <div class="container-grid-2">
+                <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="printEntries(additionalContentText)"></div>
+                <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.fields.file.url" v-bind:alt="secondaryPageImage.description">
+            </div>
+        </div>
 
-</template>
+        <div v-else>
+        <p>This content couldn't not be found</p>
+        </div>
 
-<script>
-// import here
-import { createClient } from '../plugins/contentful'
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
-import { BLOCKS, MARKS } from '@contentful/rich-text-types'
-
-const contentfulClient = createClient();
-export default {
-    head() {
+  </template>
+  
+  <script>
+  import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+  export default {
+    data() {
         return {
-            title: this.title,
-            meta: [
-                { hid: 'description', name: 'description', content: this.description },
-                { hid: 'robots', name: 'robots', content: this.robots },
-                { hid: 'keywords', name: 'keywords', content: this.keywords },
-                { hid: 'author', name: 'author', content: this.author },
-            ]
-        }
-    },
-    components: {
-
-    },
-    data: (instance) => ({
-        test: 0,
-        // entryID: '4faDEHz7CtVqZtgFbJO4GK',
-        entryID: instance.id,
-        object: {},
-        // contentful Page specific fields
-        robots: '',
-        title: '',
-        author: '',
-        keywords: '',
-        description: '',
-        pageName: '',
-        mainPageHeader: '',
-        mainPageImage: '',
-        contentText: '',
-        secondaryPageImage: '',
-        additionalContentText: ''
-
-    }),
-    
-    // Directive has a set of lifecycle hooks:
-    // called before bound element's attributes or event listeners are applied
-    async created() {
-      this.fetchContent()
-
-    },
-    // called before bound element's parent component is mounted
-    beforeMount() {
-
-    },
-    // called when bound element's parent component is mounted
-    mounted() {
-
-    },
-    // called before the containing component's VNode is updated
-    beforeUpdate() {},
-    // called after the containing component's VNode and the VNodes of its children // have updated
-    updated() {},
-    // called before the bound element's parent component is unmounted
-    beforeUnmount() {},
-    // called when the bound element's parent component is unmounted
-    unmounted() {},
-    methods: {
-        // component specific methods here
-        async fetchContent() {
-            try {
-                const entry = await contentfulClient.getEntry(this.entryID)
-                if (entry) {
-                    console.log("we got the entry")
-                    this.object = entry.fields
-                    // meta tags
-                    this.robots = this.object.robots ? entry.fields.robots : 'index, follow',
-                    this.title = this.object.title ? entry.fields.title : `${this.pageName} | AttracDev`,
-                    this.author = this.object.author ? entry.fields.author : 'AttracDev',
-                    this.keywords = this.object.keywords ? entry.fields.keywords : '',
-                    this.description = this.object.description ? entry.fields.description : ''
-                    // body content
-                    this.pageName = this.object.pageName ? entry.fields.pageName : ''
-                    this.mainPageHeader = this.object.mainPageHeader ? entry.fields.mainPageHeader : this.object.pageName
-                    this.mainPageImage = this.object.mainPageImage ? entry.fields.mainPageImage.fields : ''
-                    this.contentText = this.object.contentText ? documentToHtmlString(entry.fields.contentText) : ''
-                    this.secondaryPageImage = this.object.secondaryPageImage ? entry.fields.secondaryPageImage.fields : ''
-                    this.additionalContentText = this.object.additionalContentText ? documentToHtmlString(entry.fields.additionalContentText) : ''
-                } else {
-                    console.log('no entry was found')
-                }
-            } catch (e) {
-                console.log(e)
-            }
-            
+            title: '',
+            robots: '',
+            keywords: '',
+            description: '',
+            author: '',
+            pageName: '',
+            mainPageHeader: '',
+            mainPageImage: '',
+            contentText: '',
+            secondaryPageImage: '',
+            additionalContentText: '',
         }
     },
     props: {
-        // contentful entry object
-       id: String
+      entry: {
+        type: Object,
+        required: true
+      }
+    },
+    methods: {
+        printEntries(doc) {
+            return documentToHtmlString(doc)
+        }
+    },
+    created() {
+        // this.title =    this.entry.title
+        // this.robots =   this.entry.robots
+        // this.keywords = this.entry.keywords
+        // this.description =  this.entry.description
+        // this.author =   this.entry.author
+        this.pageName =     this.entry.pageName ? this.entry.pageName : 'ERROR RETRIEVING PAGE NAME'
+        this.mainPageHeader =   this.entry.mainPageHeader ? this.entry.mainPageHeader : this.entry.pageName
+        this.mainPageImage =    this.entry.mainPageImage ? this.entry.mainPageImage : ''
+        this.contentText =  this.entry.contentText ? this.entry.contentText : 'ERROR RETRIEVING TEXT'
+        this.secondaryPageImage =   this.entry.secondaryPageImage ? this.entry.secondaryPageImage : ''
+        this.additionalContentText =    this.entry.additionalContentText ? this.entry.additionalContentText : ''
     }
-}
-</script>
-
-<style scoped>
+  }
+  </script>
+  
+  <style scoped>
 @import '~/styles/typography.css';
     @media screen and (min-width: 1366px) {
         .container-grid-1 {
