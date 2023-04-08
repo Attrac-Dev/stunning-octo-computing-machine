@@ -17,7 +17,7 @@
                 <div class="hero-image">
                 <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
                 <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
-                <img v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.description">
+                <img v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.fields.description" v-bind:title="mainImage.fields.title">
             </div>
             </div>
         </div>
@@ -40,6 +40,7 @@
                 :subheader="service.serviceCardDescription"
                 :imgPath="service.serviceCardIcon.url"
                 :alt="service.serviceCardIcon.description"
+                :imgTitle="service.serviceCardIcon.title"
                 :nuxtlinkPath="service.serviceCardLinkPath"
                 :cta-text="service.linkText"
             />

@@ -4,12 +4,12 @@
         <div class="content-container" v-if="entry">
             <h1 data-aos="fade" data-aos-delay="1000" data-aos-offset="-10" data-aos-anchor="top-top" data-aos-duration="1600" v-if="pageName" class="page-name">{{ mainPageHeader }}</h1>
             <div class="container-grid-1">
-                <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.fields.file.url" v-bind:alt="mainPageImage.description">
+                <img data-aos="fade-right" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="main-page-image grid-item fade-in" v-if="mainPageImage" :src="mainPageImage.fields.file.url" v-bind:alt="mainPageImage.fields.description" v-bind:title="mainPageImage.fields.title">
                 <div data-aos="fade-left" data-aos-offset="-500" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="content-text grid-item" v-html="printEntries(contentText)"></div>
             </div>
             <div class="container-grid-2">
                 <div data-aos="fade-right" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="additional-content-text grid-item" v-if="additionalContentText" v-html="printEntries(additionalContentText)"></div>
-                <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.fields.file.url" v-bind:alt="secondaryPageImage.description">
+                <img data-aos="fade-left" data-aos-offset="20" data-aos-delay="800" ata-aos-easing="ease-in" data-aos-duration="1200" class="secondary-page-image grid-item fade-in" v-if="secondaryPageImage" :src="secondaryPageImage.fields.file.url" v-bind:alt="secondaryPageImage.fields.description" v-bind:title="secondaryPageImage.fields.title">
             </div>
         </div>
 
