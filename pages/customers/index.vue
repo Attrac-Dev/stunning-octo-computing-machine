@@ -1,57 +1,68 @@
+<!-- Parent Component -->
 <template>
   <div class="content-container">
-     <ContentfulPage :id=id />
+    <MyTest :entry="entry.fields" />
   </div>
 </template>
 
 <script>
-// import here
-import ContentfulPage from '~/components/ContentfulPage.vue'
-import { createClient } from '~/plugins/contentful'
+import MyTest from '@/components/MyTest.vue'
+import { createClient } from '../../plugins/contentful'
 const contentfulClient = createClient();
+
 export default {
-  components: { ContentfulPage },
-  data: () => ({
-      page: 'Customers',
-      pageType: 'service',
-      id: '6dALAVCYoc89v0MkXP0vti'
-  }), 
-  async asyncData () {
-    // do something here
+  async asyncData() {
+      const pageData = { 
+        page: 'Customers',
+        pageType: 'service',
+        id: '6dALAVCYoc89v0MkXP0vti'
+      }
+      const entry = await contentfulClient.getEntry(pageData.id)
+      return { entry }
   },
-// Directive has a set of lifecycle hooks:
-  // called before bound element's attributes or event listeners are applied
-  created() {},
-  // called before bound element's parent component is mounted
-  beforeMount() {},
-  // called when bound element's parent component is mounted
-  mounted() {},
-  // called before the containing component's VNode is updated
-  beforeUpdate() {},
-  // called after the containing component's VNode and the VNodes of its children // have updated
-  updated() {},
-  // called before the bound element's parent component is unmounted
-  beforeUnmount() {},
-  // called when the bound element's parent component is unmounted
-  unmounted() {},
-  methods: {
-      // component specific methods here
+  components: {
+    MyTest
   },
-  props: {
-    // examples of props object:
-    // title: String,
-    // likes: Number,
-    // isPublished: Boolean,
-    // commentIds: Array,
-    // author: Object,
-    // callback: Function,
-    // contactsPromise: Promise // or any other constructor
+  data() {
+      return {
+          title: '',
+          robots: '',
+          keywords: '',
+          description: '',
+          author: ''
+      }
+  },
+  head() {
+      return {
+          title: this.title,
+          meta: [
+              { name: 'description', content: this.description },
+              { name: 'robots', content: this.robots },
+              { name: 'keywords', content: this.keywords },
+              { name: 'author', content: this.author },
+          ]
+      }
+  },
+  created() {
+          const { robots, keywords, description, author } = this.entry.fields
+          // ternary operators to check if values have been passed in  or give a default value
+          this.robots = robots ? robots : 'index, follow'
+          this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
+          this.description = description ? description : 'some description string'
+          this.author = author ? author : 'AttracDev'
+
+          console.log({
+              robots: this.robots,
+              keywords: this.keywords,
+              description: this.description,
+              author: this.author
+          })
   }
 }
 </script>
 
 <style scoped>
-  .content-container {
-    margin: 1.25rem;
-}
+.content-container {
+  margin: 1.25rem;
+  }
 </style>
