@@ -48,11 +48,28 @@
       submitForm() {
         if (this.isValidEmail()) {
           // Success: Email is valid, implement your subscribe logic here
-          console.log("Subscribed with email:", this.email);
-          this.formSubmitted = true;
+          console.log("Subscribed with email:", this.email)
+          // Prepare form data for submission
+          const formData = new FormData();
+          formData.append("email", this.email)
+          console.log(`formData== ${formData}`)
+          // Use Fetch API for form submission
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData
+          })
+            .then(() => {
+              console.log("Form successfully submitted")
+              this.formSubmitted = true; // Update form submission state
+            })
+            .catch((error) => {
+              console.error("Error submitting form:", error)
+              this.formSubmitted = false; // Set formSubmitted to false to show error message
+            })
         } else {
           // Error: Invalid email, show error message
-          console.error("Invalid email:", this.email);
+          console.error("Invalid email:", this.email)
           this.formSubmitted = false; // Set formSubmitted to false to show the error message
         }
       },
