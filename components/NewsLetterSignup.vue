@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -41,12 +42,18 @@ export default {
       email: "", // Other data properties for form fields, e.g. email
     };
   },
+  computed: {
+    ...mapState(['formSubmitted'])
+  },
   methods: {
+    ...mapActions(['updateFormSubmitted']),
+
     isValidEmail() {
       // You can add your own validation logic here
       // This is a simple example that checks for a basic email format
       return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email)
     },
+
     submitForm: async function(e) { // Use async function
       e.preventDefault(); // Prevent default form submission
       if (this.isValidEmail()) {
@@ -60,19 +67,19 @@ export default {
           if (response.ok) {
             // Success: Email is valid, implement your subscribe logic here
             console.log("Subscribed with email:", this.email);
-            this.formSubmitted = true; // Update formSubmitted state to show success message
-            alert("Thank you for your submission"); // Show success message as an alert
+            this.updateFormSubmitted(true); // Update formSubmitted state in Vuex store
+            
           } else {
             throw new Error(`Form submission failed with status ${response.status}`); // Throw error for non-OK response
           }
         } catch (error) {
           console.error("Error submitting form", error);
-          this.formSubmitted = false;
-          alert(error); // Show error message as an alert
+          this.updateFormSubmitted(false); // Update formSubmitted state in Vuex store
+          
         }
       } else {
         console.error("Invalid email:", this.email);
-        this.formSubmitted = false;
+        this.updateFormSubmitted(false); // Update formSubmitted state in Vuex store
       }
     },
   },
