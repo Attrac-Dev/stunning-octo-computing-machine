@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- Show form or confirmation message based on formSubmitted state -->
-    <form 
+    <form
       name="newsletter-signup"
-      action=""
-      v-if="!formSubmitted"   
+      v-if="!formSubmitted"
       @submit.prevent="submitForm"
       netlify-honeypot="bot-field"
       data-netlify="true"
     >
+
       <input name="bot-field" class="hidden">
       <input
         type="email"
@@ -46,28 +46,26 @@ export default {
       return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email)
     },
     submitForm(e) {
-      if (this.isValidEmail()) {
-        console.log(`isEmailValid: ${this.isValidEmail()} == ${this.email}`)
-        // Prepare form data for submission
-        const formData = new FormData()
-        formData.append("email", this.email)
+    e.preventDefault(); // Prevent default form submission
+    if (this.isValidEmail()) {
+        const formData = new FormData();
+        formData.append("email", this.email);
         fetch("/", {
           method: 'post',
           body: formData
         })
-          .then(()=>{
+          .then(() => {
             // Success: Email is valid, implement your subscribe logic here
-            console.log("Subscribed with email:", this.email)
-            this.formSubmitted = true
+            console.log("Subscribed with email:", this.email);
+            this.formSubmitted = true; // Update formSubmitted state to show success message
           })
           .catch((error) => {
-            console.error("Error submitting form", error)
-            this.formSubmitted = false
-          })
+            console.error("Error submitting form", error);
+            this.formSubmitted = false;
+          });
       } else {
-        // Error: Invalid email, show error message
         console.error("Invalid email:", this.email);
-        this.formSubmitted = false; // Set formSubmitted to false to show the error message
+        this.formSubmitted = false;
       }
     },
   },
