@@ -1,7 +1,15 @@
 <template>
     <div>
       <!-- Show form or confirmation message based on formSubmitted state -->
-      <form v-if="!formSubmitted" @submit.prevent="submitForm">
+      <form 
+        name="newsletter-signup"
+        method="POST"
+        netlify-honeypot="bot-field"
+        data-netlify="true"
+        v-if="!formSubmitted"   
+        @submit.prevent="submitForm"
+      >
+        <input name="bot-field" class="hidden">
         <input
           type="email"
           name="email"
@@ -56,6 +64,7 @@
   form {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
   }
   
   input[type="email"] {
@@ -83,5 +92,14 @@
     color: red;
     margin-top: 0.3125rem;
   }
+
+  .hidden {
+    visibility: hidden;
+    position: absolute; /* Add absolute positioning to the honeypot input field */
+    top: 0; /* Position the honeypot input field at the top */
+    left: 0; /* Position the honeypot input field at the left */
+    width: 100%; /* Make the honeypot input field span the full width of the form */
+    z-index: 1; /* Set z-index to make sure the honeypot input field appears above other elements */
+}
   </style>
   
