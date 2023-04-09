@@ -58,10 +58,12 @@ export default {
             // Success: Email is valid, implement your subscribe logic here
             console.log("Subscribed with email:", this.email);
             this.formSubmitted = true; // Update formSubmitted state to show success message
+            alert("Thank you for your submission"); // Show success message as an alert
           })
           .catch((error) => {
             console.error("Error submitting form", error);
             this.formSubmitted = false;
+            alert(error); // Show error message as an alert
           });
       } else {
         console.error("Invalid email:", this.email);
