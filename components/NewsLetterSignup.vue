@@ -43,13 +43,27 @@ export default {
     isValidEmail() {
       // You can add your own validation logic here
       // This is a simple example that checks for a basic email format
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+      return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email);
     },
-    submitForm() {
+    submitForm(e) {
+      e.preventDefault()
       if (this.isValidEmail()) {
-        // Success: Email is valid, implement your subscribe logic here
-        console.log("Subscribed with email:", this.email);
-        this.formSubmitted = true;
+        // Prepare form data for submission
+        const formData = new FormData()
+        formData.append("email", this.email)
+        fetch("/", {
+          method: 'post',
+          body: formData
+        })
+          .then(()=>{
+            // Success: Email is valid, implement your subscribe logic here
+            console.log("Subscribed with email:", this.email);
+            this.formSubmitted = true;
+          })
+          .catch((error) => {
+            console.error("Error submitting form", error)
+            this.formSubmitted = false
+          })
       } else {
         // Error: Invalid email, show error message
         console.error("Invalid email:", this.email);
