@@ -3,11 +3,11 @@
     <!-- Show form or confirmation message based on formSubmitted state -->
     <form 
       name="newsletter-signup"
-      method="POST"
-      netlify-honeypot="bot-field"
-      data-netlify="true"
+      action=""
       v-if="!formSubmitted"   
       @submit.prevent="submitForm"
+      netlify-honeypot="bot-field"
+      data-netlify="true"
     >
       <input name="bot-field" class="hidden">
       <input
@@ -43,11 +43,11 @@ export default {
     isValidEmail() {
       // You can add your own validation logic here
       // This is a simple example that checks for a basic email format
-      return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email);
+      return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email)
     },
     submitForm(e) {
-      e.preventDefault()
       if (this.isValidEmail()) {
+        console.log(`isEmailValid: ${this.isValidEmail()} == ${this.email}`)
         // Prepare form data for submission
         const formData = new FormData()
         formData.append("email", this.email)
@@ -57,8 +57,8 @@ export default {
         })
           .then(()=>{
             // Success: Email is valid, implement your subscribe logic here
-            console.log("Subscribed with email:", this.email);
-            this.formSubmitted = true;
+            console.log("Subscribed with email:", this.email)
+            this.formSubmitted = true
           })
           .catch((error) => {
             console.error("Error submitting form", error)
@@ -71,7 +71,7 @@ export default {
       }
     },
   },
-};
+}
 </script>
   
   <style scoped>
