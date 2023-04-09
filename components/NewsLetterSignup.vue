@@ -45,28 +45,29 @@ export default {
       // This is a simple example that checks for a basic email format
       return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email)
     },
-    submitForm(e) {
-    e.preventDefault(); // Prevent default form submission
-    if (this.isValidEmail()) {
+    submitForm: async function(e) { // Use async function
+      e.preventDefault(); // Prevent default form submission
+      if (this.isValidEmail()) {
         const formData = new FormData();
         formData.append("email", this.email);
-        fetch("/", {
-          method: 'post',
-          body: formData
-        })
-          .then((res) => {
-            console.log(res)
-            e.preventDefault()
+        try {
+          const response = await fetch("/", { // Use await to wait for fetch to complete
+            method: 'post',
+            body: formData
+          });
+          if (response.ok) {
             // Success: Email is valid, implement your subscribe logic here
             console.log("Subscribed with email:", this.email);
             this.formSubmitted = true; // Update formSubmitted state to show success message
             alert("Thank you for your submission"); // Show success message as an alert
-          })
-          .catch((error) => {
-            console.error("Error submitting form", error);
-            this.formSubmitted = false;
-            alert(error); // Show error message as an alert
-          });
+          } else {
+            throw new Error(`Form submission failed with status ${response.status}`); // Throw error for non-OK response
+          }
+        } catch (error) {
+          console.error("Error submitting form", error);
+          this.formSubmitted = false;
+          alert(error); // Show error message as an alert
+        }
       } else {
         console.error("Invalid email:", this.email);
         this.formSubmitted = false;
