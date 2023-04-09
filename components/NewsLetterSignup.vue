@@ -8,6 +8,7 @@
       netlify-honeypot="bot-field"
       data-netlify="true"
       data-netlify-no-success
+      action="/success"
     >
 
       <input name="bot-field" class="hidden">
