@@ -38,7 +38,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      formSubmitted: false, // Track form submission state
+      // formSubmitted: false, // Track form submission state with vuex
       email: "", // Other data properties for form fields, e.g. email
     };
   },
