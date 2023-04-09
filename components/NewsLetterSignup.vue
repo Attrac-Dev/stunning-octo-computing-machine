@@ -54,7 +54,9 @@ export default {
           method: 'post',
           body: formData
         })
-          .then(() => {
+          .then((res) => {
+            console.log(res)
+            e.preventDefault()
             // Success: Email is valid, implement your subscribe logic here
             console.log("Subscribed with email:", this.email);
             this.formSubmitted = true; // Update formSubmitted state to show success message
