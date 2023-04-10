@@ -8,7 +8,7 @@
       netlify-honeypot="bot-field"
       data-netlify="true"
       data-netlify-no-success
-      action="/success"
+      v-bind:action=page
     >
 
       <input name="bot-field" class="hidden">
@@ -40,6 +40,7 @@ export default {
     return {
       // formSubmitted: false, // Track form submission state with vuex
       email: "", // Other data properties for form fields, e.g. email
+      page: ""
     };
   },
   computed: {
@@ -83,6 +84,10 @@ export default {
       }
     },
   },
+  mounted() {
+    console.log(`Setting current page to ${this.$route.path}`)
+    this.page = this.$route.path
+  }
 }
 </script>
   

@@ -6,7 +6,8 @@ export const state = () => ({
   
   export const mutations = {
     setFormSubmitted(state, value) {
-      state.formSubmitted = value;
+        console.log(`setting formSubmitted to ${value}`)
+        state.formSubmitted = value;
     }
   };
   
