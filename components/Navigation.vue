@@ -7,7 +7,7 @@
             <li class="item no-submenu"><NuxtLink to="/" >Home</NuxtLink></li>
             <li class="item no-submenu"><NuxtLink to="/about" >About</NuxtLink></li>
             <li class="item has-submenu">
-                <a tabindex="0" aria-haspopup="true">Services</a>
+                <a tabindex="0">Services</a>
                 <ul class="submenu">
                     <li class="subitem"><NuxtLink to="/services/design" >Design</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/development" >Development</NuxtLink></li>
@@ -20,7 +20,7 @@
                 </ul>
             </li>
             <li class="item has-submenu">
-                <a tabindex="0" aria-haspopup="true">Plans</a>
+                <a tabindex="0">Plans</a>
                 <ul class="submenu">
                     <li class="subitem"><NuxtLink to="/plans/freelancer" >Freelancer</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/plans/startup" >Startup</NuxtLink></li>
