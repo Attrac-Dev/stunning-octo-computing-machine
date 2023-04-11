@@ -2,7 +2,7 @@ export function navigationScript() {
     const toggle = document.querySelector(".toggle")
     const hamburger = document.querySelector(".hamburger")
     const menu = document.querySelector(".menu")
-     
+     console.log('navigation script executed')
     /* Toggle mobile menu */
     function toggleMenu() {
         if (menu.classList.contains("active")) {

@@ -66,7 +66,7 @@
 </style>
 
 <script>
-import { navigationScript } from '~/functions/navigation.js'
+import { navigationScript } from '../functions/navigation'
 export default {
     data: () => ({
         name: 'navigation'
