@@ -17,7 +17,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'apple-mobile-webb-app-capable', content: 'yes'}
+      { name: 'apple-mobile-webb-app-capable', content: 'yes'},
+      { name: 'theme-color', content: '#445CB4'} // uses the brand-indigo color for the theme
 
     ],
     link: [
