@@ -12,34 +12,63 @@
         type="submit"
         value="Subscribe"
       />
-      <p v-if="formSubmitted && !isValidEmail()" class="error-message">
-        Please enter a valid email address.
-      </p>
+      
     </form>
-    <div v-else>
+    <div v-if="!isValidEmail() && formTried>0">
+        <p >
+          Please enter a valid email address.
+        </p>
+      </div>
+    <div v-else-if="validEmail && formTried>0">
       <!-- Confirmation message markup here -->
       <p>Thank you for subscribing!</p>
+    </div>
+    <div v-else>
+      <!-- Confirmation message markup here -->
+      <p>Thank you for previously subscribing <span class="email-message">{{subscriberCookie}}</span>!</p>
     </div>
   </div>
 </template>
 
 <script>
 import { createNewsletterContact } from "../functions/sendInBlue"
-import { setCookie, getCookie } from '../functions/cookies'
+import { setCookie, getCookie, hasCookie, getCookies } from '../functions/cookies'
 
 export default {
   data() {
     return {
       formSubmitted: false, // Track form submission state
+      formTried: 0,
+      validEmail: false,
+      subscriberCookie: null,
       email: "" // Other data properties for form fields, e.g. email
+    
     };
   },
   mounted() {
-    const cookie = getCookie('contact')
-      if (cookie) {
-        console.log(cookie)
+    const cookieData = getCookie('subscriber')
+    const contactData = cookieData ? JSON.parse(cookieData) : null
+    if (contactData) {
+      if (contactData.newsletter) {
+        console.log(contactData)
         this.formSubmitted = true
+        this.subscriberCookie = contactData.email
+      } else {
+        console.log('"subscriber" cookie found, but newsletter value set to false')
+        this.formSubmitted = false
       }
+    } else {
+      const hasAnyCookie = hasCookie()
+      if (hasAnyCookie != 0) {
+        const cookieList = getCookies()
+        cookieList.forEach((cookie) => {
+          console.log(`Cookie Found: ${cookie.name}:${cookie.value}`);
+        });
+
+      } else {
+        console.log('No cookies were found')
+      }
+    }
   },
   methods: {
     isValidEmail() {
@@ -47,8 +76,8 @@ export default {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
     },
     async submitForm() {
-      console.log('submitForm called')
-
+      console.log('trying to submit form')
+      this.formTried += 1
       if (this.isValidEmail() && !this.formSubmitted) {
         try {
           // Success: Email is valid, implement your subscribe logic here
@@ -56,9 +85,12 @@ export default {
           if (contact) {
             console.log("Subscribed with email:", this.email)
               this.formSubmitted = true
-              setCookie("contact", this.email, 1)
+              const contactData = {email:this.email, newsletter: true, date: Date.now()}
+              const cookieData = JSON.stringify(contactData)
+              setCookie("subscriber", cookieData, 7) // sets the subscriber cookie with JSON as its value with a 7 day expiration
           } else {
             console.error(`New contact not created with ${this.email}`)
+            this.validEmail = true
             this.formSubmitted = false
           }
         } catch(error) {
@@ -104,6 +136,9 @@ input[type="submit"]:hover {
 
 .error-message {
   color: red;
-  margin-top: 0.3125rem;
+}
+
+.email-message {
+  color: var(--brand-indigo);
 }
 </style>
