@@ -5,7 +5,7 @@
  * @param {string} value - The value of the cookie.
  * @param {number} [days] - Optional. The number of days until the cookie expires.
  * @param {object} [options] - Optional. Additional options for the cookie.
- * @param {string} [options.sameSite] - Optional. The `SameSite` attribute of the cookie.
+ * @param {("Strict"|"Lax"|"None")} [options.sameSite] - Optional. The `SameSite` attribute of the cookie.
  * @param {boolean} [options.httpOnly] - Optional. Whether to set the `HttpOnly` attribute of the cookie.
  * @param {boolean} [options.secure] - Optional. Whether to set the `Secure` attribute of the cookie.
  */

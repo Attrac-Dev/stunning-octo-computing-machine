@@ -30,8 +30,13 @@
             <li class="item no-submenu"><a href="https://attrac.dev" target="_blank">Blog</a></li> <!-- external link to blog subdomain -->
             <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
             </li>
-            <li class="item button"><a href="#">Log In</a></li>
-            <li class="item button secondary"><a href="#">Sign Up</a></li>
+            <!-- Show when user is NOT logged in -->
+            <li class="item button" :class="{ hidden: loggedIn }"><a href="#" @click.prevent="logIn()">Log In</a></li>
+            <li class="item button secondary" :class="{ hidden: loggedIn }"><a href="#">Sign Up</a></li>
+            <!-- Show when user is logged in -->
+            <li class="item button secondary" :class="{ hidden: !loggedIn }"><a href="#" @click.prevent="logOut()">Log Out</a></li>
+
+
             <li class="toggle">
                 <button class="hamburger hamburger--emphatic" type="button">
                 <span class="hamburger-box">
@@ -62,6 +67,9 @@
         cursor: pointer;
         /* the other menu items have a pointer, so added this to look similar */
     }
+    .hidden {
+        display: none !important;
+    }
 
 </style>
 
@@ -69,8 +77,18 @@
 import { navigationScript } from '~/functions/navigation.js'
 export default {
     data: () => ({
-        name: 'navigation'
-    }),
+        name: 'navigation',
+        loggedIn: false
+    }),    methods: {
+        logIn() {
+            // update loggedIn state to true
+            this.loggedIn = true;
+        },
+        logOut() {
+            // update loggedIn state to false
+            this.loggedIn = false;
+        }
+    },
     mounted() {
         navigationScript()
     }

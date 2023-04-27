@@ -25,7 +25,7 @@
     </div>
     <div v-else>
       <!-- Confirmation message markup here -->
-      <p>Thank you for previously subscribing <span class="email-message">{{subscriberCookie}}</span>!</p>
+      <p>Thank you for previously subscribing, <span class="email-message">{{subscriberEmail}}</span>!</p>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       formSubmitted: false, // Track form submission state
       formTried: 0,
       validEmail: false,
-      subscriberCookie: null,
+      subscriberEmail: null,
       email: "" // Other data properties for form fields, e.g. email
     
     };
@@ -52,7 +52,7 @@ export default {
       if (contactData.newsletter) {
         console.log(contactData)
         this.formSubmitted = true
-        this.subscriberCookie = contactData.email
+        this.subscriberEmail = contactData.email
       } else {
         console.log('"subscriber" cookie found, but newsletter value set to false')
         this.formSubmitted = false
@@ -87,7 +87,7 @@ export default {
               this.formSubmitted = true
               const contactData = {email:this.email, newsletter: true, date: Date.now()}
               const cookieData = JSON.stringify(contactData)
-              setCookie("subscriber", cookieData, 7) // sets the subscriber cookie with JSON as its value with a 7 day expiration
+              setCookie("subscriber", cookieData, 7, {sameSite:'Strict'}) // sets the subscriber cookie with JSON as its value with a 7 day expiration
           } else {
             console.error(`New contact not created with ${this.email}`)
             this.validEmail = true
