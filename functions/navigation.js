@@ -3,7 +3,11 @@ export function navigationScript() {
     const hamburger = document.querySelector(".hamburger")
     const menu = document.querySelector(".menu")
      
-    /* Toggle mobile menu */
+    /**
+    Toggles the visibility of a mobile menu by adding or removing the "active" class
+    and also changes the icon of the menu button between hamburger and close icons.
+    @function
+    */
     function toggleMenu() {
         if (menu.classList.contains("active")) {
             menu.classList.remove("active")
@@ -23,7 +27,12 @@ export function navigationScript() {
     
     const items = document.querySelectorAll(".item")
      
-    /* Activate Submenu */
+    /**
+     * Toggles a submenu item on and off.
+     * If the item is already open, it will close it.
+     * If the item is closed, it will open it.
+     * @function
+     */
     function toggleItem() {
       // submenu toggle OFF
       if (this.classList.contains("submenu-active")) {
@@ -62,7 +71,10 @@ export function navigationScript() {
         }   
     }
     
-    /* Close Submenu From Anywhere */
+    /**
+     * Close Submenu From Anywhere
+     * @param {MouseEvent} e - The event object generated when clicking.
+     */
     function closeSubmenu(e) {
         const targetElement = e.target
         // console.log(targetElement, targetElement.nodeName)
