@@ -50,6 +50,7 @@ export default {
   plugins: [
     "~/plugins/contentful",
     { src: "~/plugins/aos", mode: "client" },
+    { src: "~/plugins/supabase.js"}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -82,6 +83,8 @@ export default {
     CONTENTFUL_ACCESSTOKEN: process.env.CONTENTFUL_ACCESSTOKEN,
     CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
     EMAIL_KEY: process.env.EMAIL_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_KEY: process.env.SUPABASE_KEY,
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
