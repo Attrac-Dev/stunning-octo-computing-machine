@@ -31,10 +31,10 @@
             <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
             </li>
             <!-- Show when user is NOT logged in -->
-            <li class="item button" :class="{ hidden: loggedIn }"><a href="#" @click.prevent="logIn()">Log In</a></li>
-            <li class="item button secondary" :class="{ hidden: loggedIn }"><a href="#">Sign Up</a></li>
+            <li class="item button" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/login" >Login</NuxtLink></li> <!-- login-->
+            <li class="item button secondary" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/signup" >Sign Up</NuxtLink></li> <!--signup-->
             <!-- Show when user is logged in -->
-            <li class="item button secondary" :class="{ hidden: !loggedIn }"><a href="#" @click.prevent="logOut()">Log Out</a></li>
+            <li class="item button secondary" :class="{ hidden: !loggedIn }" ><NuxtLink to="/auth/logout" >Log Out</NuxtLink></li> <!--logout-->
 
 
             <li class="toggle">
