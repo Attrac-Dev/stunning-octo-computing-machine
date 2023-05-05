@@ -85,6 +85,7 @@ export default {
     EMAIL_KEY: process.env.EMAIL_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_KEY: process.env.SUPABASE_KEY,
+    SIGN_UP: process.env.SIGN_UP, // used to determine if users are allowed to use the signup form or not ('active' or 'inactive')
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules

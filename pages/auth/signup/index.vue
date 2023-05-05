@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div v-if="signupActive" class="content-container">
     <h1>Sign Up</h1>
     <div class="signup-form">
       <form>
@@ -37,6 +37,12 @@
       </form>
     </div>
   </div>
+
+  <div v-else class="content-container">
+    <h2>Sign Up</h2>
+    <h3>The sign-up form is not currently available.</h3>
+    <h5>Redirecting you back to the Home page in {{ countdown }}</h5>
+  </div>
 </template>
 
 <script>
@@ -55,9 +61,37 @@ export default {
       LnameError: '',
       phoneError: '',
       passwordMatchError: '',
+      signupActive: '',
+      countdown: 10
     }
   },
   methods: {
+    countDownInterval() {
+      const interval = setInterval(() => {
+        if (this.countdown > 0) {
+          this.countdown--
+        } else {
+          clearInterval(interval)
+          this.$router.push('/').catch(error => {
+            console.error('Error navigating to home:', error)
+          })
+        }
+      }, 1000) // 1 second intervals
+    },
+    isActive() {
+      if (process.env.SIGN_UP === "active") {
+        console.log('Signup Form is available')
+        this.signupActive = true
+      } else {
+        console.log('Signup Form is not available')
+        this.signupActive = false
+        // start a 10 second timer to then redirect the user to the home page
+        this.countDownInterval()
+      }
+    },
+    clearInputs() {
+
+    },
     redirectToLoginPage() {
       this.$router.push('/auth/login')
     },
@@ -138,6 +172,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.isActive()
+  }
 }
 </script>
 
