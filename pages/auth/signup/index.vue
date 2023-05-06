@@ -39,14 +39,20 @@
   </div>
 
   <div v-else class="content-container">
-    <h2>Sign Up</h2>
-    <h3>The sign-up form is not currently available.</h3>
-    <h5>Redirecting you back to the Home page in {{ countdown }}</h5>
+    <div class="inactive-form">
+      <h2 class="centered-text">Sign Up</h2>
+      <h3 class="centered-text">Only Available to current clients.</h3>
+      <h5 class="centered-text">Redirecting you back to the Home page in {{ countdown }}</h5>
+      <div class="button-container">
+        <VariableButton class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
+      </div>
+      
+    </div>
   </div>
 </template>
 
 <script>
-
+import VariableButton from '../../../components/VariableButton.vue'
 export default {
   
   data() {
@@ -62,7 +68,8 @@ export default {
       phoneError: '',
       passwordMatchError: '',
       signupActive: '',
-      countdown: 10
+      countdown: 15,
+      mainCTA: 'Request Account'
     }
   },
   methods: {
@@ -243,6 +250,33 @@ button:hover {
 .error-message {
   color: var(--brand-indigo);
 }
+
+.inactive-form {
+  margin: 0 3rem;
+}
+
+.centered-text {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-button {
+      margin: 1rem 0;
+      transition: background-color 0.3s ease;
+    }
+
 </style>
 
   
