@@ -68,7 +68,7 @@ export default {
       phoneError: '',
       passwordMatchError: '',
       signupActive: '',
-      countdown: 15,
+      countdown: 30,
       mainCTA: 'Request Account'
     }
   },
