@@ -42,20 +42,19 @@ async function createNewsletterContact(email) {
     const response = await fetch("https://api.sendinblue.com/v3/contacts", options);
     if (!response.ok) {
       const data = await response.json()
-      throw new Error(`Main error (line 45 in sendInBlue): ${response.status} ${response.statusText}. ${data.message}`);
+      throw new Error(data.message)
     }
     const data = await response.json();
-
     return data;
+
   } catch (error) {
-    console.log(error);
-    if (error) {
+    // console.log({test:error.message})
+    if (error.message.includes('already exist')) {
       // handle the case where the contact already exists
-      console.warn(`Contact already exists with email: ${email}`);
-      return null
+      throw new Error(`Contact already exists`);
     } else {
       // handle other errors
-      console.error("Secondary error (line 58 in sendInBlue)", error);
+      console.error("Secondary error (line 59 in sendInBlue.js)", error);
       throw error;
     }
   }

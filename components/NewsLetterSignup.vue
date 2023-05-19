@@ -19,20 +19,18 @@
           Please enter a valid email address.
         </p>
       </div>
-    <div v-else-if="validEmail && formTried>0">
-      <!-- Confirmation message markup here -->
-      <p>Thank you for subscribing!</p>
-    </div>
-    <div v-else>
-      <!-- Confirmation message markup here -->
-      <p>Thank you for previously subscribing, <span class="email-message">{{subscriberEmail}}</span>!</p>
-    </div>
+      <div v-if="errorMessage" class="error-message">
+        <p>
+          {{ errorMessage }}
+        </p>
+      </div>
   </div>
 </template>
 
 <script>
 import { createNewsletterContact } from "../functions/sendInBlue"
 import { setCookie, getCookie, hasCookie, getCookies } from '../functions/cookies'
+import { mapMutations } from 'vuex'
 
 export default {
   data() {
@@ -41,7 +39,8 @@ export default {
       formTried: 0,
       validEmail: false,
       subscriberEmail: null,
-      email: "" // Other data properties for form fields, e.g. email
+      email: "", // Other data properties for form fields, e.g. email
+      errorMessage: ""
     
     };
   },
@@ -51,8 +50,11 @@ export default {
     if (contactData) {
       if (contactData.newsletter) {
         console.log(contactData)
-        this.formSubmitted = true
-        this.subscriberEmail = contactData.email
+        this.setHasSubscribed(getCookie('subscriber'))
+        // Skip setting the component data and just pass the cookie to state
+        //    which will handle the conditional rendering, instead of trying to do it here.
+        // this.formSubmitted = true
+        // this.subscriberEmail = contactData.email
       } else {
         console.log('"subscriber" cookie found, but newsletter value set to false')
         this.formSubmitted = false
@@ -71,6 +73,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setHasSubscribed']),
     isValidEmail() {
       // This is a simple validation that checks for a basic email format
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
@@ -88,14 +91,25 @@ export default {
               const contactData = {email:this.email, newsletter: true, date: Date.now()}
               const cookieData = JSON.stringify(contactData)
               setCookie("subscriber", cookieData, 7, {sameSite:'Strict'}) // sets the subscriber cookie with JSON as its value with a 7 day expiration
+              this.setHasSubscribed(getCookie('subscriber'))
           } else {
             console.error(`New contact not created with ${this.email}`)
             this.validEmail = true
             this.formSubmitted = false
+
+            // Display the error message to user
+            this.errorMessage = "Email already subscribed"
           }
         } catch(error) {
           // No need to pass on the error to the user. It is just a repeat of the main error
+          console.log({formError: error})
+          this.errorMessage = error.message
           this.formSubmitted = false
+
+          if (error.message === "Email already subscribed") {
+            this.validEmail = true
+            this.formSubmitted = false
+          }
         }
       } else {
         // Error: Invalid email, show error message

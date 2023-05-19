@@ -15,6 +15,7 @@
     "@contentful/rich-text-types": "^15.3.6",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@nuxtjs/axios": "^5.13.6",
+    "@supabase/supabase-js": "^2.21.0",
     "aos": "^2.3.4",
     "contentful": "^9.0.0",
     "core-js": "^3.15.1",

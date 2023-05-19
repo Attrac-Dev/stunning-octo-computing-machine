@@ -54,13 +54,17 @@ export default {
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
 
-          if (pageName) {
+          if (pageName && process.env.ENVIRONMENT === 'development') {
             console.log({
               "message":"success",
               pageName,
               title
             })
-          } else {
+          } else if (pageName && process.env.ENVIRONMENT === 'production') {
+            console.log({
+              message: 'successful page load'
+            })
+          }  else {
             console.error({
               "message":"failure",
               "pageName": "none detected"
