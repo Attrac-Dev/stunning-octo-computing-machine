@@ -83,13 +83,15 @@
   
   form {
     display: grid;
-    grid-template-columns: 3fr;
-    gap: 1rem;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    width: 30vw;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 2rem;
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  background-color: #fff;
+  width: 90%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width for larger screens */
+  margin: 0 auto; /* Center the form horizontally */
   }
   
   #email,
@@ -100,7 +102,7 @@
   
   h1 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 0 0 2rem; /* Remove bottom margin */
   }
   
   .form-group {
@@ -125,6 +127,7 @@
     color: #fff;
     cursor: pointer;
     padding: 0.5rem;
+    width: 100%;
   }
   </style>
   

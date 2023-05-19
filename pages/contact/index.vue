@@ -2,11 +2,14 @@
 <template>
   <div class="content-container">
     <ContentfulPage :entry="entry.fields" />
+    <button class="open-modal-button" @click="openModal">Show Contact Form</button>
+    <ContactModal ref="contactModal" />
   </div>
 </template>
 
 <script>
 import ContentfulPage from '@/components/ContentfulPage.vue'
+import ContactModal from '@/components/ContactModal.vue'
 
 import { createClient } from '../../plugins/contentful'
 const contentfulClient = createClient();
@@ -23,6 +26,7 @@ export default {
   },
   components: {
     ContentfulPage,
+    ContactModal
 
   },
   data() {
@@ -44,6 +48,11 @@ export default {
               { name: 'author', content: this.author },
           ]
       }
+  },
+  methods: {
+    openModal() {
+      this.$refs.contactModal.openModal()
+    }
   },
   created() {
           const { title, robots, keywords, description, author, pageName } = this.entry.fields
@@ -78,5 +87,18 @@ export default {
 <style scoped>
 .content-container {
   margin: 1.25rem;
+  }
+
+  button.open-modal-button {
+    background-color: var(--brand-indigo);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+    width: 100%;
+    max-width: 440px;
+    display: block;
+    margin: 0 auto;
   }
 </style>
