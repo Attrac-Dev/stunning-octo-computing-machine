@@ -79,9 +79,11 @@ export default {
           this.countdown--
         } else {
           clearInterval(interval)
-          this.$router.push('/').catch(error => {
-            console.error('Error navigating to home:', error)
-          })
+          try {
+          this.$router.push('/');
+          } catch (error) {
+            console.error('Error navigating to home:', error);
+          }
         }
       }, 1000) // 1 second intervals
     },

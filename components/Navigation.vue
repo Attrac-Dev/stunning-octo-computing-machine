@@ -31,10 +31,10 @@
             <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
             </li>
             <!-- Show when user is NOT logged in -->
-            <li class="item button" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/login" >Login</NuxtLink></li> <!-- login-->
-            <li class="item button secondary" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/signup" >Sign Up</NuxtLink></li> <!--signup-->
+            <li class="item button hard-menu" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/login" >Login</NuxtLink></li> <!-- login-->
+            <li class="item button secondary hard-menu" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/signup" >Sign Up</NuxtLink></li> <!--signup-->
             <!-- Show when user is logged in -->
-            <li class="item button secondary" :class="{ hidden: !loggedIn }" ><NuxtLink to="/auth/logout" >Log Out</NuxtLink></li> <!--logout-->
+            <li class="item button secondary hard-menu" :class="{ hidden: !loggedIn }" ><NuxtLink to="/auth/logout" >Log Out</NuxtLink></li> <!--logout-->
 
 
             <li class="toggle">
@@ -69,6 +69,10 @@
     }
     .hidden {
         display: none !important;
+    }
+    li.hard-menu > .nuxt-link-exact-active.nuxt-link-active {
+        background: var(--brand-indigo);
+        color: white;
     }
 
 </style>
