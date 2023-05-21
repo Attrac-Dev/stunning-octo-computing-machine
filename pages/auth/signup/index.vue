@@ -38,21 +38,18 @@
     </div>
   </div>
 
-  <div v-else class="content-container">
-    <div class="inactive-form">
-      <h2 class="centered-text">Sign Up</h2>
-      <h3 class="centered-text">Only Available to current clients.</h3>
-      <h5 class="centered-text">Redirecting you back to the Home page in {{ countdown }}</h5>
-      <div class="button-container">
-        <VariableButton class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
-      </div>
-      
+  <div v-else class="signup-content">
+    <div class="container">
+      <h2>Sign Up</h2>
+      <h5>Only Available to current clients.</h5>
+      <p class="centered-text">Redirecting you back to the Home page in <strong class=count>{{ countdown }}</strong></p>
     </div>
+      <button class="request-account-button" @click="requestLogin">Request Account</button>
+      <button class="return-home-button" @click="returnHome">Return Home</button>
   </div>
 </template>
 
 <script>
-import VariableButton from '../../../components/VariableButton.vue'
 export default {
   
   data() {
@@ -68,17 +65,34 @@ export default {
       phoneError: '',
       passwordMatchError: '',
       signupActive: '',
-      countdown: 30,
-      mainCTA: 'Request Account'
+      countdown: 15,
+      interval: null,
+
     }
   },
   methods: {
+    returnHome() {
+        clearInterval(this.interval);
+        try {
+          this.$router.push('/');
+        } catch (error) {
+          console.error('Error navigating to "/"" :', error);
+        }
+      },
+      requestLogin() {
+        clearInterval(this.interval);
+        try {
+          this.$router.push('/contact');
+        } catch (error) {
+          console.error('Error navigating to "/contact" :', error);
+        }
+      },
     countDownInterval() {
-      const interval = setInterval(() => {
+      this.interval = setInterval(() => {
         if (this.countdown > 0) {
           this.countdown--
         } else {
-          clearInterval(interval)
+          clearInterval(this.interval)
           try {
           this.$router.push('/');
           } catch (error) {
@@ -234,10 +248,10 @@ input {
   border-radius: 5px;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
+.request-account-button {
+  padding: 1rem 2rem;
+  border: 1px solid var(--brand-indigo);
+  border-radius: 1px;
   background-color: var(--brand-indigo);
   color: #fff;
   font-size: 1rem;
@@ -245,16 +259,37 @@ button {
   transition: all 0.3s ease;
 }
 
+.return-home-button {
+  padding: 1rem 2rem;
+  border: 1px solid var(--brand-indigo);
+  border-radius: 1px;
+  background-color: transparent;
+  color: var(--brand-indigo);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 button:hover {
   background-color: var(--brand-dark-grey);
+  color: white;
+  border: 1px solid var(--brand-white);
 }
 
 .error-message {
   color: var(--brand-indigo);
 }
 
-.inactive-form {
-  margin: 0 3rem;
+.signup-content {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: -50px; /* Adjust the margin-top value as needed */
+}
+
+.container {
+  padding: 2rem;
 }
 
 .centered-text {
@@ -262,6 +297,14 @@ button:hover {
   margin: 0.5rem 0;
 }
 
+h2, h5, p {
+    text-align: center;
+    margin: 1rem;
+}
+
+.count {
+  font-weight: 600;
+}
 .flex-center {
   display: flex;
   justify-content: center;

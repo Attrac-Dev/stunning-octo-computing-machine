@@ -14,16 +14,22 @@
       />
       
     </form>
-    <div v-if="!isValidEmail() && formTried>0">
-        <p >
+      <!-- <transition name="fade">
+      <div v-if="!isValidEmail() && formTried > 0">
+        <p class="error-message">
           Please enter a valid email address.
         </p>
       </div>
-      <div v-if="errorMessage" class="error-message">
-        <p>
+    </transition> -->
+
+    <transition name="fade">
+      <div v-if="errorMessage">
+        <p class="error-message">
           {{ errorMessage }}
         </p>
       </div>
+    </transition>
+
   </div>
 </template>
 
@@ -40,7 +46,10 @@ export default {
       validEmail: false,
       subscriberEmail: null,
       email: "", // Other data properties for form fields, e.g. email
-      errorMessage: ""
+      errorMessage: "",
+      interval: null,
+      countdown: 15,
+      fadeError: false
     
     };
   },
@@ -74,6 +83,27 @@ export default {
   },
   methods: {
     ...mapMutations(['setHasSubscribed']),
+    clearErrors() {
+      // clear the input first
+      // set fadeError to true
+      this.interval = setInterval(() => {
+        if (this.countdown > 0) {
+          this.countdown--
+        } else {
+          clearInterval(this.interval)
+          // check if formTried != 0
+          if (this.formTried !== 0) {
+            this.errorMessage = ''
+            this.validEmail = false
+            this.formTried = 0
+
+            // clear input field
+            this.email = ''
+
+          }
+        }
+      }, 1000) // 1 second intervals
+    },
     isValidEmail() {
       // This is a simple validation that checks for a basic email format
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
@@ -88,6 +118,8 @@ export default {
           if (contact) {
             console.log("Subscribed with email:", this.email)
               this.formSubmitted = true
+              this.interval = null // stop any previous error interval
+              this.errorMessage = "" // get rid of the previous error message
               const contactData = {email:this.email, newsletter: true, date: Date.now()}
               const cookieData = JSON.stringify(contactData)
               setCookie("subscriber", cookieData, 7, {sameSite:'Strict'}) // sets the subscriber cookie with JSON as its value with a 7 day expiration
@@ -105,16 +137,22 @@ export default {
           console.log({formError: error})
           this.errorMessage = error.message
           this.formSubmitted = false
+          this.clearErrors()
+          // start a 25 second timer to clear error and input field
+
 
           if (error.message === "Email already subscribed") {
             this.validEmail = true
             this.formSubmitted = false
+            this.clearErrors()
           }
         }
       } else {
         // Error: Invalid email, show error message
         console.error("Invalid email:", this.email);
         this.formSubmitted = false; // Set formSubmitted to false to show the error message
+        this.errorMessage = "Please enter a valid email address"
+        this.clearErrors()
       }
     },
   }
@@ -150,9 +188,17 @@ input[type="submit"]:hover {
 
 .error-message {
   color: red;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
-.email-message {
-  color: var(--brand-indigo);
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

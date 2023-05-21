@@ -3,7 +3,13 @@
       <div class="modal-container">
         <h1>Contact Us</h1>
         <div class="contact-form">
-        <form>
+        <form 
+          name="contact" 
+          action="/contact/success"
+          method="POST" 
+          data-netlify-recaptcha="true"
+          data-netlify="true"
+        >
             <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" v-model="name" required />
@@ -20,8 +26,20 @@
             <div v-if="phoneError" class="error">{{ phoneError }}</div>
             </div>
             <div class="form-group">
+            <label for="service">Service</label>
+            <select id="service" v-model="service" required>
+              <option disabled value="" class="option-list">Please select a service</option>
+              <option v-for="option in services" :key="option" :value="option" class="option-list">{{ option }}</option>
+            </select>
+            <div v-if="serviceError" class="error">{{ serviceError }}</div>
+            </div>
+            <div class="form-group">
             <label for="description">Brief Description</label>
-            <textarea id="description" v-model="description" required></textarea>
+            <textarea id="description" maxlength="150" v-model="description" required></textarea>
+            <div><span :class="{
+              'description-error': remainingCharacters < 50,
+              'bold': remainingCharacters < 25
+              }">{{ remainingCharacters }}</span> characters remaining</div>
             <div v-if="descriptionError" class="error">{{ descriptionError }}</div>
             </div>
         </form>
@@ -45,8 +63,20 @@
         nameError: '',
         emailError: '',
         phoneError: '',
+        serviceError: '',
         descriptionError: '',
         showModal: false,
+        services: [
+        'Design',
+        'Development',
+        'Podcasts',
+        'Videos',
+        'Copywriting',
+        'Social Media',
+        'Emails',
+        'Branding'
+        ],
+        service: '' // used to auto-fill form from a query param
       };
     },
     methods: {
@@ -54,6 +84,7 @@
         this.nameError = '';
         this.emailError = '';
         this.phoneError = '';
+        this.serviceError = '';
         this.descriptionError = '';
 
         // Name validation
@@ -78,6 +109,12 @@
         return;
         }
 
+        // Service validation
+        if (!this.selectedService) {
+          this.serviceError = 'Please select a service';
+          return;
+        }
+
         // Description validation
         if (!this.description) {
         this.descriptionError = 'Description is required';
@@ -91,6 +128,7 @@
         this.name = '';
         this.email = '';
         this.phone = '';
+        this.selectedService = '';
         this.description = '';
 
         // Show success message to user
@@ -103,30 +141,68 @@
       closeModal() {
         this.showModal = false;
         this.enableScroll();
+        // Clear form on close
+        this.name = '';
+        this.email = '';
+        this.phone = '';
+        this.selectedService = '';
+        this.description = '';
       },
       disableScroll() {
-        // Get the current scroll position
-        const scrollY = window.scrollY;
-  
-        // Add styles to disable scroll
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
+        // Disable scroll on larger screens
+        if (window.innerWidth > 600) { // Adjust the screen width threshold as needed
+            // Get the current scroll position
+            const scrollY = window.scrollY;
+
+            // Add styles to disable scroll
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+        }
       },
       enableScroll() {
-        // Get the previous scroll position
-        const scrollY = parseInt(document.body.style.top || '0', 10);
-  
-        // Remove styles to enable scroll
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-  
-        // Scroll to the previous position
-        window.scrollTo(0, Math.abs(scrollY));
+        // Enable scroll on larger screens
+        if (window.innerWidth > 600) { // Adjust the screen width threshold as needed
+            // Get the previous scroll position
+            const scrollY = parseInt(document.body.style.top || '0', 10);
+
+            // Remove styles to enable scroll
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+
+            // Scroll to the previous position
+            window.scrollTo(0, Math.abs(scrollY));
+        }
       },
+    },
+    computed: {
+      remainingCharacters() {
+        const maxlength = 150
+        return maxlength - this.description.length
+      }
+    },
+    created() {
+      const serviceParam = this.$route.query.service;
+
+      if (serviceParam) {
+        // Convert the query parameter and available services to lowercase
+        const lowercaseServiceParam = serviceParam.toLowerCase();
+        const lowercaseServices = this.services.map(service => service.toLowerCase());
+
+        // Check if the lowercase service parameter is one of the available services
+        if (lowercaseServices.includes(lowercaseServiceParam)) {
+          // Find the corresponding original service value
+          const selectedService = this.services.find(service => service.toLowerCase() === lowercaseServiceParam);
+          this.service = selectedService; // Set the selected service to the original value
+          this.showModal = true // automatically open modal on page load, if there is a query param in the route
+        } else {
+          // Handle case where the query parameter value is not a valid service
+          console.warn(`Invalid service: ${serviceParam}`);
+        }
+      }
     },
   };
   </script>
@@ -153,6 +229,8 @@
     padding: 2rem;
     width: 90%; /* Adjust the width as needed */
     max-width: 400px; /* Set a maximum width for larger screens */
+    max-height: 93%;
+    overflow-y: auto;
   }
   
   h1 {
@@ -210,12 +288,26 @@ input[type="email"], input[type="tel"], input[type="text"] {
   box-sizing: border-box;
 }
 
+select#service {
+  border: 1px solid var(--brand-indigo);
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--brand-white);
+}
+
+.option-list {
+  background-color: var(--brand-white);
+}
+
 textarea {
     border: 1px solid var(--brand-indigo);
     border-radius: 5px;
     padding: 0.5rem;
     width: 100%;
     resize: vertical;
+    background-color: var(--brand-white);
 }
 
     .button-container {
@@ -233,6 +325,13 @@ textarea {
         color: red;
         font-size: 0.8rem;
         margin-top: 0.5rem;
+    }
+
+    .description-error {
+      color: red;
+    }
+    .bold {
+      font-weight: 600;
     }
   </style>
   
