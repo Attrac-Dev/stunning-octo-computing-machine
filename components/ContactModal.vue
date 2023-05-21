@@ -5,7 +5,7 @@
         <div class="contact-form">
         <form 
           name="contact" 
-          action="/contact/success"
+          :action="actionUrl"
           method="POST" 
           data-netlify-recaptcha="true"
           data-netlify="true"
@@ -76,7 +76,9 @@
         'Emails',
         'Branding'
         ],
-        service: '' // used to auto-fill form from a query param
+        service: '', // used to auto-fill form from a query param
+        query: '',
+        actionUrl: '', // allows for dynamic redirect after successful form submission
       };
     },
     methods: {
@@ -202,6 +204,14 @@
           // Handle case where the query parameter value is not a valid service
           console.warn(`Invalid service: ${serviceParam}`);
         }
+      }
+      // save the query parameter value, to redirect the user back to the page they where viewing before submitting the form
+
+      this.query = this.$route.query.page
+      if (!this.query) {
+        this.actionUrl = '/contact/success';
+      } else {
+        this.actionUrl = `/contact/success?page=${this.query}`;
       }
     },
   };
