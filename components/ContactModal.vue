@@ -9,6 +9,7 @@
           method="POST" 
           data-netlify-recaptcha="true"
           data-netlify="true"
+          ref="contactForm"
         >
             <div class="form-group">
             <label for="name">Name</label>
@@ -45,7 +46,7 @@
         </form>
         </div>
         <div class="button-container">
-        <button class="modal-submit-button" type="submit" @click.prevent="submitForm">Submit</button>
+        <button class="modal-submit-button" type="submit" @click="submitForm">Submit</button>
         <button class="modal-close-button" @click="closeModal">Close</button>
       </div>
       </div>
@@ -60,6 +61,13 @@
         email: '',
         phone: '',
         description: '',
+        validation: {
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          description: ''
+        },
         nameError: '',
         emailError: '',
         phoneError: '',
@@ -83,48 +91,58 @@
     },
     methods: {
     async submitForm() {
-        this.nameError = '';
-        this.emailError = '';
-        this.phoneError = '';
-        this.serviceError = '';
-        this.descriptionError = '';
-
         // Name validation
         if (!this.name) {
-        this.nameError = 'Name is required';
+        this.validation.name = 'Name is required';
         return;
         }
 
         // Email validation
         if (!this.email) {
-        this.emailError = 'Email is required';
+        this.validation.email = 'Email is required';
         return;
         }
         if (!/\S+@\S+\.\S+/.test(this.email)) {
-        this.emailError = 'Invalid email format';
+        this.validation.email = 'Invalid email format';
         return;
         }
 
         // Phone number validation
         if (!this.phone) {
-        this.phoneError = 'Phone number is required';
+        this.validation.phone = 'Phone number is required';
         return;
         }
 
         // Service validation
-        if (!this.selectedService) {
-          this.serviceError = 'Please select a service';
+        if (!this.service) {
+          this.validation.service = 'Please select a service';
           return;
         }
 
         // Description validation
         if (!this.description) {
-        this.descriptionError = 'Description is required';
+        this.validation.description = 'Description is required';
         return;
         }
 
+        // clear the validation messages
+        this.validation.name = '';
+        this.validation.email = '';
+        this.validation.phone = '';
+        this.validation.service = '';
+        this.validation.description = '';
+
+
         // Perform form submission logic here
         // You can use the form data for further processing or API calls
+
+
+        // If validation passes, manually trigger the form submission
+        try {
+          await this.$refs.contactForm.submit();
+        } catch (error) {
+          console.error('Error submitting the form:', error);
+        }
 
         // Clear form on successful submit
         this.name = '';
