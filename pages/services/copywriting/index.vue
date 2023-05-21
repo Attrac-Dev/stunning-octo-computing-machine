@@ -18,7 +18,7 @@ export default {
         id: '22CwRrY6qOaDQD8FeL1Xk5'
       }
       const entry = await contentfulClient.getEntry(pageData.id)
-      return { entry }
+      return { entry, pageData }
   },
   components: {
     ContentfulPage
@@ -29,7 +29,8 @@ export default {
           robots: '',
           keywords: '',
           description: '',
-          author: ''
+          author: '',
+          CTA: ''
       }
   },
   head() {
@@ -43,7 +44,18 @@ export default {
           ]
       }
   },
+  methods: {
+    redirectToContact() {
+      const encodePath = encodeURIComponent(this.$route.path)
+
+      const path = `/contact?service=${this.pageData.page}&page=${encodePath}`
+
+      // redirect to contact page
+      this.$router.push(path)
+    }
+  },
   created() {
+    const { linkText } = this.entry.fields.service.fields
           const { title, robots, keywords, description, author, pageName } = this.entry.fields
           // ternary operators to check if values have been passed in  or give a default value
           this.title = title ? title : 'AttracDev | Software and Branding'
@@ -51,6 +63,7 @@ export default {
           this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
+          this.CTA = linkText ? linkText : ''
 
           if (pageName && process.env.ENVIRONMENT === 'development') {
             console.log({
@@ -76,5 +89,18 @@ export default {
 <style scoped>
 .content-container {
   margin: 1.25rem;
+  }
+
+  .cta-button {
+    background-color: var(--brand-indigo);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 1rem 1rem;
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
   }
 </style>
