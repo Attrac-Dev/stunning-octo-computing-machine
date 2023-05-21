@@ -229,7 +229,9 @@
       if (!this.query) {
         this.actionUrl = '/contact/success';
       } else {
-        this.actionUrl = `/contact/success?page=${this.query}`;
+        // The query needs to be encoded
+        const redirect = encodeURIComponent(this.query)
+        this.actionUrl = `/contact/success?page=${redirect}`;
       }
     },
   };
