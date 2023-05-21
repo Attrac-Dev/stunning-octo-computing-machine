@@ -2,6 +2,7 @@
 <template>
   <div class="content-container">
     <ContentfulPage :entry="entry.fields" />
+    <button data-aos="zoom-in" v-if="CTA" class="cta-button" @click="redirectToContact">{{ CTA }}</button>
   </div>
 </template>
 
