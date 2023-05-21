@@ -92,7 +92,7 @@ export default {
   margin: 1.25rem;
   }
 
-  .cta-button {
+.cta-button {
     background-color: var(--brand-indigo);
     border: none;
     border-radius: 5px;
@@ -100,7 +100,7 @@ export default {
     cursor: pointer;
     padding: 1rem 1rem;
     width: 100%;
-    max-width: 200px;
+    max-width: 250px;
     display: block;
     margin: 0 auto;
   }
