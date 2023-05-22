@@ -5,9 +5,7 @@
         <div class="contact-form">
         <form 
           name="contact" 
-          :action="actionUrl"
           method="POST" 
-          data-netlify-recaptcha="true"
           data-netlify="true"
           ref="contactForm"
         >
@@ -46,7 +44,7 @@
         </form>
         </div>
         <div class="button-container">
-        <button class="modal-submit-button" type="submit" @click="submitForm">Submit</button>
+        <button class="modal-submit-button" type="submit" @click.prevent="submitForm">Submit</button>
         <button class="modal-close-button" @click="closeModal">Close</button>
       </div>
       </div>
@@ -132,27 +130,40 @@
         this.validation.service = '';
         this.validation.description = '';
 
+        const formData = new FormData()
+        formData.append('name', this.name)
+        formData.append('email', this.email)
+        formData.append('phone', this.phone)
+        formData.append('service',this.service)
+        formData.append('description', this.description)
 
-        // Perform form submission logic here
-        // You can use the form data for further processing or API calls
-
-
-        // If validation passes, manually trigger the form submission
         try {
-          await this.$refs.contactForm.submit();
-        } catch (error) {
-          console.error('Error submitting the form:', error);
-        }
+          const response = await fetch('/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString(),
+          });
+          // Clear form on successful submit
+          if (response) {
+            this.name = '';
+            this.email = '';
+            this.phone = '';
+            this.service = '';
+            this.description = '';
 
-        // Clear form on successful submit
-        this.name = '';
-        this.email = '';
-        this.phone = '';
-        this.selectedService = '';
-        this.description = '';
+            // navigate to success page via this.actionURL
+            this.$router.push(this.actionUrl)
+          } else {
+            throw new Error('Form submission failure')
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          // Handle error case, e.g., show error message to the user
+        }
 
         // Show success message to user
         // You can display a success message or redirect the user to another page
+        console.log('Form submitted successfully')
     },
       openModal() {
         this.showModal = true;
