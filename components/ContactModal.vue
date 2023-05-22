@@ -5,8 +5,6 @@
         <div class="contact-form">
         <form 
           name="contact" 
-          method="POST" 
-          data-netlify="true"
           ref="contactForm"
         >
             <div class="form-group">
@@ -137,24 +135,30 @@
         formData.append('service',this.service)
         formData.append('description', this.description)
 
+        const tableName = 'contact_form'
+
         try {
-          const response = await fetch('/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString(),
-          });
-          // Clear form on successful submit
-          if (response) {
+          const { data, error } = await this.$supabase
+            .from(tableName)
+            .insert([{ data: formData }])
+            .single()
+
+          if (error) {
+            // handle the error
+            throw new Error('Form submission failure')
+          } else {
+            // clear the fields
             this.name = '';
             this.email = '';
             this.phone = '';
             this.service = '';
             this.description = '';
-
+            if (data) {
+              console.log(data)
+              console.log('Form submitted successfully')
+            }
             // navigate to success page via this.actionURL
             this.$router.push(this.actionUrl)
-          } else {
-            throw new Error('Form submission failure')
           }
         } catch (error) {
           console.error('Form submission error:', error);
