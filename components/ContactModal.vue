@@ -45,6 +45,9 @@
         <button class="modal-submit-button" type="submit" @click.prevent="submitForm">Submit</button>
         <button class="modal-close-button" @click="closeModal">Close</button>
       </div>
+      <!-- Show submission error to user -->
+      <div v-show="submissionError" class="error-message">{{ submissionError }}</div>
+
       </div>
     </div>
   </template>
@@ -83,6 +86,7 @@
         service: '', // used to auto-fill form from a query param
         query: '',
         actionUrl: '', // allows for dynamic redirect after successful form submission
+        submissionError: '', // to show the user if the form was not successfully submitted
       };
     },
     methods: {
@@ -128,24 +132,27 @@
         this.validation.service = '';
         this.validation.description = '';
 
-        const formData = new FormData()
-        formData.append('name', this.name)
-        formData.append('email', this.email)
-        formData.append('phone', this.phone)
-        formData.append('service',this.service)
-        formData.append('description', this.description)
+        const formData = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          service: this.service,
+          description: this.description,
+        }
 
         const tableName = 'contact_form'
 
         try {
           const { data, error } = await this.$supabase
-            .from(tableName)
-            .insert([{ data: formData }])
-            .single()
+          .from(tableName)
+          .insert([formData])
+          .single();
 
           if (error) {
             // handle the error
-            throw new Error('Form submission failure')
+            console.log('Form submission error', error)
+            this.submissionError = error
+            return
           } else {
             // clear the fields
             this.name = '';
@@ -161,13 +168,9 @@
             this.$router.push(this.actionUrl)
           }
         } catch (error) {
-          console.error('Form submission error:', error);
+          console.error(error);
           // Handle error case, e.g., show error message to the user
         }
-
-        // Show success message to user
-        // You can display a success message or redirect the user to another page
-        console.log('Form submitted successfully')
     },
       openModal() {
         this.showModal = true;
