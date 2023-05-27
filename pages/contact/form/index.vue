@@ -1,6 +1,9 @@
 <template>
+
 <div v-if="isDevelopment" class="contact-form">
-  <form action="https://formspree.io/f/mknaapyb" method="POST">
+  
+  <form action="https://formspree.io/f/mknaapyb" method="POST" @submit="secretSubmit">
+
   <label for="name">Name</label>
   <input type="text" id="name" name="name" v-model="name" required>
   <div v-if="validation.name" class="error">{{ validation.name }}</div>
@@ -133,6 +136,9 @@
       };
     },
     methods: {
+      async secretSubmit() {
+        this.$router.push('/contact/success')
+      },
       submitForm() {
         if (!this.bypass) {
             if (!this.name) {
