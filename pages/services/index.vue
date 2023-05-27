@@ -50,7 +50,7 @@ export default {
     redirectToContact() {
       const encodePath = encodeURIComponent(this.$route.path)
 
-      const path = `/contact?service=Development&page=${encodePath}`
+      const path = "/contact/form"
 
       // redirect to contact page
       this.$router.push(path)

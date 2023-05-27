@@ -49,7 +49,7 @@ export default {
     redirectToContact() {
       const encodePath = encodeURIComponent(this.$route.path)
       // had to hard-code the path for the emails service
-      const path = `/contact?service=Emails&page=${encodePath}`
+      const path = "/contact/form"
 
       // redirect to contact page
       this.$router.push(path)

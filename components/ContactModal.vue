@@ -7,20 +7,28 @@
           name="contact" 
           ref="contactForm"
         >
+          <!-- Conditionally display checkbox in development mode -->
+          <div v-if="isDevelopment" class="form-group">
+            <label>
+              <input type="checkbox" v-model="bypass" />
+              Activate Developer Mode (bypass form)
+            </label>
+          </div>
+
             <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" v-model="name" required />
-            <div v-if="nameError" class="error">{{ nameError }}</div>
+            <div v-if="validation.name" class="error">{{ validation.name }}</div>
             </div>
             <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" v-model="email" required />
-            <div v-if="emailError" class="error">{{ emailError }}</div>
+            <div v-if="validation.email" class="error">{{ validation.email }}</div>
             </div>
             <div class="form-group">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" v-model="phone" required />
-            <div v-if="phoneError" class="error">{{ phoneError }}</div>
+            <div v-if="validation.phone" class="error">{{ validation.phone }}</div>
             </div>
             <div class="form-group">
             <label for="service">Service</label>
@@ -28,7 +36,7 @@
               <option disabled value="" class="option-list">Please select a service</option>
               <option v-for="option in services" :key="option" :value="option" class="option-list">{{ option }}</option>
             </select>
-            <div v-if="serviceError" class="error">{{ serviceError }}</div>
+            <div v-if="validation.service" class="error">{{ validation.service }}</div>
             </div>
             <div class="form-group">
             <label for="description">Brief Description</label>
@@ -37,8 +45,10 @@
               'description-error': remainingCharacters < 50,
               'bold': remainingCharacters < 25
               }">{{ remainingCharacters }}</span> characters remaining</div>
-            <div v-if="descriptionError" class="error">{{ descriptionError }}</div>
+            <div v-if="validation.description" class="error">{{ validation.description }}</div>
             </div>
+             <!-- Honeypot field (zipcode) -->
+            <input type="text" id="zipcode" v-model="zipcode" style="display: none;" />
         </form>
         </div>
         <div class="button-container">
@@ -46,7 +56,7 @@
         <button class="modal-close-button" @click="closeModal">Close</button>
       </div>
       <!-- Show submission error to user -->
-      <div v-show="submissionError" class="error-message">{{ submissionError }}</div>
+      <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
 
       </div>
     </div>
@@ -60,6 +70,7 @@
         email: '',
         phone: '',
         description: '',
+        zipcode: '',
         validation: {
           name: '',
           email: '',
@@ -67,11 +78,11 @@
           service: '',
           description: ''
         },
-        nameError: '',
-        emailError: '',
-        phoneError: '',
-        serviceError: '',
-        descriptionError: '',
+        // nameError: '',
+        // emailError: '',
+        // phoneError: '',
+        // serviceError: '',
+        // descriptionError: '',
         showModal: false,
         services: [
         'Design',
@@ -85,12 +96,39 @@
         ],
         service: '', // used to auto-fill form from a query param
         query: '',
-        actionUrl: '', // allows for dynamic redirect after successful form submission
+        actionUrl: '/contact/success', // allows for dynamic redirect after successful form submission
         submissionError: '', // to show the user if the form was not successfully submitted
+        environment: '',
+        bypass: false,
       };
     },
     methods: {
+      async checkUserExists(email, phone) {
+        const payload = {
+          p_email: email,
+          p_phone: phone,
+          p_table: 'contact_form',
+        };
+        try {
+          const { data, error } = await this.$supabase.rpc('validate_contact', payload);
+
+          if (error) {
+            // Handle the error
+            console.error(error);
+            return { success: false, error: error.message };
+          } else {
+            return { success: true, result: data };
+          }
+        } catch (error) {
+          // Handle any other error that occurred
+          console.error(error);
+          return { success: false, error: 'An error occurred during user validation' };
+        }
+  },
     async submitForm() {
+        // bypass form requirements in development mode
+        // start wrap here
+        if (!this.bypass){
         // Name validation
         if (!this.name) {
         this.validation.name = 'Name is required';
@@ -109,8 +147,15 @@
 
         // Phone number validation
         if (!this.phone) {
-        this.validation.phone = 'Phone number is required';
-        return;
+            this.validation.phone = 'Phone number is required';
+            return;
+          }
+        
+        if (!this.phoneLength(this.phone)) {
+          this.validation.phone = 'Phone number incorrect length'
+          return;
+        } else {
+          this.validation.phone = ''
         }
 
         // Service validation
@@ -132,12 +177,34 @@
         this.validation.service = '';
         this.validation.description = '';
 
+
         const formData = {
           name: this.name,
           email: this.email,
-          phone: this.phone,
+          phone: this.formatPhone(this.phone),
           service: this.service,
           description: this.description,
+          zipcode: this.zipcode,
+        }
+        try {
+          const uniqueUser = await this.checkUserExists(this.email, this.phone)
+          console.log({existingUser: uniqueUser})
+          if (!uniqueUser.success){
+            this.submissionError = `Error submitting form, userCheck=${uniqueUser}`
+            throw new Error(`User: ${uniqueUser}`)
+          } else {
+              if (!uniqueUser.result) {
+              this.validation.email = 'Email may already be associated with a user'
+              this.validation.phone = 'Phone may already be associated with a user'
+              this.submissionError = "User already exists."
+              return
+            } else {
+              console.log('User was unique')
+            }
+          }
+        } catch(error) {
+          console.error(error)
+          return //prevent submission
         }
 
         const tableName = 'contact_form'
@@ -161,22 +228,41 @@
             this.service = '';
             this.description = '';
             if (data) {
-              console.log(data)
+              console.log({supabaseData: data})
               console.log('Form submitted successfully')
+              // navigate to success page via this.actionURL    
             }
-            // navigate to success page via this.actionURL
-            this.$router.push(this.actionUrl)
           }
+          alert(`redirect: ${this.actionUrl}`)
+          this.$router.push({path:`${this.actionUrl}`})
         } catch (error) {
           console.error(error);
           // Handle error case, e.g., show error message to the user
         }
+        // end wrap here
+      } else {
+        // in development mode, act like form is submitted, without sending to database
+        alert(`Dev redirect to: ${this.actionUrl}`)
+        this.$router.push(`${this.actionUrl}`)
+      }
     },
-      openModal() {
+    isDevelopment() {
+      return process.env.ENVIRONMENT === 'development'
+    },
+    formatPhone(phoneNumber) {
+        const sanitizedPhoneNumber = phoneNumber.replace(/\D/g, '');
+        const formattedPhoneNumber = sanitizedPhoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)$2-$3');
+        return formattedPhoneNumber;
+      },
+      phoneLength(phoneNumber) {
+      const numericPhoneNumber = phoneNumber.replace(/\D/g, '');
+      return numericPhoneNumber.length === 10;
+    },
+    openModal() {
         this.showModal = true;
         this.disableScroll();
       },
-      closeModal() {
+    closeModal() {
         this.showModal = false;
         this.enableScroll();
         // Clear form on close
@@ -215,6 +301,20 @@
             window.scrollTo(0, Math.abs(scrollY));
         }
       },
+      getRedirect() {
+        // save the query parameter value, to redirect the user back to the page they where viewing before submitting the form
+        this.query = this.$route.query.page
+        if (!this.query) {
+          console.log('no page query found')
+          const redirect = encodeURIComponent('/')
+          this.actionUrl = `/contact/success?page=${redirect}`;
+        } else {
+          // The query needs to be encoded
+          console.log('encoding page query now...')
+          const redirect = encodeURIComponent(this.query)
+          this.actionUrl = `/contact/success?page=${redirect}`;
+        }
+      }
     },
     computed: {
       remainingCharacters() {
@@ -241,16 +341,7 @@
           console.warn(`Invalid service: ${serviceParam}`);
         }
       }
-      // save the query parameter value, to redirect the user back to the page they where viewing before submitting the form
-
-      this.query = this.$route.query.page
-      if (!this.query) {
-        this.actionUrl = '/contact/success';
-      } else {
-        // The query needs to be encoded
-        const redirect = encodeURIComponent(this.query)
-        this.actionUrl = `/contact/success?page=${redirect}`;
-      }
+      this.getRedirect()
     },
   };
   </script>
@@ -377,6 +468,11 @@ textarea {
 
     .description-error {
       color: red;
+    }
+
+    .submission-error {
+      font-weight: 100;
+      text-align: center;
     }
     .bold {
       font-weight: 600;

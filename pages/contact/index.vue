@@ -51,7 +51,8 @@ export default {
   },
   methods: {
     openModal() {
-      this.$refs.contactModal.openModal()
+      // this.$refs.contactModal.openModal()
+      this.$router.push('/contact/form')
     }
   },
   created() {

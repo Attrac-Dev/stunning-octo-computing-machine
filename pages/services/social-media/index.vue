@@ -12,6 +12,7 @@ import { createClient } from '../../../plugins/contentful'
 const contentfulClient = createClient();
 
 export default {
+  // setting kabab-case for url path
   async asyncData() {
       const pageData = { 
         page: 'Social Media',
@@ -49,7 +50,7 @@ export default {
     redirectToContact() {
       const encodePath = encodeURIComponent(this.$route.path)
 
-      const path = `/contact?service=${this.pageData.page}&page=${encodePath}`
+      const path = "/contact/form"
 
       // redirect to contact page
       this.$router.push(path)

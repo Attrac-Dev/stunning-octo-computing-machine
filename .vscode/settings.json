@@ -4,6 +4,7 @@
         "contentful",
         "fortawesome",
         "nuxtlink",
-        "VWWN"
+        "VWWN",
+        "zipcode"
     ]
 }

@@ -14,7 +14,7 @@
                     <li class="subitem"><NuxtLink to="/services/podcasts" >Podcasts</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/videos" >Videos</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/copywriting" >Copywriting</NuxtLink></li>
-                    <li class="subitem"><NuxtLink to="/services/social media" >Social Media</NuxtLink></li>
+                    <li class="subitem"><NuxtLink to="/services/social-media" >Social Media</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/emails" >Emails</NuxtLink></li>
                     <li class="subitem"><NuxtLink to="/services/branding" >Branding</NuxtLink></li>
                 </ul>
@@ -28,8 +28,7 @@
                 </ul>
             </li>
             <li class="item no-submenu"><a href="https://attrac.dev" target="_blank">Blog</a></li> <!-- external link to blog subdomain -->
-            <li class="item no-submenu"><NuxtLink to="/contact" >Contact</NuxtLink>
-            </li>
+            <li class="item no-submenu"><NuxtLink to="/contact">Contact</NuxtLink></li>
             <!-- Show when user is NOT logged in -->
             <li class="item button hard-menu" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/login" >Login</NuxtLink></li> <!-- login-->
             <li class="item button secondary hard-menu" :class="{ hidden: loggedIn }" ><NuxtLink to="/auth/signup" >Sign Up</NuxtLink></li> <!--signup-->
@@ -82,8 +81,10 @@ import { navigationScript } from '~/functions/navigation.js'
 export default {
     data: () => ({
         name: 'navigation',
-        loggedIn: false
-    }),    methods: {
+        loggedIn: false,
+        test: 'blah'
+    }),    
+    methods: {
         logIn() {
             // update loggedIn state to true
             this.loggedIn = true;
@@ -91,7 +92,7 @@ export default {
         logOut() {
             // update loggedIn state to false
             this.loggedIn = false;
-        }
+        },
     },
     mounted() {
         navigationScript()
