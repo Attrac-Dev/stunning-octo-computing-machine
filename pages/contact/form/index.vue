@@ -257,6 +257,11 @@
   },
   created() {
     this.isDevelopment()
+  },
+  mounted(){
+    // get current url
+    const url = this.$nuxt.$route.path
+    console.log({current: url})
   }
 };
 </script>
