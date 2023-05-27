@@ -2,7 +2,7 @@
 
 <div v-if="isDevelopment" class="contact-form">
   
-  <form action="https://formspree.io/f/mknaapyb" method="POST" @submit="secretSubmit">
+  <form action="https://formspree.io/f/mknaapyb" method="POST">
 
   <label for="name">Name</label>
   <input type="text" id="name" name="name" v-model="name" required>
@@ -35,6 +35,8 @@
 
   <!-- Honeypot field (zipcode) -->
   <input type="text" id="zipcode" name="zipcode" v-model="zipcode" style="display: none;">
+
+  <input type="hidden" name="_next" value="/contact/success">
 
   <button class="modal-submit-button" type="submit">Submit</button>
 
