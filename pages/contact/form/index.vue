@@ -1,6 +1,32 @@
 <template>
-    <div class="contact-form">
-        <form v-if="!isDevelopment" name="contact" @submit.prevent="submitForm" netlify>
+        <div v-if="isDevelopment" class="contact-form">
+        <form name="contact" method="POST" data-netlify="true">
+            <p>
+                <label>Your Name: <input type="text" name="name" required /></label>
+            </p>
+            <p>
+                <label>Your Email: <input type="email" name="email" required /></label>
+            </p>
+            <p>
+                <label>Services: 
+                    <select name="services[]" v-model="service" multiple>
+                        <option disabled value="" class="option-list">Please select services</option>
+                        <option v-for="option in services" :key="option" :value="option" class="option-list">{{ option }}</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+            <label>Message: <textarea name="message"></textarea></label>
+            </p>
+            <p>
+            <button type="submit">Send</button>
+            </p>
+        </form>
+    </div>
+
+
+    <div v-else class="contact-form">
+        <form name="contact" @submit.prevent="submitForm" netlify>
         <!-- Conditionally display checkbox in development mode -->
         <!-- <div v-if="isDevelopment" class="form-group">
             <label>
@@ -53,30 +79,8 @@
         <!-- Show submission error to user -->
         <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
         </form>
-        <form v-else name="contact" method="POST" data-netlify="true">
-            <p>
-                <label>Your Name: <input type="text" name="name" /></label>
-            </p>
-            <p>
-                <label>Your Email: <input type="email" name="email" /></label>
-            </p>
-            <p>
-                <label>Your Role: 
-                    <select name="role[]" multiple>
-                        <option value="leader">Leader</option>
-                        <option value="follower">Follower</option>
-                    </select>
-                </label>
-            </p>
-            <p>
-            <label>Message: <textarea name="message"></textarea></label>
-            </p>
-            <p>
-            <button type="submit">Send</button>
-            </p>
-        </form>
-
     </div>
+
   </template>
   
   <script>
@@ -106,7 +110,7 @@
           'Emails',
           'Branding'
         ],
-        service: '',
+        service: [],
         submissionError: '',
         bypass: false,
       };
