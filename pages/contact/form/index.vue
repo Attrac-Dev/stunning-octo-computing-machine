@@ -1,6 +1,6 @@
 <template>
     <div class="contact-form">
-      <form name="contact" action="/contact/success" method="POST" @submit="submitForm" netlify>
+      <form name="contact" method="POST" @submit="submitForm" netlify>
         <!-- Conditionally display checkbox in development mode -->
         <div v-if="isDevelopment" class="form-group">
           <label>

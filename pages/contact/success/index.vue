@@ -5,19 +5,9 @@
       <h5>We will respond as quickly as possible.</h5>
     </div>
 
-    <button class="return-home-button" @click="returnHome">Return Home</button>
+    <NuxtLink to="/" ><button class="return-home-button">Return Home</button></NuxtLink>
   </div>
 </template>
-
-<script>
-export default {
-  methods: {
-    returnHome() {
-      this.$router.push('/');
-    },
-  },
-};
-</script>
 
 <style scoped>
 h2,
