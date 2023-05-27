@@ -9,6 +9,28 @@
   </div>
 </template>
 
+<script>
+export default {
+  head() {
+      return {
+        title: this.title,
+        meta: [
+          { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
+          { name: 'author', content: this.author },
+        ]
+      }
+    },
+    data() {
+      return {
+        // page data
+        title: 'Thank You for Your Submission | AttracDev',
+        author: 'AttracDev',
+      }
+    }
+
+}
+</script>
+
 <style scoped>
 h2,
 h5 {

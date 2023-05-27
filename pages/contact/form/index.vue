@@ -1,6 +1,6 @@
 <template>
 
-<div v-if="isDevelopment" class="contact-form">
+<div class="contact-form">
   
   <form @submit.prevent="submitForm">
 
@@ -45,60 +45,19 @@
 
 </div>
 
-
-
-    <div v-else class="contact-form">
-        <form name="contact" @submit.prevent="submitForm" netlify>
-
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" v-model="name" required />
-            <div v-if="validation.name" class="error">{{ validation.name }}</div>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" v-model="email" required />
-            <div v-if="validation.email" class="error">{{ validation.email }}</div>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" v-model="phone" required />
-            <div v-if="validation.phone" class="error">{{ validation.phone }}</div>
-        </div>
-        <div class="form-group">
-            <label for="service">Service</label>
-            <select id="service" name="service" v-model="service" required>
-            <option disabled value="" class="option-list">Please select a service</option>
-            <option v-for="option in services" :key="option" :value="option" class="option-list">{{ option }}</option>
-            </select>
-            <div v-if="validation.service" class="error">{{ validation.service }}</div>
-        </div>
-        <div class="form-group">
-            <label for="description">Brief Description</label>
-            <textarea id="description" name="description" maxlength="150" v-model="description" required></textarea>
-            <div>
-            <span :class="{
-                'description-error': remainingCharacters < 50,
-                'bold': remainingCharacters < 25
-            }">{{ remainingCharacters }}</span> characters remaining
-            </div>
-            <div v-if="validation.description" class="error">{{ validation.description }}</div>
-        </div>
-        <!-- Honeypot field (zipcode) -->
-        <input type="text" id="zipcode" name="zipcode" v-model="zipcode" style="display: none;" />
-
-        <div class="button-container">
-            <button class="modal-submit-button" type="submit">Submit</button>
-        </div>
-        <!-- Show submission error to user -->
-        <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
-        </form>
-    </div>
-
   </template>
   
   <script>
   export default {
+    head() {
+      return {
+        title: this.title,
+        meta: [
+          { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
+          { name: 'author', content: this.author },
+        ]
+      }
+    },
     data() {
       return {
         name: '',
@@ -127,6 +86,9 @@
         service: '',
         submissionError: '',
         bypass: false,
+        // page data
+        title: 'Contact Us | AttracDev',
+        author: 'AttracDev',
       };
     },
     methods: {
@@ -211,9 +173,6 @@
     remainingCharacters() {
       return 150 - this.description.length;
     },
-  },
-  created() {
-    this.isDevelopment()
   },
 };
 </script>

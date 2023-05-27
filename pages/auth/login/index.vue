@@ -21,12 +21,24 @@
   
   <script>
   export default {
+    head() {
+      return {
+        title: this.title,
+        meta: [
+          { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
+          { name: 'author', content: this.author },
+        ]
+      }
+    },
     data() {
       return {
         email: '',
         password: '',
         emailError: '',
         passwordError: '',
+        // page data
+        title: 'User Login | AttracDev',
+        author: 'AttracDev',
       }
     },
     methods: {

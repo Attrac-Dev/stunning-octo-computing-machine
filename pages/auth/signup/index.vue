@@ -51,7 +51,15 @@
 
 <script>
 export default {
-  
+  head() {
+      return {
+        title: this.title,
+        meta: [
+          { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
+          { name: 'author', content: this.author },
+        ]
+      }
+    },
   data() {
     return {
       email: '',
@@ -67,7 +75,9 @@ export default {
       signupActive: '',
       countdown: 15,
       interval: null,
-
+      // page data
+      title: 'User Sign Up | AttracDev',
+      author: 'AttracDev',
     }
   },
   methods: {
