@@ -1,100 +1,121 @@
 <template>
-
 <div class="contact-form">
-  
-  <form @submit.prevent="submitForm">
 
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" v-model="name" required>
-  <div v-if="validation.name" class="error">{{ validation.name }}</div>
+    <form @submit.prevent="submitForm">
+      <h1>Schedule a Consultation</h1>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" v-model="name" required>
+      <div v-if="validation.name" class="error">{{ validation.name }}</div>
 
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" v-model="email" required>
-  <div v-if="validation.email" class="error">{{ validation.email }}</div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" v-model="email" required>
+      <div v-if="validation.email" class="error">{{ validation.email }}</div>
 
-  <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" v-model="phone" required>
-  <div v-if="validation.phone" class="error">{{ validation.phone }}</div>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" v-model="phone" required>
+      <div v-if="validation.phone" class="error">{{ validation.phone }}</div>
 
-  <label for="service">Service</label>
-  <select id="service" name="service" v-model="service" required>
-    <option disabled value="" class="option-list">Please select a service</option>
-    <option v-for="option in services" :key="option" :value="option" class="option-list">{{ option }}</option>
-  </select>
-  <div v-if="validation.service" class="error">{{ validation.service }}</div>
+      <label for="topic">Topic</label>
+      <select id="topic" name="topic" v-model="topic" required>
+        <option disabled value="" class="option-list">Please select a topic</option>
+        <option v-for="option in topics" :key="option" :value="option" class="option-list">{{ option }}</option>
+      </select>
+      <div v-if="validation.topic" class="error">{{ validation.topic }}</div>
 
-  <label for="description">Brief Description</label>
-  <textarea id="description" name="description" maxlength="150" v-model="description" required></textarea>
-  <div>
-    <span :class="{
-      'description-error': remainingCharacters < 50,
-      'bold': remainingCharacters < 25
-    }">{{ remainingCharacters }}</span> characters remaining
+      <label for="description">Description</label>
+      <textarea id="description" name="description" maxlength="150" v-model="description" required></textarea>
+      <div>
+        <span :class="{
+          'description-error': remainingCharacters < 50,
+          'bold': remainingCharacters < 25
+        }">{{ remainingCharacters }}</span> characters remaining
+      </div>
+      <div v-if="validation.description" class="error">{{ validation.description }}</div>
+
+      <label for="current-website">Current Website</label>
+      <input type="url" id="current-website" name="current-website" v-model="currentWebsite">
+
+      <label for="budget">Budget Range</label>
+      <select id="budget" name="budget" v-model="budget" required>
+        <option disabled value="" class="option-list">Please select a budget range</option>
+        <option value="Under $500">Under $500</option>
+        <option value="$500 to $2000">$500 to $2000</option>
+        <option value="Over $2000">Over $2000</option>
+      </select>
+      <div v-if="validation.budget" class="error">{{ validation.budget }}</div>
+
+      <!-- Honeypot field (zipcode) -->
+      <input type="text" id="zipcode" name="zipcode" v-model="zipcode" style="display: none;">
+
+      <input type="hidden" name="_next" value="https://development--attracdev-development.netlify.app/contact/success">
+
+      <button class="modal-submit-button" type="submit">Submit</button>
+
+      <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
+    </form>
   </div>
-  <div v-if="validation.description" class="error">{{ validation.description }}</div>
+</template>
 
-  <!-- Honeypot field (zipcode) -->
-  <input type="text" id="zipcode" name="zipcode" v-model="zipcode" style="display: none;">
 
-  <input type="hidden" name="_next" value="https://development--attracdev-development.netlify.app/contact/success">
-
-  <button class="modal-submit-button" type="submit">Submit</button>
-
-  <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
-</form>
-
-</div>
-
-  </template>
-  
-  <script>
-  export default {
-    head() {
-      return {
-        title: this.title,
-        meta: [
-          { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
-          { name: 'author', content: this.author },
-        ]
-      }
-    },
-    data() {
-      return {
+<script>
+export default {
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        { name: 'robots', content: 'noindex, nofollow' }, // Set the value to "noindex, nofollow" to prevent indexing and following
+        { name: 'author', content: this.author },
+      ]
+    }
+  },
+  data() {
+    return {
+      name: '',
+      email: '',
+      phone: '',
+      description: '',
+      currentWebsite: '',
+      budget: '',
+      url: '',
+      topic: '',
+      zipcode: '',
+      validation: {
         name: '',
         email: '',
         phone: '',
         description: '',
-        zipcode: '',
-        validation: {
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          description: ''
-        },
-        showModal: false,
-        services: [
-          'Design',
-          'Development',
-          'Podcasts',
-          'Videos',
-          'Copywriting',
-          'Social Media',
-          'Emails',
-          'Branding'
-        ],
-        service: '',
-        submissionError: '',
-        bypass: false,
-        // page data
-        title: 'Contact Us | AttracDev',
-        author: 'AttracDev',
-      };
-    },
-    methods: {
-      submitForm() {
-        if (!this.bypass) {
-            if (!this.name) {
+        budget: '',
+        url: '',
+        topic: '',
+      },
+      topics: [
+        'General Design',
+        'Web Design',
+        'Motion Design',
+        'Web Development',
+        'App Development',
+        'Podcast Production',
+        'Podcast Editing',
+        'Sound Design',
+        'Video Editing',
+        'Copywriting',
+        'Social Media Management',
+        'Email Automation',
+        'Brand Identity',
+        'Brand Message',
+        'Other - Please Specify Below'
+      ],
+      submissionError: '',
+      bypass: false,
+      // page data
+      title: 'Schedule Consultation | AttracDev',
+      author: 'AttracDev',
+    };
+  },
+  methods: {
+    submitForm() {
+      if (!this.bypass) {
+        if (!this.name) {
           this.validation.name = 'Please enter your name.';
           return;
         }
@@ -106,12 +127,20 @@
           this.validation.phone = 'Please enter your phone number.';
           return;
         }
-        if (!this.service) {
-          this.validation.service = 'Please select a service.';
-          return;
-        }
         if (!this.description) {
           this.validation.description = 'Please provide a brief description.';
+          return;
+        }
+        if (!this.budget) {
+          this.validation.budget = 'Please select a budget range.';
+          return;
+        }
+        if (!this.url) {
+          this.validation.url = 'Please provide your current website URL.';
+          return;
+        }
+        if (!this.topic) {
+          this.validation.topic = 'Please select a topic.';
           return;
         }
       }
@@ -124,9 +153,10 @@
         name: this.name,
         email: this.email,
         phone: this.phone,
-        service: this.service,
         description: this.description,
-
+        budget: this.budget,
+        url: this.url,
+        topic: this.topic,
       };
 
       // TODO: Handle form submission logic here
@@ -137,15 +167,14 @@
         console.log(formData)
       }
 
-      if (!this.zipcode) {
+      if (!this.zipcode){
         this.$axios
-        .post('https://formspree.io/f/mknaapyb', formData)
+        .post('https://formspree.io/f/xjvddpdl', formData)
         .then(response => {
           // Handle successful form submission
           console.log(response.data);
-          // this.showModal = false;
           alert('Form submitted successfully!');
-          this.$router.push('/contact/success')
+          this.$router.push('/contact/success');
         })
         .catch(error => {
           // Handle form submission error
@@ -161,21 +190,21 @@
           this.$router.push('/contact/success');
         }, 1000);
       }
-
-
-      // Show success message and close modal
-      // this.showModal = false;
     },
+
     resetValidation() {
       this.validation = {
         name: '',
         email: '',
         phone: '',
-        service: '',
         description: '',
+        budget: '',
+        url: '',
+        topic: '',
       };
       this.submissionError = '';
     },
+
     isDevelopment() {
       // Determine if the application is running in development mode
       return process.env.NODE_ENV === 'development';
@@ -183,7 +212,7 @@
   },
   computed: {
     remainingCharacters() {
-      return 150 - this.description.length;
+      return 250 - this.description.length;
     },
   },
 };
@@ -267,7 +296,9 @@
   input[type="email"],
   input[type="tel"],
   input[type="text"],
-  select#service,
+  input[type='url'],
+  select#topic,
+  select#budget,
   textarea {
     border: 1px solid var(--brand-indigo);
     border-radius: 5px;
@@ -275,7 +306,7 @@
     width: 100%;
     box-sizing: border-box;
     background-color: var(--brand-white);
-  }
+    }
 
   .option-list {
     background-color: var(--brand-white);

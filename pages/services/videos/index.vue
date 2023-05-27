@@ -66,22 +66,6 @@ export default {
           this.author = author ? author : 'AttracDev'
           this.CTA = linkText ? linkText : ''
 
-          if (pageName && process.env.ENVIRONMENT === 'development') {
-            console.log({
-              "message":"success",
-              pageName,
-              title
-            })
-          } else if (pageName && process.env.ENVIRONMENT === 'production') {
-            console.log({
-              message: 'successful page load'
-            })
-          }  else {
-            console.error({
-              "message":"failure",
-              "pageName": "none detected"
-            })
-          }
 
   }
 }

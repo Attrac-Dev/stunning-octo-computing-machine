@@ -31,7 +31,9 @@ export default {
     name: 'page',
     mode: 'out-in',
     beforeEnter (el) {
-      console.log('Before Enter . . . . ')
+      if (process.env.ENVIRONMENT === 'development') {
+        console.log('Before Enter . . . . ')
+      }
     }
   },
 

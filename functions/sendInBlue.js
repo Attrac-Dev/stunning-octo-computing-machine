@@ -1,7 +1,7 @@
 const apiKey = process.env.EMAIL_KEY;
 
 async function getContacts() {
-  console.log(`api key: ${apiKey}`)
+  // console.log(`api key: ${apiKey}`)
   const options = {
     method: 'GET',
     headers: {

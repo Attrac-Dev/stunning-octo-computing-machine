@@ -51,27 +51,6 @@ export default {
           this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
-
-          if (pageName && process.env.ENVIRONMENT === 'development') {
-            console.log({
-              "message":"success",
-              pageName,
-              title,
-              environment: process.env.ENVIRONMENT
-            })
-          } else if (pageName && process.env.ENVIRONMENT === 'production') {
-            console.log({
-              message: `successfully loaded ${pageName}`
-            })
-          }  else {
-            console.error({
-              "message":"failure",
-              pageName,
-              title,
-              environment: process.env.ENVIRONMENT
-            })
-          }
-
   }
 }
 </script>

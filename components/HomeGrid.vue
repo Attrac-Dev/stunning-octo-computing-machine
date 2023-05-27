@@ -9,8 +9,8 @@
                     <h3 class="intro-header indigo-text" data-aos="fade-left" data-aos-delay="1200" data-aos-duration="600">{{  mainH3 }}</h3>
                 </section>
                 <div class="call-to-action-block breakout">
-                    <VariableButton data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
-                    <VariableButton data-aos="fade-left" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA2 :textColor="'white'" />
+                    <VariableButton data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'contact/consulting'" :text=mainCTA :textColor="'white'" />
+                    <VariableButton data-aos="fade-left" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact/quote'" :text=mainCTA2 :textColor="'white'" />
                 </div>
             </div>
             <div class="right">
@@ -54,7 +54,7 @@
 // import here
 import { createClient } from '../plugins/contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-
+import { pageLog } from '../functions/logging'
 const contentfulClient = createClient();
 import HomeCard from './HomeCard.vue'
 import VariableButton from './VariableButton.vue';
@@ -122,6 +122,8 @@ export default {
         this.servicesSubheader =    this.entry.servicesH3 ? this.entry.servicesH3 : ''
         this.servicesDescription =  this.entry.servicesDescription ? this.entry.servicesDescription : ''
         this.services =             this.entry.services ? this.getNested(this.entry.services) : []
+
+        pageLog(this.entry)
     },
     props: {
       entry: {

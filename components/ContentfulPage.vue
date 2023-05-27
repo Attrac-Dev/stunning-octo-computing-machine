@@ -20,6 +20,7 @@
   </template>
   
   <script>
+    import { pageLog } from '../functions/logging'
   import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
   export default {
     data() {
@@ -60,6 +61,8 @@
         this.contentText =  this.entry.contentText ? this.entry.contentText : 'ERROR RETRIEVING TEXT'
         this.secondaryPageImage =   this.entry.secondaryPageImage ? this.entry.secondaryPageImage : ''
         this.additionalContentText =    this.entry.additionalContentText ? this.entry.additionalContentText : ''
+
+        pageLog(this.entry)
     }
   }
   </script>
