@@ -2,7 +2,7 @@
 
 <div v-if="isDevelopment" class="contact-form">
   
-  <form action="https://formspree.io/f/mknaapyb" method="POST">
+  <form @submit.prevent="submitForm">
 
   <label for="name">Name</label>
   <input type="text" id="name" name="name" v-model="name" required>
@@ -49,13 +49,6 @@
 
     <div v-else class="contact-form">
         <form name="contact" @submit.prevent="submitForm" netlify>
-        <!-- Conditionally display checkbox in development mode -->
-        <!-- <div v-if="isDevelopment" class="form-group">
-            <label>
-            <input type="checkbox" v-model="bypass" />
-            Activate Developer Mode (bypass form)
-            </label>
-        </div> -->
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -96,7 +89,6 @@
 
         <div class="button-container">
             <button class="modal-submit-button" type="submit">Submit</button>
-            <button class="modal-close-button" @click="closeModal">Close</button>
         </div>
         <!-- Show submission error to user -->
         <div v-show="submissionError" class="error submission-error">{{ submissionError }}</div>
@@ -138,9 +130,6 @@
       };
     },
     methods: {
-      async secretSubmit() {
-        this.$router.push('/contact/success')
-      },
       submitForm() {
         if (!this.bypass) {
             if (!this.name) {
@@ -182,13 +171,16 @@
       // You can use Axios, fetch API, or any other library to make a POST request to your server
 
       // For demonstration purposes, log the form data to the console
+      if (this.isDevelopment()) {
+        console.log(formData)
+      }
       this.$axios
-      .post('/contact/form', formData)
+      .post('https://formspree.io/f/mknaapyb', formData)
       .then(response => {
         // Handle successful form submission
         console.log(response.data);
-        this.showModal = false;
-        // alert('Form submitted successfully!');
+        // this.showModal = false;
+        alert('Form submitted successfully!');
         this.$router.push('/contact/success')
       })
       .catch(error => {
@@ -198,42 +190,7 @@
       });
 
       // Show success message and close modal
-      this.showModal = false;
-    },
-    handleSubmit(event) {
-      event.preventDefault();
-
-      const myForm = event.target;
-      const formData = new FormData(myForm);
-
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
-      })
-        .then(() => {
-          // Handle successful form submission
-          console.log("Form successfully submitted");
-          this.showModal = false;
-          alert('Form submitted successfully!');
-        })
-        .catch((error) => {
-          // Handle form submission error
-          console.error("Form submission error:", error);
-          this.submissionError = "An error occurred while submitting the form. Please try again.";
-        });
-    },
-    closeModal() {
-      // Reset form data and validation errors when modal is closed
-      this.name = '';
-      this.email = '';
-      this.phone = '';
-      this.service = '';
-      this.description = '';
-      this.zipcode = '';
-      this.resetValidation();
-
-      this.showModal = false;
+      // this.showModal = false;
     },
     resetValidation() {
       this.validation = {
@@ -258,11 +215,6 @@
   created() {
     this.isDevelopment()
   },
-  mounted(){
-    // get current url
-    const url = this.$nuxt.$route.path
-    console.log({current: url})
-  }
 };
 </script>
 
