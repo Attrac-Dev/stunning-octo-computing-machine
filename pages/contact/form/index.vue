@@ -1,6 +1,6 @@
 <template>
     <div class="contact-form">
-        <form name="contact" action="/contact/success" method="POST" @submit="submitForm" netlify>
+        <form name="contact"  method="POST" @submit.prevent="submitForm" netlify>
         <!-- Conditionally display checkbox in development mode -->
         <div v-if="isDevelopment" class="form-group">
           <label>
@@ -131,12 +131,13 @@
 
       // For demonstration purposes, log the form data to the console
       this.$axios
-      .post('/contact/success', formData)
+      .post('/contact/form', formData)
       .then(response => {
         // Handle successful form submission
         console.log(response.data);
         this.showModal = false;
-        alert('Form submitted successfully!');
+        // alert('Form submitted successfully!');
+        this.$router.push('/contact/success')
       })
       .catch(error => {
         // Handle form submission error
