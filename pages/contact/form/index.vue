@@ -1,6 +1,6 @@
 <template>
     <div class="contact-form">
-      <form name="contact" method="POST" @submit="submitForm" netlify>
+        <form name="contact" action="/contact/success" method="POST" @submit="submitForm" netlify>
         <!-- Conditionally display checkbox in development mode -->
         <div v-if="isDevelopment" class="form-group">
           <label>
@@ -130,11 +130,22 @@
       // You can use Axios, fetch API, or any other library to make a POST request to your server
 
       // For demonstration purposes, log the form data to the console
-      console.log(formData);
+      this.$axios
+      .post('/contact/success', formData)
+      .then(response => {
+        // Handle successful form submission
+        console.log(response.data);
+        this.showModal = false;
+        alert('Form submitted successfully!');
+      })
+      .catch(error => {
+        // Handle form submission error
+        console.error(error);
+        this.submissionError = 'Failed to submit the form. Please try again later.';
+      });
 
       // Show success message and close modal
       this.showModal = false;
-      alert('Form submitted successfully!');
     },
     closeModal() {
       // Reset form data and validation errors when modal is closed
