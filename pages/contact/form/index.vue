@@ -220,16 +220,19 @@
       };
       this.submissionError = '';
     },
-  },
-  computed: {
-    remainingCharacters() {
-      return 150 - this.description.length;
-    },
     isDevelopment() {
       // Determine if the application is running in development mode
       return process.env.NODE_ENV === 'development';
     },
   },
+  computed: {
+    remainingCharacters() {
+      return 150 - this.description.length;
+    },
+  },
+  created() {
+    this.isDevelopment()
+  }
 };
 </script>
 
