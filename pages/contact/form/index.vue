@@ -36,7 +36,7 @@
   <!-- Honeypot field (zipcode) -->
   <input type="text" id="zipcode" name="zipcode" v-model="zipcode" style="display: none;">
 
-  <input type="hidden" name="_next" value="/contact/success">
+  <input type="hidden" name="_next" value="https://development--attracdev-development.netlify.app/contact/success">
 
   <button class="modal-submit-button" type="submit">Submit</button>
 
