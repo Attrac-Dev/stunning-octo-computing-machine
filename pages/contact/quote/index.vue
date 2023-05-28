@@ -3,7 +3,7 @@
 
 
     <form @submit.prevent="submitForm">
-      <h1>Request a Quote</h1>
+      <h1>Elevate Your Business: Request a Quote</h1>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" v-model="name" required>
       <div v-if="validation.name" class="error">{{ validation.name }}</div>
@@ -96,10 +96,11 @@ export default {
         'Emails',
         'Branding'
       ],
+      service: '',
       submissionError: '',
       bypass: false,
       // page data
-      title: 'Contact Us | AttracDev',
+      title: 'Request a Quote: Unleash Your Business through Professional Services | AttracDev',
       author: 'AttracDev',
     };
   },
@@ -241,7 +242,7 @@ export default {
     .modal-close-button,
     .modal-submit-button {
       border: none;
-      border-radius: 5px;
+      border-radius: 3px;
       color: #fff;
       cursor: pointer;
       padding: 0.5rem;
@@ -258,6 +259,9 @@ export default {
     .modal-submit-button {
       background-color: var(--brand-indigo);
     }
+    .modal-submit-button:hover, .modal-submit-button:active {
+    background-color: var(--brand-blue);
+  }
     
     .contact-form {
       display: flex;
@@ -297,6 +301,10 @@ export default {
       background-color: var(--brand-white);
     }
   
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 3px solid var(--accent-color);
+      outline-offset: -3px;
+    }
     .option-list {
       background-color: var(--brand-white);
     }
@@ -314,17 +322,25 @@ export default {
     .modal-submit-button,
     .modal-close-button {
       flex-grow: 1;
-      margin-right: 0.5rem;
+      padding: 1rem 0;
+      /* margin-right: 0.5rem; */
     }
+
+    .modal-submit-button:hover, .modal-submit-button:active,
+  .modal-close-button, .modal-close-button:hover, .modal-close-button:active {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+  }
   
     .error {
-      color: red;
+      color: var(--accent-color);
       font-size: 0.8rem;
       margin-top: 0.5rem;
     }
   
     .description-error {
-      color: red;
+      color: var(--accent-color);
     }
   
     .submission-error {

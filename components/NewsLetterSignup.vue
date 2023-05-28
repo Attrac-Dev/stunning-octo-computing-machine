@@ -173,8 +173,13 @@ input[type="email"] {
   background-color: var(--brand-white);
 }
 
+input:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: -3px;
+}
+
 input[type="submit"] {
-  background-color: var(--brand-indigo);
+  background-color: var(--accent-color);
   color: var(--brand-white);
   cursor: pointer;
   border: 0;
@@ -183,11 +188,13 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: var(--highlight-color);
+  background-color: var(--brand-blue);
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
 }
 
 .error-message {
-  color: red;
+  color: var(--accent-color);
   opacity: 1;
   transition: opacity 1s ease;
 }

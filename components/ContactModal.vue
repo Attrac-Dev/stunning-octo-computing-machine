@@ -380,7 +380,7 @@
   .modal-close-button,
 .modal-submit-button {
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   color: #fff;
   cursor: pointer;
   padding: 0.5rem;
@@ -397,6 +397,10 @@
 .modal-submit-button {
     background-color: var(--brand-indigo);
 }
+
+.modal-submit-button:hover, .modal-submit-button:active {
+    background-color: var(--brand-blue);
+  }
     .contact-form {
     display: flex;
     justify-content: center;

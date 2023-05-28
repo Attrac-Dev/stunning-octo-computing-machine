@@ -2,7 +2,7 @@
 <template>
   <div class="content-container">
     <ContentfulPage :entry="entry.fields" />
-    <button data-aos="zoom-in" v-if="CTA" class="cta-button" @click="redirectToContact">{{ CTA }}</button>
+    <button data-aos="zoom-in" v-if="CTA" class="cta-button" @click="redirectToContact" :data-title="tooltipText">{{ CTA }}</button>
   </div>
 </template>
 
@@ -68,8 +68,11 @@ export default {
           this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
-
-
+  },
+  computed: {
+    tooltipText() {
+      return `Click here to fill out a form to help with your ${this.pageData.page}`;
+    }
   }
 }
 </script>
@@ -80,9 +83,9 @@ export default {
   }
 
   .cta-button {
-    background-color: var(--brand-indigo);
+    background-color: var(--accent-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
     padding: 1rem 1rem;
@@ -91,4 +94,38 @@ export default {
     display: block;
     margin: 0 auto;
   }
+
+  .cta-button:active, .cta-button:hover {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+  }
+
+  /* tooltip styling */
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+
+[data-title]:after {
+  content: attr(data-title);
+  background-color: var(--brand-off-white);
+  color: var(--brand-dark-grey);
+  font-size: 14px; /* Adjust the font size as needed */
+  position: absolute;
+  padding: 0.75rem;
+  top: 120%; /* Change 'bottom' to 'top' */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translateX(-50%); /* Center horizontally */
+  white-space: nowrap;
+  /* box-shadow: 1px 1px 3px #222222; */
+  opacity: 0;
+  z-index: 99999;
+  visibility: hidden;
+}
+
+[data-title] {
+  position: relative;
+}
 </style>

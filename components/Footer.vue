@@ -60,7 +60,7 @@
       <ul class="ft-legal-list">
         <!-- <li><a href="#">Terms &amp; Conditions</a></li>
         <li><a href="#">Privacy Policy</a></li> -->
-        <li class="copyright">&copy; Copyright {{ startYear }}-{{ currentYear }}, AttracDev LLC.</li>
+        <li class="copyright">&copy; Copyright {{ startYear }}-{{ currentYear }}, AttracDev</li>
       </ul>
     </section>
   </footer>

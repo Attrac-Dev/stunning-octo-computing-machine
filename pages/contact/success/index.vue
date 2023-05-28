@@ -53,13 +53,19 @@ h5 {
 .return-home-button {
   background-color: var(--brand-indigo);
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   color: #fff;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   width: 100%;
   max-width: 200px;
   display: block;
   margin: 0 auto;
+}
+
+.return-home-button:active, .return-home-button:hover {
+  background-color: var(--brand-blue);
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
 }
 </style>

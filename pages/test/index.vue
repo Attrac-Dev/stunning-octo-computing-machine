@@ -12,7 +12,7 @@
   
   <script>
   import { getContacts } from "../../functions/sendInBlue";
-  
+
   export default {
     head() {
       return {
@@ -43,7 +43,9 @@
 };
   </script>
   
-  <style>
-  /* Add any custom styles for this component here */
+  <style scoped>
+  .content-container {
+    margin: 0 2rem;
+  }
   </style>
   

@@ -261,7 +261,7 @@ input {
 .request-account-button {
   padding: 1rem 2rem;
   border: 1px solid var(--brand-indigo);
-  border-radius: 1px;
+  border-radius: 3px;
   background-color: var(--brand-indigo);
   color: #fff;
   font-size: 1rem;
@@ -269,10 +269,17 @@ input {
   transition: all 0.3s ease;
 }
 
+button.request-account-button:hover {
+  background-color: var(--brand-blue);
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+}
+
+
 .return-home-button {
   padding: 1rem 2rem;
   border: 1px solid var(--brand-indigo);
-  border-radius: 1px;
+  border-radius: 3px;
   background-color: transparent;
   color: var(--brand-indigo);
   font-size: 1rem;
@@ -280,11 +287,14 @@ input {
   transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--brand-dark-grey);
+button.return-home-button:hover {
+  background-color: var(--accent-color);
   color: white;
   border: 1px solid var(--brand-white);
+  outline: 2px solid var(--brand-indigo);
+  outline-offset: -2px;
 }
+
 
 .error-message {
   color: var(--brand-indigo);

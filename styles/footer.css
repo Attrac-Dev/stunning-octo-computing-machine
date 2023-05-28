@@ -21,7 +21,7 @@ footer {
 
   /* More Sticky Footer Styles */
 h2.ft-title {
-    color: var(--shadow-color);
+    color: var(--highlight-color);
 }
 
 .ft-main-item {
@@ -39,8 +39,10 @@ h2.ft-title {
   .ft-main-item>ul>li>a {
     color: var(--brand-off-white);
 }
-.ft-main-item>ul>li>a:hover {
-    color: var(--brand-indigo);
+.ft-main-item>ul>li>a:hover, .ft-main-item>ul>li>a:active {
+    color: var(--accent-color);
+    outline: 1px solid var(--accent-color);
+    outline-offset: 3px;
 }
 
   /* Footer main | Newsletter form */
@@ -62,6 +64,11 @@ h2.ft-title {
     border: 0;
     padding: 0.625rem 0.9375rem;
     margin-top: 0.3125rem;
+  }
+
+  input:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: -3px;
   }
 
   input[type="submit"]:hover {
@@ -92,7 +99,7 @@ h2.ft-title {
   /* Footer legal */
   .ft-legal {
     padding: 0.9375rem 1.875rem;
-    background-color: var(--brand-indigo);
+    background-color: var(--brand-blue);
   }
   .ft-legal-list {
     width: 100%;
@@ -122,7 +129,7 @@ h2.ft-title {
 @media all and (min-width: 576px) { 
     /* LANDSCAPE-MOBILE FOOTER */
 footer {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-indigo);
     margin-top: 2rem;
 }
 /* Sticks footer to bottom */
@@ -138,7 +145,7 @@ footer {
 
   /* More Sticky Footer Styles */
 h2.ft-title {
-    color: var(--shadow-color);
+    color: var(--highlight-color);
 }
 
   /* Footer main | Newsletter form */

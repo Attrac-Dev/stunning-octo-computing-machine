@@ -116,12 +116,14 @@ export default {
 
   button.cta-text {
     margin: 15px 0;
-    background: var(--brand-blue);
+    background: var(--brand-indigo);
     color: var(--brand-white);
   }
 
   button.cta-text:hover, button.cta-text:active {
-    background: var(--brand-indigo);
+    background: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
   }
 
   p {

@@ -135,11 +135,23 @@
   button[type="submit"] {
     background-color: var(--brand-indigo);
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 1rem;
     width: 100%;
+  }
+
+  button:hover {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+  }
+
+  .error {
+    color: var(--accent-color);
+    font-weight: 300;
+    margin-top: 5px;
   }
   </style>
   

@@ -2,7 +2,7 @@
 <div class="contact-form">
 
     <form @submit.prevent="submitForm">
-      <h1>Schedule a Consultation</h1>
+      <h1>Take Your Business to New Heights: Schedule Your Consultation</h1>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" v-model="name" required>
       <div v-if="validation.name" class="error">{{ validation.name }}</div>
@@ -252,7 +252,7 @@ export default {
   .modal-close-button,
   .modal-submit-button {
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
     padding: 0.5rem;
@@ -268,6 +268,12 @@ export default {
   
   .modal-submit-button {
     background-color: var(--brand-indigo);
+  }
+
+  .modal-submit-button:hover, .modal-submit-button:active {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
   }
   
   .contact-form {
@@ -308,6 +314,10 @@ export default {
     background-color: var(--brand-white);
     }
 
+  input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: -3px;
+  }
   .option-list {
     background-color: var(--brand-white);
   }
@@ -325,17 +335,23 @@ export default {
   .modal-submit-button,
   .modal-close-button {
     flex-grow: 1;
-    margin-right: 0.5rem;
+    padding: 1rem 0;
+    /* margin-right: 0.5rem; */
+  }
+
+  .modal-submit-button:hover, .modal-submit-button:active,
+  .modal-close-button, .modal-close-button:hover, .modal-close-button:active {
+    background-color: var(--brand-blue);
   }
 
   .error {
-    color: red;
+    color: var(--accent-color);
     font-size: 0.8rem;
     margin-top: 0.5rem;
   }
-
+  
   .description-error {
-    color: red;
+    color: var(--accent-color);
   }
 
   .submission-error {
