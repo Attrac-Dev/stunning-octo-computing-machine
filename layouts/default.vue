@@ -16,20 +16,63 @@
       </div>
 </template>
     
-    <style>
-    .body-container {
-      /* Add a minimum height to ensure the container has enough space for content */
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+<script>
+export default {
+  data() {
+    return {
+      gAnalyticsId: process.env.G_ANALYTICS_ID
+    };
+  },
+  head() {
+    const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${this.gAnalyticsId}`;
+
+    return {
+      script: [
+        {
+          src: scriptSrc,
+          async: true
+        },
+        {
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(...args) { dataLayer.push(args); }
+            gtag('js', new Date());
+            gtag('config', '${this.gAnalyticsId}');
+          `
+        }
+      ]
+    };
+  },
+  mounted() {
+    this.initializeGoogleAnalytics();
+    this.updateGoogleAnalytics();
+  },
+  methods: {
+    initializeGoogleAnalytics() {
+      if (process.env.ENVIRONMENT === 'development') {
+        console.log('Initializing Google Analytics. . .')
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = (...args) => { window.dataLayer.push(args); };
+      window.gtag('js', new Date());
+      window.gtag('config', this.gAnalyticsId);
+    },
+    updateGoogleAnalytics() {
+      if (typeof window.gtag !== 'undefined') {
+        if (process.env.ENVIRONMENT === 'development') {
+          console.log('Updating Google Analytics. . .')
+        }
+        window.gtag('event', 'page_view', {
+          page_path: this.$route.fullPath
+        });
+      }
     }
-    
-    .content-container {
-      /* Add a margin to separate the content from the navigation and footer */
-      margin-top: 80px;
-      margin-bottom: 80px;
-      flex-grow: 1; /* Allow the content container to grow to fill remaining space */
-      min-height: 100vh;
+  },
+  watch: {
+    $route(to, from) {
+      this.updateGoogleAnalytics();
     }
-    </style>
+  }
+};
+</script>
     
