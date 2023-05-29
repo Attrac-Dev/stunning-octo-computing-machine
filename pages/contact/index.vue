@@ -50,10 +50,9 @@ export default {
       }
   },
   methods: {
-    // nothing to see here... move along
-    // openModal() {
-    //   this.$router.push('/contact/form')
-    // }
+    openModal() {
+      this.$router.push('/contact/form')
+    }
   },
   created() {
           const { title, robots, keywords, description, author, pageName } = this.entry.fields
