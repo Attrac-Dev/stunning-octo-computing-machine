@@ -54,7 +54,9 @@ export default {
 
 .modal-container {
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 4px;
+  outline: 2px solid var(--brand-indigo);
+  outline-offset: -5px;
   padding: 2rem;
   width: 90%;
   max-width: 400px;
@@ -78,7 +80,7 @@ button {
   border-radius: 3px;
   color: #fff;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 1rem;
   width: 48%;
 }
 
@@ -93,9 +95,18 @@ button.proceed:hover{
 }
 
 button.cancel {
-background-color: var(--brand-white);
-outline: 2px solid var(--accent-color);
-color: var(--brand-indigo);
-
+  background-color: var(--brand-white);
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+  color: var(--brand-indigo);
 }
+
+button.cancel:hover,
+button.cancel:active {
+  background-color: var(--accent-color);
+  color: var(--brand-white);
+  outline: 2px solid var(--brand-indigo);
+  outline-offset: -2px;
+}
+
 </style>

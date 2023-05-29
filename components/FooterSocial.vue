@@ -59,6 +59,7 @@ export default {
     justify-content: center;
     color: var(--brand-blue);
 }
+
 .icon-credit-link {
     color: var(--brand-blue);
     margin: 0 5px;

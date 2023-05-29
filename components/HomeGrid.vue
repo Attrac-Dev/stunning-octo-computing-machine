@@ -4,7 +4,7 @@
         <div class="above-fold">
             <div class="left">
                 <section class="intro-content">
-                    <h1 class="intro-header blue-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">{{ mainHeader }}</h1>
+                    <h1 class="intro-header accent-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">{{ mainHeader }}</h1>
                     <h2 class="intro-header grey-text" data-aos="fade-right" data-aos-delay="800" data-aos-duration="600">{{ mainSubHeader }}</h2>
                     <h3 class="intro-header indigo-text" data-aos="fade-left" data-aos-delay="1200" data-aos-duration="600">{{  mainH3 }}</h3>
                 </section>
@@ -161,8 +161,8 @@ export default {
     color: var(--brand-white);
 }
 
-.blue-text {
-     color: var(--brand-blue);
+.accent-text {
+     color: var(--accent-color);
 }
 .grey-text {
     color: var(--brand-dark-grey);

@@ -1,6 +1,6 @@
 #logo {
     /* mobile sized screens */
-    width: min(70vw, 170px);
+    width: min(65vw, 275px);
     height: auto;
 }
 
@@ -238,7 +238,7 @@ a {
 @media all and (min-width: 992px) {
     #logo {
         /* mobile sized screens */
-        width: min(70vw, 250px);
+        width: min(18vw, 350px);
     }
     
     .menu {

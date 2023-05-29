@@ -62,6 +62,7 @@ export default {
   buildModules: [
     '@nuxtjs/fontawesome',
     '@nuxtjs/google-fonts',
+
   ],
 
   fontawesome: {

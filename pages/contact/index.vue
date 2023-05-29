@@ -9,7 +9,7 @@
 
 <script>
 import ContentfulPage from '@/components/ContentfulPage.vue'
-import ContactModal from '@/components/ContactModal.vue'
+// import ContactModal from '@/components/ContactModal.vue'
 
 import { createClient } from '../../plugins/contentful'
 const contentfulClient = createClient();
@@ -26,7 +26,7 @@ export default {
   },
   components: {
     ContentfulPage,
-    ContactModal
+    // ContactModal
 
   },
   data() {
@@ -50,10 +50,10 @@ export default {
       }
   },
   methods: {
-    openModal() {
-      // this.$refs.contactModal.openModal()
-      this.$router.push('/contact/form')
-    }
+    // nothing to see here... move along
+    // openModal() {
+    //   this.$router.push('/contact/form')
+    // }
   },
   created() {
           const { title, robots, keywords, description, author, pageName } = this.entry.fields
@@ -77,13 +77,20 @@ export default {
   button.open-modal-button {
     background-color: var(--brand-indigo);
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
-    padding: 1rem 0.5rem;
+    padding: 1rem;
     width: 100%;
     max-width: 440px;
     display: block;
     margin: 0 auto;
+  }
+
+  button.open-modal-button:hover, 
+  button.open-modal-button:active {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
   }
 </style>
