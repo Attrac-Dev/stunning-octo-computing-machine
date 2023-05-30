@@ -16,4 +16,6 @@
     --tablet-min-width: 768px;
     --desktop-min-width: 992px;
     --large-screen-min-width: 1200px;
+        /* NOTE -- images need to be updated (re-downloaded from https://storyset.com/design etc) */
+        /* Images should be #6394CF -- which is a few shades lighter than the base --brand-indigo color */
   }
