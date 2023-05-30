@@ -32,7 +32,7 @@ export default {
     mode: 'out-in',
     beforeEnter (el) {
       if (process.env.ENVIRONMENT === 'development') {
-        console.log('Before Enter . . . . ')
+        console.log('Page transitioned')
       }
     }
   },

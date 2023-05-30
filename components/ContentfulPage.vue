@@ -69,6 +69,8 @@
   
   <style scoped>
 @import '~/styles/typography.css';
+@import '~/styles/contentful-page.css';
+
     @media screen and (min-width: 1366px) {
         .container-grid-1 {
             display: grid;
@@ -118,8 +120,8 @@
     .additional-content-text ::v-deep(h3, h4, h5) {
         padding-bottom: 2rem;
         /* using global typography */
-    }
 
+    }
     .content-text ::v-deep(p), .additional-content-text ::v-deep(p) {
         margin-bottom: 40px;
         /* using global typography */
