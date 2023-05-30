@@ -75,7 +75,6 @@
     @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css");
 
     .content-text ::v-deep h2::after {
-    -webkit-font-smoothing: antialiased;
     display: inline-block;
     font: var(--fa-font-solid);
     content: "\f076";
