@@ -69,15 +69,12 @@
   
   <style scoped>
     @import '~/styles/typography.css';
-    /* @import '~/styles/contentful-page.css'; */
-
-    /* Magnet icon animations */
-    /* @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css"); */
-    @import url("https://cdn.jsdelivr.net/npm/@fortawesome/free-solid-svg-icons@6.4.0/index.min.js");
 
     .content-text ::v-deep h2::after {
     display: inline-block;
     font: var(--fa-font-solid);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: "\f076";
     transform: rotate(-90deg);
     color: var(--accent-color);
@@ -101,6 +98,8 @@
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     font: var(--fa-font-solid);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: "\f076";
     transform: rotate(-90deg);
     color: var(--accent-color);
