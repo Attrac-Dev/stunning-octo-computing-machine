@@ -1,6 +1,6 @@
 #logo {
     /* mobile sized screens */
-    width: min(65vw, 275px);
+    width: min(65vw, 200px);
     height: auto;
 }
 
