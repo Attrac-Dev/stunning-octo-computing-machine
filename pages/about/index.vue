@@ -51,20 +51,6 @@ export default {
           this.keywords = keywords ? keywords : 'This is just a sting to test if the keywords are working... There already are keywords on Contentful'
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
-
-          if (pageName) {
-            console.log({
-              "message":"success",
-              pageName,
-              title
-            })
-          } else {
-            console.error({
-              "message":"failure",
-              "pageName": "none detected"
-            })
-          }
-
   }
 }
 </script>

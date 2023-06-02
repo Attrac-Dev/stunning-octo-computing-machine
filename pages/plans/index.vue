@@ -52,19 +52,6 @@ export default {
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
 
-          if (pageName) {
-            console.log({
-              "message":"success",
-              pageName,
-              title
-            })
-          } else {
-            console.error({
-              "message":"failure",
-              "pageName": "none detected"
-            })
-          }
-
   }
 }
 </script>

@@ -2,11 +2,14 @@
 <template>
   <div class="content-container">
     <ContentfulPage :entry="entry.fields" />
+    <button class="open-modal-button" @click="openModal">Show Contact Form</button>
+    <ContactModal ref="contactModal" />
   </div>
 </template>
 
 <script>
 import ContentfulPage from '@/components/ContentfulPage.vue'
+// import ContactModal from '@/components/ContactModal.vue'
 
 import { createClient } from '../../plugins/contentful'
 const contentfulClient = createClient();
@@ -23,6 +26,7 @@ export default {
   },
   components: {
     ContentfulPage,
+    // ContactModal
 
   },
   data() {
@@ -45,6 +49,11 @@ export default {
           ]
       }
   },
+  methods: {
+    openModal() {
+      this.$router.push('/contact/form')
+    }
+  },
   created() {
           const { title, robots, keywords, description, author, pageName } = this.entry.fields
           // ternary operators to check if values have been passed in  or give a default value
@@ -54,18 +63,6 @@ export default {
           this.description = description ? description : 'some description string'
           this.author = author ? author : 'AttracDev'
 
-          if (pageName) {
-            console.log({
-              "message":"success",
-              pageName,
-              title
-            })
-          } else {
-            console.error({
-              "message":"failure",
-              "pageName": "none detected"
-            })
-          }
 
   }
 }
@@ -74,5 +71,25 @@ export default {
 <style scoped>
 .content-container {
   margin: 1.25rem;
+  }
+
+  button.open-modal-button {
+    background-color: var(--brand-indigo);
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    max-width: 440px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  button.open-modal-button:hover, 
+  button.open-modal-button:active {
+    background-color: var(--brand-blue);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
   }
 </style>

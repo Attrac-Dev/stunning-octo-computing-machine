@@ -1,25 +1,21 @@
 :root {
    
-    --brand-white: white;
+    --brand-white: white; 
     --brand-light-off-white: #f9f7f7;
     --brand-off-white: #e6e7ed;
     --brand-grey: #999999;
     --brand-dark-grey: #444444;
-    --brand-blue: #7B93FB;
-    --brand-blue-rgb: 123, 147, 251;
-    --brand-indigo: #445CB4;
-    --brand-indigo-rgb: 68, 92, 180;
-    --brand-grey-rgb: 153, 153, 153;
-    --highlight-rgb: 146, 62, 207;
-    --main-color:#4B0082;
-    --secondary-color:#61657A;
-    --accent-color: #6174C7;
-    --highlight-color: #C6D0FB;
+    --brand-blue: #384E77;
+    --brand-indigo: #18314F;
+    --accent-color: #FF6666;
+    --highlight-color: #BFCDE0;
     --hightlight-50: rgba((var(--highlight-rgb)), 0.5);
-    --shadow-color: #3C477A;
+    --shadow-color: #0D1A2A;
     /* sizes below cannot be used in media queries. They must be hard-coded */
     --phone-min-width: 576px; /* Mobile First styles */
     --tablet-min-width: 768px;
     --desktop-min-width: 992px;
     --large-screen-min-width: 1200px;
+        /* NOTE -- images need to be updated (re-downloaded from https://storyset.com/design etc) */
+        /* Images should be #6394CF -- which is a few shades lighter than the base --brand-indigo color */
   }

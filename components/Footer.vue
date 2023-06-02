@@ -31,36 +31,36 @@
           <li><NuxtLink to="/advertising">Advertising</NuxtLink></li>
         </ul>
       </div>
-      <div class="ft-main-item">
-        <h2 class="ft-title">Stay Updated</h2>
-        <p>Subscribe to our newsletter to get our latest news.</p>
-        <!-- <form>
-          <input type="email" name="email" placeholder="Enter email address">
-          <input type="submit" value="Subscribe">
-        </form> -->
-        <NewsLetterSignup/>
-      </div>
+      <!-- conditional render transition -->
+      <transition name="fade">
+        <!-- Show Newsletter Form if no cookie exists -->
+        <div v-if="!hasSubscribed" key="newsletter-form" class="ft-main-item newsletter-signup">
+          <h2 class="ft-title">Stay Updated</h2>
+          <p>Subscribe to our newsletter to get our latest news.</p>
+          <!-- <form>
+            <input type="email" name="email" placeholder="Enter email address">
+            <input type="submit" value="Subscribe">
+          </form> -->
+          <NewsLetterSignup />
+        </div>
+
+        <!-- Show Thank You message if cookie exists -->
+        <div v-else key="newletter-thanks" class="ft-main-item">
+          <h2 class="ft-title">Thank You!</h2>
+          <p>You are subscribed to the newsletter.</p>
+          <p>Keep an eye out for it monthly.</p>      
+        </div>
+
+      </transition>
+
     </section>
-  
-    <!-- Footer social -->
-    <!-- <section class="ft-social"> -->
-      <!-- <ul class="ft-social-list"> -->
-        <!-- <li><a href="https://vm.tiktok.com/ZMRH711rk/" target="_blank"><i class="fab fa-tiktok"></i></a></li> tiktok icon not showing up -->
-        <!-- <li><a href="#" target="_blank"><i class="fab fa-facebook"></i></a></li> -->
-        <!-- <li><a href="https://twitter.com/attracdev" target="_blank"><i class="fab fa-twitter"></i></a></li> -->
-        <!-- <li><a href="https://www.instagram.com/attracdev/" target="_blank"><i class="fab fa-instagram"></i></a></li> -->
-        <!-- <li><a href="https://github.com/Attrac-Dev" target="_blank"><i class="fab fa-github"></i></a></li> -->
-        <!-- <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li> -->
-        <!-- <li><a href="https://www.youtube.com/channel/UCmRdPCkCDIt9d8iTSBuH6Fw" target="_blank"><i class="fab fa-youtube"></i></a></li> -->
-      <!-- </ul> -->
-    <!-- </section> -->
     <FooterSocial />
     <!-- Footer legal -->
     <section class="ft-legal">
       <ul class="ft-legal-list">
         <!-- <li><a href="#">Terms &amp; Conditions</a></li>
         <li><a href="#">Privacy Policy</a></li> -->
-        <li class="copyright">&copy; Copyright {{ startYear }}-{{ currentYear }}, AttracDev LLC.</li>
+        <li class="copyright">&copy; Copyright {{ startYear }}-{{ currentYear }}, AttracDev</li>
       </ul>
     </section>
   </footer>
@@ -69,11 +69,23 @@
 <style>
     @import '~/styles/normalize.css';
     @import '~/styles/footer.css';
+
+    .fade-enter-active, 
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
 </style>
 
 <script>
 import NewsLetterSignup from './NewsLetterSignup.vue'
 import FooterSocial from './FooterSocial.vue'
+import { getCookie, hasCookie, getCookies } from '../functions/cookies'
+import { mapState } from 'vuex'
 
 export default {
  data() {
@@ -83,7 +95,7 @@ export default {
       }
     },
   computed: {
-
+    ...mapState(['hasSubscribed']),
   },
   components: {
     NewsLetterSignup,

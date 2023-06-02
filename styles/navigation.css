@@ -1,6 +1,6 @@
 #logo {
     /* mobile sized screens */
-    width: min(70vw, 170px);
+    width: min(65vw, 200px);
     height: auto;
 }
 
@@ -147,7 +147,7 @@ a {
     }
     .item:not(.button) a:hover,
     .item a:hover::after {
-        color: var(--brand-blue);
+        color: var(--accent-color);
     }
     /* LANDSCAPE-MOBILE menu */
     .menu {
@@ -204,7 +204,7 @@ a {
     }
     .button a {
         color: var(--brand-white);
-        background: var(--brand-blue);
+        background: var(--brand-indigo);
         border: 1px var(--brand-indigo) solid;
     }
     .button.secondary {
@@ -217,15 +217,20 @@ a {
     }
 
     li.item.button.secondary>a:hover {
-        background-color: var(--brand-off-white);
+        background-color: var(--accent-color);
+        outline: none;
+        border: 1px solid var(--brand-indigo);
+        color: var(--brand-white);
     }
 
     .button a:hover {
         text-decoration: none;
     }
     .button:not(.secondary) a:hover {
-        background: var(--brand-indigo);
-        border-color: var(--shadow-color);
+        background: var(--brand-blue);
+        border-color: var(--brand-blue);
+        outline: 2px solid var(--accent-color);
+        outline-offset: -2px;
     }
 }
 
@@ -233,7 +238,7 @@ a {
 @media all and (min-width: 992px) {
     #logo {
         /* mobile sized screens */
-        width: min(70vw, 250px);
+        width: min(18vw, 350px);
     }
     
     .menu {

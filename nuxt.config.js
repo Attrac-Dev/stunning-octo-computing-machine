@@ -17,7 +17,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'apple-mobile-webb-app-capable', content: 'yes'}
+      { name: 'apple-mobile-webb-app-capable', content: 'yes'},
+      { name: 'theme-color', content: '#18314F'} // uses the brand-indigo color for the theme
 
     ],
     link: [
@@ -30,7 +31,9 @@ export default {
     name: 'page',
     mode: 'out-in',
     beforeEnter (el) {
-      console.log('Before Enter . . . . ')
+      if (process.env.ENVIRONMENT === 'development') {
+        console.log('Page transitioned')
+      }
     }
   },
 
@@ -49,6 +52,7 @@ export default {
   plugins: [
     "~/plugins/contentful",
     { src: "~/plugins/aos", mode: "client" },
+    { src: "~/plugins/supabase.js"}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,6 +62,7 @@ export default {
   buildModules: [
     '@nuxtjs/fontawesome',
     '@nuxtjs/google-fonts',
+
   ],
 
   fontawesome: {
@@ -79,12 +84,17 @@ export default {
   env: {
     CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE,
     CONTENTFUL_ACCESSTOKEN: process.env.CONTENTFUL_ACCESSTOKEN,
-    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT
+    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
+    EMAIL_KEY: process.env.EMAIL_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_KEY: process.env.SUPABASE_KEY,
+    SIGN_UP: process.env.SIGN_UP, // used to determine if users are allowed to use the signup form or not ('active' or 'inactive')
+    ENVIRONMENT: process.env.ENVIRONMENT
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

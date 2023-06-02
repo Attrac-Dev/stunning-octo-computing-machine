@@ -4,13 +4,13 @@
         <div class="above-fold">
             <div class="left">
                 <section class="intro-content">
-                    <h1 class="intro-header blue-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">{{ mainHeader }}</h1>
+                    <h1 class="intro-header accent-text" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">{{ mainHeader }}</h1>
                     <h2 class="intro-header grey-text" data-aos="fade-right" data-aos-delay="800" data-aos-duration="600">{{ mainSubHeader }}</h2>
                     <h3 class="intro-header indigo-text" data-aos="fade-left" data-aos-delay="1200" data-aos-duration="600">{{  mainH3 }}</h3>
                 </section>
                 <div class="call-to-action-block breakout">
-                    <VariableButton data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA :textColor="'white'" />
-                    <VariableButton data-aos="fade-left" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'var(--brand-blue)'" :filled="true" :link="'/contact'" :text=mainCTA2 :textColor="'white'" />
+                    <VariableButton data-aos="fade-right" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'#FF6666'" :filled="true" :link="'contact/consulting'" :text=mainCTA :textColor="'white'" />
+                    <VariableButton data-aos="fade-left" ata-aos-easing="linear" data-aos-duration="600" data-aos-delay="1600" class="cta-button" :color="'#FF6666'" :filled="true" :link="'/contact/quote'" :text=mainCTA2 :textColor="'white'" />
                 </div>
             </div>
             <div class="right">
@@ -45,7 +45,6 @@
                 :cta-text="service.linkText"
             />
         </div>
-        
     </div>
 </div>
 </template>
@@ -54,7 +53,7 @@
 // import here
 import { createClient } from '../plugins/contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-
+import { pageLog } from '../functions/logging'
 const contentfulClient = createClient();
 import HomeCard from './HomeCard.vue'
 import VariableButton from './VariableButton.vue';
@@ -122,6 +121,8 @@ export default {
         this.servicesSubheader =    this.entry.servicesH3 ? this.entry.servicesH3 : ''
         this.servicesDescription =  this.entry.servicesDescription ? this.entry.servicesDescription : ''
         this.services =             this.entry.services ? this.getNested(this.entry.services) : []
+
+        pageLog(this.entry)
     },
     props: {
       entry: {
@@ -147,20 +148,21 @@ export default {
     margin-top: 4rem;
     display: flex;
     justify-content: space-evenly;
+    gap: 1rem;
 }
 
 .services-headers {
-    background-color: var(--brand-indigo);
-    padding: 2rem 4rem 4rem 4rem;
-    box-shadow: 0 3px 1px var(--brand-dark-grey);
+    background-color: var(--brand-blue);
+    padding: 4rem;
+    box-shadow: 0 8px 10px var(--brand-indigo);
 
 }
 .service-header {
     color: var(--brand-white);
 }
 
-.blue-text {
-     color: var(--brand-blue);
+.accent-text {
+     color: var(--accent-color);
 }
 .grey-text {
     color: var(--brand-dark-grey);
@@ -173,6 +175,7 @@ export default {
 .card-wrapper {
     margin-top: 5rem;
 }
+
 
 /* Huge Screens */
 @media screen and (min-width: 1201px) {
@@ -198,11 +201,13 @@ export default {
 /* Extra-large screens */
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
   /* styles for screens between 1025 and 1200 pixels go here */
+
 }
 
 /* Large screens */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   /* styles for screens between 769 and 1024 pixels go here */
+
 }
 
 /* medium screens */
@@ -249,9 +254,7 @@ export default {
         flex-direction: column;
         align-items: center;
     }
-    .cta-button {
-        margin: 1rem 0;
-    }
+
     .services-headers {
         padding-left:15px;
         padding-right: 15px;
