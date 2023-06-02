@@ -208,4 +208,10 @@ input[type="submit"]:hover {
 .fade-leave-to {
   opacity: 0;
 }
+
+@media only all and (min-width: 762px) and (max-width: 992px) {
+  input[type="email"] {
+    width: min(18rem, 50vw);
+  }
+}
 </style>

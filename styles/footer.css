@@ -187,9 +187,11 @@ h2.ft-title {
 
 @media all and (min-width: 768px) {
     /* Sticky Footer */
-    .ft-main {
+    .ft-main{
         justify-content: space-evenly;
       }
+    .ft-main-item {
+    }
 }
 
 @media all and (min-width: 992px) {

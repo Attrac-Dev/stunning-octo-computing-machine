@@ -34,7 +34,7 @@
       <!-- conditional render transition -->
       <transition name="fade">
         <!-- Show Newsletter Form if no cookie exists -->
-        <div v-if="!hasSubscribed" key="newsletter-form" class="ft-main-item">
+        <div v-if="!hasSubscribed" key="newsletter-form" class="ft-main-item newsletter-signup">
           <h2 class="ft-title">Stay Updated</h2>
           <p>Subscribe to our newsletter to get our latest news.</p>
           <!-- <form>
