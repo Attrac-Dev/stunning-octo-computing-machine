@@ -98,7 +98,7 @@ h2.ft-title {
   }
   /* Footer legal */
   .ft-legal {
-    padding: 0.9375rem 1.875rem;
+    padding: 1rem 0.5rem;
     background-color: var(--brand-blue);
   }
   .ft-legal-list {
@@ -125,12 +125,18 @@ h2.ft-title {
   }
 
 
+
   /* Small devices (landscape phones, 576px and up) */
 @media all and (min-width: 576px) { 
     /* LANDSCAPE-MOBILE FOOTER */
 footer {
     background-color: var(--brand-indigo);
     margin-top: 2rem;
+}
+
+.ft-legal {
+  padding: 1rem 0.5rem;
+  background-color: var(--brand-blue);
 }
 /* Sticks footer to bottom */
 .body-container {
@@ -190,4 +196,15 @@ h2.ft-title {
   section.ft-main {
         margin-top: 10rem;
     }
+}
+
+
+@media all and (max-width: 775px) {
+  footer {
+    background-color: var(--brand-indigo);
+  }
+  .ft-main, .ft-social, .icon-credit {
+    padding: 1rem 0.5rem 0 0.5rem;
+    background-color: var(--brand-indigo);
+  }
 }
