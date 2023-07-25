@@ -70,6 +70,10 @@
   <style scoped>
     @import '~/styles/typography.css';
 
+
+    .main-page-image, .secondary-page-image {
+        width: 100%;
+    }
     .content-text ::v-deep h2::after {
     display: inline-block;
     font: var(--fa-font-solid);

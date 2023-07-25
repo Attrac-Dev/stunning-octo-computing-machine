@@ -3,17 +3,16 @@
     <div v-if="errorType()">
         <!-- <h1 class="not-found-header">I think we're lost.</h1>
         <h3 class="not-found-header"> Better turn back <NuxtLink class="home-link" to="/">Home</NuxtLink></h3> -->
-        <img class="not-found-img" src="~/static/Oops 404 Error with a broken robot-bro.svg" alt="404 robot illustration">
+        <img class="not-found-img" src="~/static/Oops 404 Error with a broken robot-bro 1 - RECOLOR.svg" alt="404 robot illustration">
         <h5 class="not-found-header bottom-text">{{ error.message }}</h5>
         <h5 class="not-found-header bottom-text">Return <NuxtLink class="home-link" to="/">Home</NuxtLink></h5>
     </div>
     <div v-else>
         <h1 class="error-header">Error {{ error.statusCode }}</h1>
         <h3 class="error-header">Return <NuxtLink class="error-home-link" to="/">Home</NuxtLink></h3>
-        <img class="error-img" src="~/static/404-bro.svg" alt="Question mark illustration">
+        <img class="error-img" src="~/static/404-bro 1 - RECOLOR.svg" alt="Question mark illustration">
         <h5 class="error-header">{{ error.message }}</h5>
     </div>
-    
     
   </div>
 </template>

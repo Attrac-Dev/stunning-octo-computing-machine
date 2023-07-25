@@ -17,8 +17,8 @@
                 <div class="hero-image">
                 <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
                 <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
-                <img v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.fields.description" v-bind:title="mainImage.fields.title">
-            </div>
+                    <img class="main-image" v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.fields.description" v-bind:title="mainImage.fields.title">
+                </div>
             </div>
         </div>
         
@@ -137,6 +137,11 @@ export default {
 @import '~/styles/vars.css';
 @import '~/styles/typography.css';
 
+.main-image {
+    width: 100%;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
 .breakout {
     /* go beyond the wrapping container */
     margin-left:   calc(50% - 50vw);
@@ -201,13 +206,19 @@ export default {
 /* Extra-large screens */
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
   /* styles for screens between 1025 and 1200 pixels go here */
-
+    .main-image {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 /* Large screens */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   /* styles for screens between 769 and 1024 pixels go here */
-
+    .main-image {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
 }
 
 /* medium screens */
@@ -228,7 +239,10 @@ export default {
         padding-left:30px;
         padding-right: 15px;
     }
-
+    .main-image {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
 }
 
 /* smallest screens */
@@ -258,6 +272,11 @@ export default {
     .services-headers {
         padding-left:15px;
         padding-right: 15px;
+    }
+
+    .main-image {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
     }
 }
 
