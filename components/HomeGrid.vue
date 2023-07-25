@@ -17,8 +17,8 @@
                 <div class="hero-image">
                 <!-- <a href="https://storyset.com/online">Online illustrations by Storyset</NuxtLink> Use this link to attribute some images to Storyset -->
                 <!-- <img src="~/static/temp-hero-img.png" alt="Testing image"> -->
-                <img v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.fields.description" v-bind:title="mainImage.fields.title">
-            </div>
+                    <img class="main-image" v-if="mainImage" :src="mainImage.fields.file.url" v-bind:alt="mainImage.fields.description" v-bind:title="mainImage.fields.title">
+                </div>
             </div>
         </div>
         
@@ -137,6 +137,9 @@ export default {
 @import '~/styles/vars.css';
 @import '~/styles/typography.css';
 
+.main-image {
+    width: 100%;
+}
 .breakout {
     /* go beyond the wrapping container */
     margin-left:   calc(50% - 50vw);
