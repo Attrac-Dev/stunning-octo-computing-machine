@@ -9,6 +9,15 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
+    script: [
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-QKWQ9ZYTWN",
+        async: true,
+      },
+      {
+        src: "js/ga.js",
+      }
+    ],
     // title: 'AttracDev | Design & Development',
     htmlAttrs: {
       lang: 'en'
