@@ -47,6 +47,23 @@
     methods: {
         printEntries(doc) {
             return documentToHtmlString(doc)
+        },
+        trackPageview() {
+            const currPage = this.$route.path
+            if (process.env.ENVIRONMENT === 'production') {
+                this.$gtag.pageview(currPage)
+                // leaving temp console log, purely for testing... Remember to remove it.
+                console.log({
+                    gTagEnabled: true,
+                    gTagMessage: `Tracking view for "${currPage}"`
+                })
+            } else {
+                console.log({
+                    gTagEnabled: false,
+                    gTagMessage: `Google Analytics tracking not enabled for "${currPage}" while ENVIRONMENT: ${process.env.ENVIRONMENT}`
+                })
+            }
+
         }
     },
     created() {
@@ -63,6 +80,7 @@
         this.additionalContentText =    this.entry.additionalContentText ? this.entry.additionalContentText : ''
 
         pageLog(this.entry)
+        this.trackPageview()
     }
   }
   </script>

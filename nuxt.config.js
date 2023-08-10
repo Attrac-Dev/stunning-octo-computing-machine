@@ -9,16 +9,6 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    script: [
-      {
-        src: "https://www.googletagmanager.com/gtag/js?id=G-QKWQ9ZYTWN",
-        async: true,
-      },
-      {
-        src: "js/ga.js",
-      }
-    ],
-    // title: 'AttracDev | Design & Development',
     htmlAttrs: {
       lang: 'en'
     },
@@ -27,7 +17,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'apple-mobile-webb-app-capable', content: 'yes'},
-      { name: 'theme-color', content: '#18314F'} // uses the brand-indigo color for the theme
+      { name: 'theme-color', content: '#282D3C'} // uses the brand-indigo color for the theme
 
     ],
     link: [
@@ -61,7 +51,8 @@ export default {
   plugins: [
     "~/plugins/contentful",
     { src: "~/plugins/aos", mode: "client" },
-    { src: "~/plugins/supabase.js"}
+    { src: "~/plugins/supabase.js"},
+    { src: "~/plugins/gtag.js"}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
